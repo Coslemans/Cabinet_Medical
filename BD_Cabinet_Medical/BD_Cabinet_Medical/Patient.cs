@@ -23,7 +23,6 @@ namespace BD_Cabinet_Medical
     
         public int ID { get; set; }
         public string Nume { get; set; }
-        public string Prenume { get; set; }
         public string CNP { get; set; }
         public string Serie_Buletin { get; set; }
         public string Numar_Buletin { get; set; }

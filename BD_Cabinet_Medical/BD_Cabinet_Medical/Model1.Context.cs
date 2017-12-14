@@ -31,12 +31,12 @@ namespace BD_Cabinet_Medical
         public virtual DbSet<Drug> Drugs { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<History_Patients> History_Patients { get; set; }
-        public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Exemption> Exemptions { get; set; }
         public virtual DbSet<Internment_Tickets> Internment_Tickets { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<Patient> Patients { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
