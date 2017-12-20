@@ -85,7 +85,7 @@ namespace BD_Cabinet_Medical
                                     "Message", MessageBoxButtons.OK, 
                                     MessageBoxIcon.Information);
                                 Hide();
-                                new Medic_Form(employee[0]);
+                                new Medic_Form(employee[0],this);
                                // Show();
                             }
                         }

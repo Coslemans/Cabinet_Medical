@@ -173,6 +173,7 @@
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(647, 362);
+            this.ControlBox = false;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Login_Type);
             this.Controls.Add(this.label4);

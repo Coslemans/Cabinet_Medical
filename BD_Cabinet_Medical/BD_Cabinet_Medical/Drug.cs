@@ -23,7 +23,6 @@ namespace BD_Cabinet_Medical
     
         public int ID { get; set; }
         public string Denumire { get; set; }
-        public double Gramaj { get; set; }
         public System.DateTime Data_Expirarii { get; set; }
         public int Stoc { get; set; }
     
