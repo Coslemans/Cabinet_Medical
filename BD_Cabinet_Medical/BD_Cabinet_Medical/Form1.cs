@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Security.Cryptography;
 namespace BD_Cabinet_Medical
 {
     public partial class Start_Form : Form
@@ -20,6 +20,19 @@ namespace BD_Cabinet_Medical
         private void Exit_Button_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        public string getMD5(string text)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+            byte[] result = md5.Hash;
+            StringBuilder str = new StringBuilder();
+            for(int i=0;i<result.Length;i++)
+            {
+                str.Append(result[i].ToString("x2"));
+            }
+            return str.ToString();
         }
 
         private void Login_Button_Click(object sender, EventArgs e)
@@ -43,7 +56,7 @@ namespace BD_Cabinet_Medical
                 else
                 {
                     string Username = Username_Box.Text.ToString();
-                    string Password = Password_Box.Text.ToString();
+                    string Password = getMD5(Password_Box.Text.ToString());
                     string Type = Login_Type.SelectedItem.ToString();
                     using (var context = new Cabinet_MedicalEntities())
                     {
@@ -65,7 +78,9 @@ namespace BD_Cabinet_Medical
                                     MessageBoxIcon.Information);
                                 Hide();
                                 new Patient_Form(employee[0]);
-                               // Show();
+                                Username_Box.Text = "";
+                                Password_Box.Text = "";
+                                // Show();
                             }
                         }
                         
@@ -86,7 +101,9 @@ namespace BD_Cabinet_Medical
                                     MessageBoxIcon.Information);
                                 Hide();
                                 new Medic_Form(employee[0],this);
-                               // Show();
+                                // Show();
+                                Username_Box.Text = "";
+                                Password_Box.Text = "";
                             }
                         }
 

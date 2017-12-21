@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Security.Cryptography;
 namespace BD_Cabinet_Medical
 {
     public partial class Medic_Form : Form
@@ -38,6 +38,7 @@ namespace BD_Cabinet_Medical
                                 emp.Numar_Buletin,
                                 emp.Data_Nasterii
                             };
+                            
 
                 foreach(var row in query)
                 {
@@ -49,13 +50,22 @@ namespace BD_Cabinet_Medical
             }
             using (var context = new Cabinet_MedicalEntities())
             {
-                var query = (from app in context.Appointments
-                             select app).Count();
-                Request_Label.Text = query.ToString().Trim() + " Appointments";
-                if(query!=0)
+                var query = from app in context.Appointments
+                            where app.ID_Medic.Equals(Abouts.ID)
+                            select app;
+                Request_Label.Text = query.Count().ToString().Trim() + " Appointments";
+                if(query.Count()!=0)
                 {
                     Request_Label.BackColor = Color.Red;
                 }
+            }
+
+            if(Equals(Abouts.Specializare.ToString().Trim(),"Asistent")==true)
+            {
+
+                Add_Button.Enabled = false;
+                Delete_Button.Enabled = false;
+                
             }
         }
 
@@ -116,5 +126,6 @@ namespace BD_Cabinet_Medical
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

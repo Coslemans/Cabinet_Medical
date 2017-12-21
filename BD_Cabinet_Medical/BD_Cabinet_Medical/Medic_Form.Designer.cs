@@ -31,16 +31,16 @@
             this.Name_Label = new System.Windows.Forms.Label();
             this.Specs_Label = new System.Windows.Forms.Label();
             this.PacientsData = new System.Windows.Forms.DataGridView();
-            this.View_Button = new System.Windows.Forms.Button();
-            this.Add_Button = new System.Windows.Forms.Button();
-            this.Delete_Button = new System.Windows.Forms.Button();
-            this.Request_Label = new System.Windows.Forms.Label();
-            this.Logout_Button = new System.Windows.Forms.Button();
             this.Nume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CNP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Serie_Buletin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Numar_Buletin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data_Nasterii = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.View_Button = new System.Windows.Forms.Button();
+            this.Add_Button = new System.Windows.Forms.Button();
+            this.Delete_Button = new System.Windows.Forms.Button();
+            this.Request_Label = new System.Windows.Forms.Label();
+            this.Logout_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PacientsData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             this.Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name_Label.Location = new System.Drawing.Point(12, 13);
             this.Name_Label.Name = "Name_Label";
-            this.Name_Label.Size = new System.Drawing.Size(50, 16);
+            this.Name_Label.Size = new System.Drawing.Size(49, 16);
             this.Name_Label.TabIndex = 0;
             this.Name_Label.Text = "Name";
             // 
@@ -83,6 +83,45 @@
             this.PacientsData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.PacientsData.Size = new System.Drawing.Size(590, 352);
             this.PacientsData.TabIndex = 2;
+            // 
+            // Nume
+            // 
+            this.Nume.HeaderText = "Nume Pacient";
+            this.Nume.Name = "Nume";
+            this.Nume.ReadOnly = true;
+            this.Nume.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Nume.Width = 120;
+            // 
+            // CNP
+            // 
+            this.CNP.HeaderText = "CNP";
+            this.CNP.Name = "CNP";
+            this.CNP.ReadOnly = true;
+            this.CNP.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CNP.Width = 130;
+            // 
+            // Serie_Buletin
+            // 
+            this.Serie_Buletin.HeaderText = "Serie Buletin";
+            this.Serie_Buletin.Name = "Serie_Buletin";
+            this.Serie_Buletin.ReadOnly = true;
+            this.Serie_Buletin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Serie_Buletin.Width = 50;
+            // 
+            // Numar_Buletin
+            // 
+            this.Numar_Buletin.HeaderText = "Numar Buletin";
+            this.Numar_Buletin.Name = "Numar_Buletin";
+            this.Numar_Buletin.ReadOnly = true;
+            this.Numar_Buletin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Data_Nasterii
+            // 
+            this.Data_Nasterii.HeaderText = "Data Nasterii";
+            this.Data_Nasterii.Name = "Data_Nasterii";
+            this.Data_Nasterii.ReadOnly = true;
+            this.Data_Nasterii.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Data_Nasterii.Width = 147;
             // 
             // View_Button
             // 
@@ -134,45 +173,6 @@
             this.Logout_Button.Text = "Logout";
             this.Logout_Button.UseVisualStyleBackColor = true;
             this.Logout_Button.Click += new System.EventHandler(this.Logout_Button_Click);
-            // 
-            // Nume
-            // 
-            this.Nume.HeaderText = "Nume Pacient";
-            this.Nume.Name = "Nume";
-            this.Nume.ReadOnly = true;
-            this.Nume.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Nume.Width = 120;
-            // 
-            // CNP
-            // 
-            this.CNP.HeaderText = "CNP";
-            this.CNP.Name = "CNP";
-            this.CNP.ReadOnly = true;
-            this.CNP.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CNP.Width = 130;
-            // 
-            // Serie_Buletin
-            // 
-            this.Serie_Buletin.HeaderText = "Serie Buletin";
-            this.Serie_Buletin.Name = "Serie_Buletin";
-            this.Serie_Buletin.ReadOnly = true;
-            this.Serie_Buletin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Serie_Buletin.Width = 50;
-            // 
-            // Numar_Buletin
-            // 
-            this.Numar_Buletin.HeaderText = "Numar Buletin";
-            this.Numar_Buletin.Name = "Numar_Buletin";
-            this.Numar_Buletin.ReadOnly = true;
-            this.Numar_Buletin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // Data_Nasterii
-            // 
-            this.Data_Nasterii.HeaderText = "Data Nasterii";
-            this.Data_Nasterii.Name = "Data_Nasterii";
-            this.Data_Nasterii.ReadOnly = true;
-            this.Data_Nasterii.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Data_Nasterii.Width = 147;
             // 
             // Medic_Form
             // 
