@@ -118,6 +118,18 @@ namespace BD_Cabinet_Medical
                 {
                     throw new Exception("Selectati un pacient!");
                 }
+
+                string name = PacientsData.SelectedCells[0].Value.ToString();
+
+                using (var context = new Cabinet_MedicalEntities())
+                {
+                    var PacientDel = (from c in context.Patients
+                                      where c.Nume.Equals(name)
+                                      select c).First();
+                    //context.Patients.Remove(PacientDel);
+                    //context.SaveChanges();
+                    //PacientsData.Rows.Remove(PacientsData.SelectedRows[0]);
+                }
                 
             }
             catch (Exception ex)
