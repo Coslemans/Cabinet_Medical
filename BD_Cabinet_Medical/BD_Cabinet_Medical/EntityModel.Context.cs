@@ -19,10 +19,24 @@ namespace BD_Cabinet_Medical
             : base("name=Cabinet_MedicalEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            modelBuilder.Entity<Patient>().HasOptional(c => c.Appointments)
+                .WithOptionalDependent()
+                        .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Patient>().HasOptional(c => c.History_Patients)
+                .WithOptionalDependent()
+                        .WillCascadeOnDelete(true);
+            modelBuilder.Entity<History_Patients>().HasOptional(c => c.Exemptions)
+                .WithOptionalDependent()
+                        .WillCascadeOnDelete(true);
+            modelBuilder.Entity<History_Patients>().HasOptional(c => c.Recipes)
+               .WithOptionalDependent()
+                       .WillCascadeOnDelete(true);
+            modelBuilder.Entity<History_Patients>().HasOptional(c => c.Internment_Tickets)
+               .WithOptionalDependent()
+                       .WillCascadeOnDelete(true);
         }
     
         public virtual DbSet<Disease> Diseases { get; set; }
