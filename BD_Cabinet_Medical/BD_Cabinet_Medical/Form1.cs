@@ -56,7 +56,8 @@ namespace BD_Cabinet_Medical
                 else
                 {
                     string Username = Username_Box.Text.ToString();
-                    string Password = getMD5(Password_Box.Text.ToString());
+                    //string Password = getMD5(Password_Box.Text.ToString());
+                    string Password = Password_Box.Text.ToString();
                     string Type = Login_Type.SelectedItem.ToString();
                     using (var context = new Cabinet_MedicalEntities())
                     {

@@ -127,5 +127,9 @@ namespace BD_Cabinet_Medical
             }
         }
 
+        private void Name_Label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -19,5 +19,10 @@ namespace BD_Cabinet_Medical
             Abouts = P;
             Show();
         }
+
+        private void Patient_Form_Load(object sender, EventArgs e)
+        {
+            this.Text = Abouts.Nume.ToString().Trim() + " Window";
+        }
     }
 }

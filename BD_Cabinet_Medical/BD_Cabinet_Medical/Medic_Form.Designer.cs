@@ -53,6 +53,7 @@
             this.Name_Label.Size = new System.Drawing.Size(49, 16);
             this.Name_Label.TabIndex = 0;
             this.Name_Label.Text = "Name";
+            this.Name_Label.Click += new System.EventHandler(this.Name_Label_Click);
             // 
             // Specs_Label
             // 
