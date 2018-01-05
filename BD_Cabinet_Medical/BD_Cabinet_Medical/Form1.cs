@@ -121,6 +121,9 @@ namespace BD_Cabinet_Medical
                 
         }
 
-   
+        private void Start_Form_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

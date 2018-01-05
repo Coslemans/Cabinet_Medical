@@ -58,10 +58,10 @@
             // Specs_Label
             // 
             this.Specs_Label.AutoSize = true;
-            this.Specs_Label.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Specs_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Specs_Label.Location = new System.Drawing.Point(12, 38);
             this.Specs_Label.Name = "Specs_Label";
-            this.Specs_Label.Size = new System.Drawing.Size(41, 14);
+            this.Specs_Label.Size = new System.Drawing.Size(37, 13);
             this.Specs_Label.TabIndex = 1;
             this.Specs_Label.Text = "Specs";
             // 
@@ -85,6 +85,7 @@
             this.PacientsData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.PacientsData.Size = new System.Drawing.Size(590, 352);
             this.PacientsData.TabIndex = 2;
+            this.PacientsData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PacientsData_CellContentClick);
             // 
             // Nume
             // 
@@ -158,10 +159,10 @@
             // 
             this.Request_Label.AutoSize = true;
             this.Request_Label.BackColor = System.Drawing.SystemColors.Control;
-            this.Request_Label.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Request_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Request_Label.Location = new System.Drawing.Point(12, 64);
             this.Request_Label.Name = "Request_Label";
-            this.Request_Label.Size = new System.Drawing.Size(82, 14);
+            this.Request_Label.Size = new System.Drawing.Size(71, 13);
             this.Request_Label.TabIndex = 6;
             this.Request_Label.Text = "Appointments";
             this.Request_Label.Click += new System.EventHandler(this.Request_Label_Click);
