@@ -14,6 +14,7 @@ namespace BD_Cabinet_Medical
     {
         Employee Abouts;
         Form Login;
+      
         public Medic_Form(Employee E, Form F)
         {
             InitializeComponent();
@@ -97,9 +98,28 @@ namespace BD_Cabinet_Medical
         {
             try
             {
-                if (PacientsData.SelectedRows.Count == 0)
+                using (var context = new Cabinet_MedicalEntities())
                 {
-                    throw new Exception("Selectati un pacient!");
+                    string cell = PacientsData.SelectedRows[0].Cells[0].Value.ToString();
+                    var query2 = (from pat in context.Patients
+                                 where pat.Nume.Equals(cell)
+                                 select pat).First();
+
+
+
+                    if (PacientsData.SelectedRows.Count == 0)
+                    {
+                        throw new Exception("Selectati un pacient!");
+                    }
+
+              
+                    else
+                    {
+                        this.Close();
+
+                        View_Form view = new View_Form(query2);
+                        view.Show();
+                    }
                 }
             }
             catch (Exception ex)
@@ -140,6 +160,11 @@ namespace BD_Cabinet_Medical
         }
 
         private void Name_Label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PacientsData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

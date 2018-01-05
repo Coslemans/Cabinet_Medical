@@ -189,6 +189,7 @@
             this.MaximizeBox = false;
             this.Name = "Start_Form";
             this.Text = "Cabinet Medical";
+            this.Load += new System.EventHandler(this.Start_Form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Login_Button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Exit_Button)).EndInit();
