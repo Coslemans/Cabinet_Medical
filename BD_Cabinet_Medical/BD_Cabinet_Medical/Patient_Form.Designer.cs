@@ -36,6 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Doctors = new System.Windows.Forms.ComboBox();
             this.saveAppointment = new System.Windows.Forms.Button();
+            this.History = new System.Windows.Forms.DataGridView();
+            this.historyButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.History)).BeginInit();
             this.SuspendLayout();
             // 
             // Logout_Button
@@ -72,7 +75,7 @@
             // 
             // dateTime
             // 
-            this.dateTime.CustomFormat = "dd/MM/yyyy/ hh:mm";
+            this.dateTime.CustomFormat = "yyyy-MM-dd hh:mm:ss";
             this.dateTime.Enabled = false;
             this.dateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTime.Location = new System.Drawing.Point(249, 121);
@@ -123,13 +126,34 @@
             this.saveAppointment.UseVisualStyleBackColor = true;
             this.saveAppointment.Click += new System.EventHandler(this.saveAppointment_Click);
             // 
+            // History
+            // 
+            this.History.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.History.Enabled = false;
+            this.History.Location = new System.Drawing.Point(173, 204);
+            this.History.Name = "History";
+            this.History.Size = new System.Drawing.Size(484, 150);
+            this.History.TabIndex = 9;
+            // 
+            // historyButton
+            // 
+            this.historyButton.Location = new System.Drawing.Point(12, 204);
+            this.historyButton.Name = "historyButton";
+            this.historyButton.Size = new System.Drawing.Size(75, 23);
+            this.historyButton.TabIndex = 10;
+            this.historyButton.Text = "History";
+            this.historyButton.UseVisualStyleBackColor = true;
+            this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
+            // 
             // Patient_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(564, 373);
+            this.ClientSize = new System.Drawing.Size(669, 373);
             this.ControlBox = false;
+            this.Controls.Add(this.historyButton);
+            this.Controls.Add(this.History);
             this.Controls.Add(this.saveAppointment);
             this.Controls.Add(this.Doctors);
             this.Controls.Add(this.label1);
@@ -141,6 +165,7 @@
             this.MinimizeBox = false;
             this.Name = "Patient_Form";
             this.Load += new System.EventHandler(this.Patient_Form_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.History)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,5 +181,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox Doctors;
         private System.Windows.Forms.Button saveAppointment;
+        private System.Windows.Forms.DataGridView History;
+        private System.Windows.Forms.Button historyButton;
     }
 }

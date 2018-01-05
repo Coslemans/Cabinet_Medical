@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace BD_Cabinet_Medical
 {
@@ -68,8 +70,24 @@ namespace BD_Cabinet_Medical
 
         private void saveAppointment_Click(object sender, EventArgs e)
         {
+            Cabinet_MedicalEntities _repository = new Cabinet_MedicalEntities();
+            Appointment new_app = new Appointment();
+            new_app.Date = dateTime.Value;
+            new_app.ID_Pacient = Abouts.ID;
+            var quey = from emp in _repository.Employees
+                       select new
+                       {
+                           emp.Nume,
+                           emp.ID
+                       };
+            foreach (var nou in quey)
+            {
+                if (nou.Nume == Doctors.SelectedItem.ToString())
+                    new_app.ID_Pacient = nou.ID;
+            }
             try
             {
+
                 if(Doctors.SelectedItem==null)
                 {
                     throw new Exception("Selectati un medic!");
@@ -79,12 +97,69 @@ namespace BD_Cabinet_Medical
                 {
                     throw new Exception("Selectati o data!");
                 }
+                else
+                {
+                    _repository.Appointments.Add(new_app);
+                    _repository.SaveChanges();
+                }
             }
             catch(Exception exc)
             {
                 MessageBox.Show(exc.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
 
+
+            //var connection = new SqlConnection();
+            //connection.ConnectionString = "Data Source = DESKTOP - 3R1BJRO; Initial Catalog = Cabinet_Medical; Integrated Security = True";
+            ////connection.Open();
+            //var cmd = connection.CreateCommand();
+            //DbParameter par = cmd.CreateParameter();
+            //par.ParameterName = "@ID_medic";
+            //DbParameter par2 = cmd.CreateParameter();
+            //par2.ParameterName = "@ID_pacient";
+            //DbParameter par3 = cmd.CreateParameter();
+            //par3.ParameterName = "@Date";
+            //par3.Value = dateTime.Value;
+
+            //using (var cont = new Cabinet_MedicalEntities())
+            //{
+            //    var query = from emp in cont.Employees
+            //                select new
+            //                {
+            //                    emp.Nume,
+            //                    emp.ID
+            //                };
+            //    foreach(var elem in query)
+            //    {
+            //        if (elem.Nume == Doctors.SelectedItem.ToString())
+            //            par.Value = elem.ID;
+            //    }
+            //    var qry = from emp in cont.Patients
+            //              select new
+            //              {
+            //                  emp.Nume,
+            //                  emp.ID
+            //              };
+            //    foreach(var pac in qry)
+            //    {
+            //        if (pac.Nume == Abouts.Nume.ToString())
+            //            par2.Value = pac.ID;
+            //    }
+            //}
+            //cmd.CommandType = CommandType.Text;
+            //cmd.CommandText = "INSERT INTO Appointments (ID_Medic, ID_Pacient, Date, Accepted) VALUES (@ID_medic,@ID_pacient,@Date,null)";
+            //connection.Close();
+
+
+        }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            History.Enabled = true;
+            Doctors.Enabled = false;
+            saveAppointment.Enabled = false;
+            dateTime.Enabled = false;
         }
     }
 }
