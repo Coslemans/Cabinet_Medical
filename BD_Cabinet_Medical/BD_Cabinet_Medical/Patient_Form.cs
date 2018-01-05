@@ -110,46 +110,7 @@ namespace BD_Cabinet_Medical
             
 
 
-            //var connection = new SqlConnection();
-            //connection.ConnectionString = "Data Source = DESKTOP - 3R1BJRO; Initial Catalog = Cabinet_Medical; Integrated Security = True";
-            ////connection.Open();
-            //var cmd = connection.CreateCommand();
-            //DbParameter par = cmd.CreateParameter();
-            //par.ParameterName = "@ID_medic";
-            //DbParameter par2 = cmd.CreateParameter();
-            //par2.ParameterName = "@ID_pacient";
-            //DbParameter par3 = cmd.CreateParameter();
-            //par3.ParameterName = "@Date";
-            //par3.Value = dateTime.Value;
-
-            //using (var cont = new Cabinet_MedicalEntities())
-            //{
-            //    var query = from emp in cont.Employees
-            //                select new
-            //                {
-            //                    emp.Nume,
-            //                    emp.ID
-            //                };
-            //    foreach(var elem in query)
-            //    {
-            //        if (elem.Nume == Doctors.SelectedItem.ToString())
-            //            par.Value = elem.ID;
-            //    }
-            //    var qry = from emp in cont.Patients
-            //              select new
-            //              {
-            //                  emp.Nume,
-            //                  emp.ID
-            //              };
-            //    foreach(var pac in qry)
-            //    {
-            //        if (pac.Nume == Abouts.Nume.ToString())
-            //            par2.Value = pac.ID;
-            //    }
-            //}
-            //cmd.CommandType = CommandType.Text;
-            //cmd.CommandText = "INSERT INTO Appointments (ID_Medic, ID_Pacient, Date, Accepted) VALUES (@ID_medic,@ID_pacient,@Date,null)";
-            //connection.Close();
+            
 
 
         }
