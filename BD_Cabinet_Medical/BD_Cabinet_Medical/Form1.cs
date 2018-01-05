@@ -78,7 +78,7 @@ namespace BD_Cabinet_Medical
                                     "Message", MessageBoxButtons.OK, 
                                     MessageBoxIcon.Information);
                                 Hide();
-                                new Patient_Form(employee[0]);
+                                new Patient_Form(employee[0],this);
                                 Username_Box.Text = "";
                                 Password_Box.Text = "";
                                 // Show();

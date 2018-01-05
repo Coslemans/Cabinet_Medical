@@ -71,6 +71,7 @@
             this.PacientsData.AllowUserToDeleteRows = false;
             this.PacientsData.AllowUserToResizeColumns = false;
             this.PacientsData.AllowUserToResizeRows = false;
+            this.PacientsData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.PacientsData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PacientsData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Nume,
