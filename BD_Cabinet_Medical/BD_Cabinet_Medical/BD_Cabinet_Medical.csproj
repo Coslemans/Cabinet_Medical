@@ -77,6 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Add_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_Form.Designer.cs">
+      <DependentUpon>Add_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Appointment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -153,6 +159,9 @@
     <Compile Include="View_Form.Designer.cs">
       <DependentUpon>View_Form.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Add_Form.resx">
+      <DependentUpon>Add_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

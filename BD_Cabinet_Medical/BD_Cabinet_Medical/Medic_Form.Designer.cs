@@ -144,6 +144,7 @@
             this.Add_Button.TabIndex = 4;
             this.Add_Button.Text = "Add";
             this.Add_Button.UseVisualStyleBackColor = true;
+            this.Add_Button.Click += new System.EventHandler(this.Add_Button_Click);
             // 
             // Delete_Button
             // 
