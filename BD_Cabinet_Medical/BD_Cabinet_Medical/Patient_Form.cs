@@ -233,5 +233,10 @@ namespace BD_Cabinet_Medical
             
             History.DataSource = data;
         }
+
+        private void Doctors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

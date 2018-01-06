@@ -125,6 +125,7 @@
             this.Doctors.Name = "Doctors";
             this.Doctors.Size = new System.Drawing.Size(225, 21);
             this.Doctors.TabIndex = 7;
+            this.Doctors.SelectedIndexChanged += new System.EventHandler(this.Doctors_SelectedIndexChanged);
             // 
             // saveAppointment
             // 
