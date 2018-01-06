@@ -155,6 +155,7 @@ namespace BD_Cabinet_Medical
             Doctors.Enabled = false;
             dateTime.Enabled = false;
             saveAppointment.Enabled = false;
+            Doctors.Items.Clear();
 
         }
 
