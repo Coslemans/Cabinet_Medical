@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Logout_Button = new System.Windows.Forms.Button();
             this.nameLabel = new System.Windows.Forms.Label();
             this.newAppointment = new System.Windows.Forms.Button();
@@ -38,7 +39,12 @@
             this.saveAppointment = new System.Windows.Forms.Button();
             this.History = new System.Windows.Forms.DataGridView();
             this.historyButton = new System.Windows.Forms.Button();
+            this.cabinet_MedicalDataSet = new BD_Cabinet_Medical.Cabinet_MedicalDataSet();
+            this.appointmentsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.appointmentsTableAdapter = new BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters.AppointmentsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.History)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cabinet_MedicalDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // Logout_Button
@@ -130,9 +136,10 @@
             // 
             this.History.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.History.Enabled = false;
-            this.History.Location = new System.Drawing.Point(173, 204);
+            this.History.Location = new System.Drawing.Point(173, 199);
             this.History.Name = "History";
-            this.History.Size = new System.Drawing.Size(484, 150);
+            this.History.RowHeadersWidth = 100;
+            this.History.Size = new System.Drawing.Size(500, 150);
             this.History.TabIndex = 9;
             // 
             // historyButton
@@ -144,6 +151,20 @@
             this.historyButton.Text = "History";
             this.historyButton.UseVisualStyleBackColor = true;
             this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
+            // 
+            // cabinet_MedicalDataSet
+            // 
+            this.cabinet_MedicalDataSet.DataSetName = "Cabinet_MedicalDataSet";
+            this.cabinet_MedicalDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // appointmentsBindingSource
+            // 
+            this.appointmentsBindingSource.DataMember = "Appointments";
+            this.appointmentsBindingSource.DataSource = this.cabinet_MedicalDataSet;
+            // 
+            // appointmentsTableAdapter
+            // 
+            this.appointmentsTableAdapter.ClearBeforeFill = true;
             // 
             // Patient_Form
             // 
@@ -166,6 +187,8 @@
             this.Name = "Patient_Form";
             this.Load += new System.EventHandler(this.Patient_Form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.History)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cabinet_MedicalDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +206,8 @@
         private System.Windows.Forms.Button saveAppointment;
         private System.Windows.Forms.DataGridView History;
         private System.Windows.Forms.Button historyButton;
+        private Cabinet_MedicalDataSet cabinet_MedicalDataSet;
+        private System.Windows.Forms.BindingSource appointmentsBindingSource;
+        private Cabinet_MedicalDataSetTableAdapters.AppointmentsTableAdapter appointmentsTableAdapter;
     }
 }

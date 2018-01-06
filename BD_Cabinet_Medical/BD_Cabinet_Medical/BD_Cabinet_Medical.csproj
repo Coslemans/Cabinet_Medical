@@ -80,6 +80,11 @@
     <Compile Include="Appointment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cabinet_MedicalDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cabinet_MedicalDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Disease.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -173,6 +178,17 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Cabinet_MedicalDataSet.xsc">
+      <DependentUpon>Cabinet_MedicalDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Cabinet_MedicalDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Cabinet_MedicalDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Cabinet_MedicalDataSet.xss">
+      <DependentUpon>Cabinet_MedicalDataSet.xsd</DependentUpon>
+    </None>
     <None Include="EntityModel.edmx.diagram">
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </None>
