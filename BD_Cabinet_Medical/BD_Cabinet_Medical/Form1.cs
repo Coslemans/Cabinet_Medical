@@ -125,5 +125,10 @@ namespace BD_Cabinet_Medical
         {
 
         }
+
+        private void Login_Type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -154,6 +154,7 @@
             this.Login_Type.Name = "Login_Type";
             this.Login_Type.Size = new System.Drawing.Size(121, 21);
             this.Login_Type.TabIndex = 10;
+            this.Login_Type.SelectedIndexChanged += new System.EventHandler(this.Login_Type_SelectedIndexChanged);
             // 
             // label5
             // 
