@@ -202,7 +202,7 @@
             this.showHistory.Size = new System.Drawing.Size(52, 17);
             this.showHistory.TabIndex = 13;
             this.showHistory.Text = "Istoric";
-            this.showHistory.Click += new System.EventHandler(this.showHistory_Click);
+           
             // 
             // historyGroup
             // 
