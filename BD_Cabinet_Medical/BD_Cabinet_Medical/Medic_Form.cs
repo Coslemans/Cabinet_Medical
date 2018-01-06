@@ -171,7 +171,7 @@ namespace BD_Cabinet_Medical
 
         private void Add_Button_Click(object sender, EventArgs e)
         {
-            Add_Form add = new Add_Form();
+            Add_Form add = new Add_Form(Abouts);
             add.Show();
         }
     }

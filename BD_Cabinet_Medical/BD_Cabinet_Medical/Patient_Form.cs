@@ -151,11 +151,10 @@ namespace BD_Cabinet_Medical
             {
                 MessageBox.Show(exc.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-
-
-            
-
+            Doctors.Text="" ;
+            Doctors.Enabled = false;
+            dateTime.Enabled = false;
+            saveAppointment.Enabled = false;
 
         }
 
@@ -232,6 +231,11 @@ namespace BD_Cabinet_Medical
            
             
             History.DataSource = data;
+        }
+
+        private void showHistory_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

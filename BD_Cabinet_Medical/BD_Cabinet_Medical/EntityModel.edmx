@@ -92,7 +92,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="CNP" Type="char" MaxLength="13" Nullable="false" />
           <Property Name="Serie_Buletin" Type="nchar" MaxLength="2" Nullable="false" />
@@ -430,7 +430,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="CNP" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Serie_Buletin" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />

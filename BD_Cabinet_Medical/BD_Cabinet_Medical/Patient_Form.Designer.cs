@@ -45,27 +45,31 @@
             this.appointmentsTableAdapter = new BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters.AppointmentsTableAdapter();
             this.Programare = new System.Windows.Forms.GroupBox();
             this.showHistory = new System.Windows.Forms.Label();
+            this.historyGroup = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.History)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cabinet_MedicalDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).BeginInit();
             this.Programare.SuspendLayout();
+            this.historyGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // Logout_Button
             // 
-            this.Logout_Button.Location = new System.Drawing.Point(12, 110);
+            this.Logout_Button.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.Logout_Button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Logout_Button.BackgroundImage")));
+            this.Logout_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Logout_Button.Location = new System.Drawing.Point(2, 221);
             this.Logout_Button.Name = "Logout_Button";
-            this.Logout_Button.Size = new System.Drawing.Size(75, 23);
+            this.Logout_Button.Size = new System.Drawing.Size(100, 96);
             this.Logout_Button.TabIndex = 0;
-            this.Logout_Button.Text = "Logout";
-            this.Logout_Button.UseVisualStyleBackColor = true;
+            this.Logout_Button.UseVisualStyleBackColor = false;
             this.Logout_Button.Click += new System.EventHandler(this.Logout_Button_Click);
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
             this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(8, 46);
+            this.nameLabel.Location = new System.Drawing.Point(12, 52);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(65, 24);
             this.nameLabel.TabIndex = 1;
@@ -141,17 +145,17 @@
             // 
             this.History.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.History.Enabled = false;
-            this.History.Location = new System.Drawing.Point(130, 204);
+            this.History.Location = new System.Drawing.Point(135, 23);
             this.History.Name = "History";
-            this.History.RowHeadersWidth = 100;
-            this.History.Size = new System.Drawing.Size(519, 150);
+            this.History.RowHeadersWidth = 130;
+            this.History.Size = new System.Drawing.Size(532, 150);
             this.History.TabIndex = 9;
             // 
             // historyButton
             // 
             this.historyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("historyButton.BackgroundImage")));
             this.historyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.historyButton.Location = new System.Drawing.Point(13, 215);
+            this.historyButton.Location = new System.Drawing.Point(45, 40);
             this.historyButton.Name = "historyButton";
             this.historyButton.Size = new System.Drawing.Size(74, 96);
             this.historyButton.TabIndex = 10;
@@ -181,7 +185,7 @@
             this.Programare.Controls.Add(this.saveAppointment);
             this.Programare.Controls.Add(this.dateTime);
             this.Programare.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Programare.Location = new System.Drawing.Point(130, 12);
+            this.Programare.Location = new System.Drawing.Point(248, 12);
             this.Programare.Name = "Programare";
             this.Programare.Size = new System.Drawing.Size(532, 163);
             this.Programare.TabIndex = 12;
@@ -192,23 +196,35 @@
             // 
             this.showHistory.AutoSize = true;
             this.showHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.showHistory.Location = new System.Drawing.Point(21, 323);
+            this.showHistory.Location = new System.Drawing.Point(57, 156);
             this.showHistory.Name = "showHistory";
             this.showHistory.Size = new System.Drawing.Size(52, 17);
             this.showHistory.TabIndex = 13;
             this.showHistory.Text = "Istoric";
+            this.showHistory.Click += new System.EventHandler(this.showHistory_Click);
+            // 
+            // historyGroup
+            // 
+            this.historyGroup.Controls.Add(this.History);
+            this.historyGroup.Controls.Add(this.showHistory);
+            this.historyGroup.Controls.Add(this.historyButton);
+            this.historyGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.historyGroup.Location = new System.Drawing.Point(108, 181);
+            this.historyGroup.Name = "historyGroup";
+            this.historyGroup.Size = new System.Drawing.Size(683, 191);
+            this.historyGroup.TabIndex = 14;
+            this.historyGroup.TabStop = false;
+            this.historyGroup.Text = "Istoric";
             // 
             // Patient_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.ClientSize = new System.Drawing.Size(674, 373);
+            this.ClientSize = new System.Drawing.Size(803, 373);
             this.ControlBox = false;
-            this.Controls.Add(this.showHistory);
+            this.Controls.Add(this.historyGroup);
             this.Controls.Add(this.Programare);
-            this.Controls.Add(this.historyButton);
-            this.Controls.Add(this.History);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.Logout_Button);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -220,6 +236,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).EndInit();
             this.Programare.ResumeLayout(false);
             this.Programare.PerformLayout();
+            this.historyGroup.ResumeLayout(false);
+            this.historyGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +260,6 @@
         private Cabinet_MedicalDataSetTableAdapters.AppointmentsTableAdapter appointmentsTableAdapter;
         private System.Windows.Forms.GroupBox Programare;
         private System.Windows.Forms.Label showHistory;
+        private System.Windows.Forms.GroupBox historyGroup;
     }
 }
