@@ -31,21 +31,41 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(View_Form));
             this.buttonScutire = new System.Windows.Forms.Button();
             this.buttonReteta = new System.Windows.Forms.Button();
             this.buttonBilet = new System.Windows.Forms.Button();
             this.labelNume = new System.Windows.Forms.Label();
             this.ViewData = new System.Windows.Forms.DataGridView();
-            this.comboBoxTipC = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonAfisare = new System.Windows.Forms.Button();
             this.Nume = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nume_medic = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Data = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.comboBoxTipC = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonAfisare = new System.Windows.Forms.Button();
+            this.RetetaData = new System.Windows.Forms.DataGridView();
+            this.cData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CMedic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CDescriere = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Medicament = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Numar_flacoane = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BiletData = new System.Windows.Forms.DataGridView();
+            this.CData3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CMedic3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CAfectiune3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descriere = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNrB3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ViewData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RetetaData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BiletData)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonScutire
@@ -56,6 +76,7 @@
             this.buttonScutire.TabIndex = 1;
             this.buttonScutire.Text = "Scutire";
             this.buttonScutire.UseVisualStyleBackColor = true;
+            this.buttonScutire.Click += new System.EventHandler(this.buttonScutire_Click);
             // 
             // buttonReteta
             // 
@@ -135,6 +156,31 @@
             this.ViewData.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ViewData_CellContentClick);
             this.ViewData.CellContextMenuStripChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ViewData_CellContentClick);
             // 
+            // Nume
+            // 
+            this.Nume.HeaderText = "Data";
+            this.Nume.Name = "Nume";
+            // 
+            // Nume_medic
+            // 
+            this.Nume_medic.HeaderText = "Nume medic";
+            this.Nume_medic.Name = "Nume_medic";
+            // 
+            // Data
+            // 
+            this.Data.HeaderText = "Denumire afectiune";
+            this.Data.Name = "Data";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Tip scutire";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Numar zile repaus";
+            this.Column2.Name = "Column2";
+            // 
             // comboBoxTipC
             // 
             this.comboBoxTipC.FormattingEnabled = true;
@@ -167,30 +213,133 @@
             this.buttonAfisare.UseVisualStyleBackColor = true;
             this.buttonAfisare.Click += new System.EventHandler(this.buttonAfisare_Click);
             // 
-            // Nume
+            // RetetaData
             // 
-            this.Nume.HeaderText = "Data";
-            this.Nume.Name = "Nume";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.RetetaData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.RetetaData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.RetetaData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.cData,
+            this.CMedic,
+            this.CDescriere,
+            this.Medicament,
+            this.Numar_flacoane});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.RetetaData.DefaultCellStyle = dataGridViewCellStyle5;
+            this.RetetaData.Location = new System.Drawing.Point(184, 90);
+            this.RetetaData.Name = "RetetaData";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.RetetaData.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.RetetaData.Size = new System.Drawing.Size(544, 239);
+            this.RetetaData.TabIndex = 9;
+            this.RetetaData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RetetaData_CellContentClick);
             // 
-            // Nume_medic
+            // cData
             // 
-            this.Nume_medic.HeaderText = "Nume medic";
-            this.Nume_medic.Name = "Nume_medic";
+            this.cData.HeaderText = "Data";
+            this.cData.Name = "cData";
             // 
-            // Data
+            // CMedic
             // 
-            this.Data.HeaderText = "Denumire afectiune";
-            this.Data.Name = "Data";
+            this.CMedic.HeaderText = "Nume medic";
+            this.CMedic.Name = "CMedic";
             // 
-            // Column1
+            // CDescriere
             // 
-            this.Column1.HeaderText = "Tip scutire";
-            this.Column1.Name = "Column1";
+            this.CDescriere.HeaderText = "Denumire afectiune";
+            this.CDescriere.Name = "CDescriere";
             // 
-            // Column2
+            // Medicament
             // 
-            this.Column2.HeaderText = "Numar zile repaus";
-            this.Column2.Name = "Column2";
+            this.Medicament.HeaderText = "Medicament";
+            this.Medicament.Name = "Medicament";
+            // 
+            // Numar_flacoane
+            // 
+            this.Numar_flacoane.HeaderText = "Numar flacoane";
+            this.Numar_flacoane.Name = "Numar_flacoane";
+            // 
+            // BiletData
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BiletData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.BiletData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BiletData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CData3,
+            this.CMedic3,
+            this.CAfectiune3,
+            this.Descriere,
+            this.CNrB3});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.BiletData.DefaultCellStyle = dataGridViewCellStyle8;
+            this.BiletData.Location = new System.Drawing.Point(184, 90);
+            this.BiletData.Name = "BiletData";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BiletData.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.BiletData.Size = new System.Drawing.Size(544, 239);
+            this.BiletData.TabIndex = 10;
+            this.BiletData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BiletData_CellContentClick);
+            // 
+            // CData3
+            // 
+            this.CData3.HeaderText = "Data";
+            this.CData3.Name = "CData3";
+            // 
+            // CMedic3
+            // 
+            this.CMedic3.HeaderText = "Medic";
+            this.CMedic3.Name = "CMedic3";
+            // 
+            // CAfectiune3
+            // 
+            this.CAfectiune3.HeaderText = "Denumire afectiune";
+            this.CAfectiune3.Name = "CAfectiune3";
+            // 
+            // Descriere
+            // 
+            this.Descriere.HeaderText = "Descriere";
+            this.Descriere.Name = "Descriere";
+            // 
+            // CNrB3
+            // 
+            this.CNrB3.HeaderText = "Numar bilet";
+            this.CNrB3.Name = "CNrB3";
             // 
             // View_Form
             // 
@@ -198,6 +347,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(724, 330);
+            this.Controls.Add(this.BiletData);
+            this.Controls.Add(this.RetetaData);
             this.Controls.Add(this.buttonAfisare);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxTipC);
@@ -214,6 +365,8 @@
             this.Text = "View";
             this.Load += new System.EventHandler(this.View_Form_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ViewData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RetetaData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BiletData)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,5 +386,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Data;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridView RetetaData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CMedic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CDescriere;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Medicament;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Numar_flacoane;
+        private System.Windows.Forms.DataGridView BiletData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CData3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CMedic3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CAfectiune3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descriere;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CNrB3;
     }
 }

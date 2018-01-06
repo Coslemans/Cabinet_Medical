@@ -35,6 +35,12 @@ namespace BD_Cabinet_Medical
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Exemption> Exemptions { get; set; }
+
+        internal void SubmitChanges()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual DbSet<Internment_Tickets> Internment_Tickets { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
     

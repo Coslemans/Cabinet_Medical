@@ -233,7 +233,7 @@ namespace BD_Cabinet_Medical
             History.DataSource = data;
         }
 
-        private void showHistory_Click(object sender, EventArgs e)
+        private void Doctors_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
