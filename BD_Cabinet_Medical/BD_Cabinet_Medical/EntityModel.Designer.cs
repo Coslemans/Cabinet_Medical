@@ -1,5 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\ProiectBaze\Cabinet_Medical\BD_Cabinet_Medical\BD_Cabinet_Medical\EntityModel.edmx'. 
-// T4 code generation is enabled for model 'C:\Users\Daniela\Source\Repos\Cabinet_Medical\BD_Cabinet_Medical\BD_Cabinet_Medical\EntityModel.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\gitrepos\Cabinet_Medical\BD_Cabinet_Medical\BD_Cabinet_Medical\EntityModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -41,9 +41,28 @@ namespace BD_Cabinet_Medical
             
             }
         }
+        
+        bool checkAppointment(int medic,int pacient,DateTime date)
+        {
+            var context = new Cabinet_MedicalEntities();
+            var app = from cab in context.Appointments
+                      where cab.ID_Pacient.Equals(pacient) && cab.ID_Medic.Equals(medic) && cab.Date.Equals(date)
+                      select new
+                      {
+                          cab.ID_Medic,
+                          cab.ID_Pacient,
+                          cab.Date
+                      };
+            if (app.Count() != 0)
+                return true;
+            else
+                return false;
+        }
 
         private void Patient_Form_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'cabinet_MedicalDataSet.Appointments' table. You can move, or remove it, as needed.
+            this.appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
             this.Text = Abouts.Nume.ToString().Trim() + " Window";
             nameLabel.Text = Abouts.Nume.ToString().Trim();
         }
@@ -66,27 +85,15 @@ namespace BD_Cabinet_Medical
             dateTime.Enabled = true;
             saveAppointment.Enabled = true;
             FillCombo();
+            History.Enabled = false;
         }
 
         private void saveAppointment_Click(object sender, EventArgs e)
         {
-            Cabinet_MedicalEntities _repository = new Cabinet_MedicalEntities();
-            Appointment new_app = new Appointment();
-            new_app.Date = dateTime.Value;
-            new_app.ID_Pacient = Abouts.ID;
-            var quey = from emp in _repository.Employees
-                       select new
-                       {
-                           emp.Nume,
-                           emp.ID
-                       };
-            foreach (var nou in quey)
-            {
-                if (nou.Nume == Doctors.SelectedItem.ToString())
-                    new_app.ID_Pacient = nou.ID;
-            }
+           
             try
             {
+
 
                 if(Doctors.SelectedItem==null)
                 {
@@ -99,8 +106,45 @@ namespace BD_Cabinet_Medical
                 }
                 else
                 {
-                    _repository.Appointments.Add(new_app);
-                    _repository.SaveChanges();
+                    int idMed = 0;
+                    SqlConnection con = new SqlConnection();
+                    con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
+
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO Appointments (ID_Medic,ID_Pacient,Date,Accepted) Values (@ID_Medic,@ID_Pacient,@Date,null)";
+
+
+                    using (var context = new Cabinet_MedicalEntities())
+                    {
+                        var medic = from med in context.Employees
+                                    where med.Nume.Equals(Doctors.SelectedItem.ToString())
+                                    select new
+                                    {
+                                        med.Nume,
+                                        med.ID
+                                    };
+                        foreach (var me in medic)
+                        {
+                            if (me.Nume.Equals(Doctors.SelectedItem.ToString()))
+                            {
+                                cmd.Parameters.Add("@ID_Medic", SqlDbType.Int).Value = me.ID;
+                                idMed = me.ID;
+                            }
+                        }
+                    }
+                    cmd.Parameters.Add("@ID_Pacient", SqlDbType.Int).Value = Abouts.ID;
+                    cmd.Parameters.Add("@Date", SqlDbType.DateTime).Value = dateTime.Value;
+
+                    if (checkAppointment(idMed, Abouts.ID, dateTime.Value) == true)
+                        throw new Exception("Programarea este deja inregistrata!");
+                    else
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+
                 }
             }
             catch(Exception exc)
@@ -110,46 +154,7 @@ namespace BD_Cabinet_Medical
             
 
 
-            //var connection = new SqlConnection();
-            //connection.ConnectionString = "Data Source = DESKTOP - 3R1BJRO; Initial Catalog = Cabinet_Medical; Integrated Security = True";
-            ////connection.Open();
-            //var cmd = connection.CreateCommand();
-            //DbParameter par = cmd.CreateParameter();
-            //par.ParameterName = "@ID_medic";
-            //DbParameter par2 = cmd.CreateParameter();
-            //par2.ParameterName = "@ID_pacient";
-            //DbParameter par3 = cmd.CreateParameter();
-            //par3.ParameterName = "@Date";
-            //par3.Value = dateTime.Value;
-
-            //using (var cont = new Cabinet_MedicalEntities())
-            //{
-            //    var query = from emp in cont.Employees
-            //                select new
-            //                {
-            //                    emp.Nume,
-            //                    emp.ID
-            //                };
-            //    foreach(var elem in query)
-            //    {
-            //        if (elem.Nume == Doctors.SelectedItem.ToString())
-            //            par.Value = elem.ID;
-            //    }
-            //    var qry = from emp in cont.Patients
-            //              select new
-            //              {
-            //                  emp.Nume,
-            //                  emp.ID
-            //              };
-            //    foreach(var pac in qry)
-            //    {
-            //        if (pac.Nume == Abouts.Nume.ToString())
-            //            par2.Value = pac.ID;
-            //    }
-            //}
-            //cmd.CommandType = CommandType.Text;
-            //cmd.CommandText = "INSERT INTO Appointments (ID_Medic, ID_Pacient, Date, Accepted) VALUES (@ID_medic,@ID_pacient,@Date,null)";
-            //connection.Close();
+            
 
 
         }
@@ -160,6 +165,73 @@ namespace BD_Cabinet_Medical
             Doctors.Enabled = false;
             saveAppointment.Enabled = false;
             dateTime.Enabled = false;
+            DataTable data = new DataTable();
+            data.Columns.Add("Afectiune", typeof(string));
+            data.Columns.Add("Medic", typeof(string));
+            data.Columns.Add("Specializare", typeof(string));
+            data.Columns.Add("Data_examinare", typeof(DateTime));
+            var context = new Cabinet_MedicalEntities();
+            var query = from hist in context.History_Patients
+                        where hist.ID_Pacient.Equals(Abouts.ID)
+                        select new
+                        {
+                            hist.ID,
+                            hist.ID_Afectiune,
+                            hist.ID_Medic,
+                            hist.Data
+                        };
+            foreach(var ist in query)
+            {
+                DataRow row = null;
+                row = data.NewRow();
+                var disease = from dis in context.Diseases
+                              where dis.ID == ist.ID_Afectiune
+                              select new
+                              {
+                                  dis.Denumire,dis.ID
+                              };
+
+                var medic = from doc in context.Employees
+                            where doc.ID.Equals(ist.ID)
+                            select new
+                            {
+                                doc.Nume,
+                                doc.Specializare,
+                                doc.ID
+                            };
+                var dat = from da in context.History_Patients
+                          where da.ID.Equals(ist.ID)
+                          select new
+                          {
+                              da.Data,
+                              da.ID
+                          };
+                foreach(var nou in dat)
+                {
+                    if (nou.ID == ist.ID)
+                        row["Data_examinare"] = nou.Data.ToString().Trim();
+                }
+                foreach(var doc in medic)
+                {
+                    if (doc.ID == ist.ID_Medic)
+                    {
+                        row["Medic"] = doc.Nume.ToString().Trim();
+                        row["Specializare"] = doc.Specializare.ToString().Trim();
+                    }
+                }
+                foreach (var dis in disease)
+                {
+                    if (dis.ID == ist.ID_Afectiune)
+                        row["Afectiune"] = dis.Denumire.ToString().Trim();
+
+                }
+                data.Rows.Add(row);
+                
+
+            }
+           
+            
+            History.DataSource = data;
         }
     }
 }
