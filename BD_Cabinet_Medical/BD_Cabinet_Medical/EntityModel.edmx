@@ -22,14 +22,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Appointments' does not have a 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="nchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Drugs">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Data_Expirarii" Type="date" Nullable="false" />
           <Property Name="Stoc" Type="int" Nullable="false" />
@@ -48,23 +48,20 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Drugs_Diseases' does not have 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Specializare" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Username" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Parola" Type="nchar" MaxLength="12" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Cabinet_Medical.dbo.Exemptions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Exemptions">
           <Key>
-            <PropertyRef Name="ID_Istoric" />
-            <PropertyRef Name="Zile_Repaus" />
-            <PropertyRef Name="Tip" />
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="Zile_Repaus" Type="int" Nullable="false" />
           <Property Name="Tip" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -73,8 +70,8 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Exemptions' does not have a pr
           <Property Name="ID_Pacient" Type="int" Nullable="false" />
           <Property Name="ID_Medic" Type="int" Nullable="false" />
           <Property Name="ID_Afectiune" Type="int" Nullable="false" />
-          <Property Name="Data" Type="date" Nullable="false" />
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Data" Type="date" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -290,6 +287,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <EntitySet Name="Diseases" EntityType="Self.Diseases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exemptions" EntityType="Self.Exemptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History_Patients" EntityType="Self.History_Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -306,13 +304,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
     [Drugs_Diseases].[ID_Afectiune] AS [ID_Afectiune], 
     [Drugs_Diseases].[ID_Medicament] AS [ID_Medicament]
     FROM [dbo].[Drugs_Diseases] AS [Drugs_Diseases]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Exemptions" EntityType="Self.Exemptions" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Exemptions].[ID_Istoric] AS [ID_Istoric], 
-    [Exemptions].[Zile_Repaus] AS [Zile_Repaus], 
-    [Exemptions].[Tip] AS [Tip]
-    FROM [dbo].[Exemptions] AS [Exemptions]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -382,7 +373,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="History_Patients" Relationship="Self.FK_Istoric_Pacienti_Afectiuni" FromRole="Diseases" ToRole="History_Patients" />
           <NavigationProperty Name="Drugs" Relationship="Self.Drugs_Diseases" FromRole="Diseases" ToRole="Drugs" />
@@ -391,7 +382,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Data_Expirarii" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Stoc" Type="Int32" Nullable="false" />
@@ -402,13 +393,23 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Specializare" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Parola" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Employees" FromRole="Employees" ToRole="Appointments" />
           <NavigationProperty Name="History_Patients" Relationship="Self.FK_Istoric_Pacienti_Angajati" FromRole="Employees" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="Exemption">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
+          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
+          <Property Name="Tip" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="Exemptions" ToRole="History_Patients" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -417,14 +418,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
           <Property Name="ID_Medic" Type="Int32" Nullable="false" />
           <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Disease" Relationship="Self.FK_Istoric_Pacienti_Afectiuni" FromRole="History_Patients" ToRole="Diseases" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Istoric_Pacienti_Angajati" FromRole="History_Patients" ToRole="Employees" />
+          <NavigationProperty Name="Exemptions" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemptions" />
           <NavigationProperty Name="Internment_Tickets" Relationship="Self.FK_Bilete_Internare_Istoric_Pacienti" FromRole="History_Patients" ToRole="Internment_Tickets" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Istoric_Pacienti_Pacienti" FromRole="History_Patients" ToRole="Patients" />
           <NavigationProperty Name="Recipes" Relationship="Self.FK_Retete_Istoric_Pacienti" FromRole="History_Patients" ToRole="Recipes" />
-          <NavigationProperty Name="Exemptions" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemptions" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -463,17 +464,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Property Name="Accepted" Type="Int32" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Appointments_Employees" FromRole="Appointments" ToRole="Employees" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_Appointments_Patients" FromRole="Appointments" ToRole="Patients" />
-        </EntityType>
-        <EntityType Name="Exemption">
-          <Key>
-            <PropertyRef Name="ID_Istoric" />
-            <PropertyRef Name="Zile_Repaus" />
-            <PropertyRef Name="Tip" />
-          </Key>
-          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
-          <Property Name="Tip" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="Exemptions" ToRole="History_Patients" />
         </EntityType>
         <EntityType Name="Internment_Tickets">
           <Key>
@@ -546,6 +536,18 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Scutiri_Istoric_Pacienti">
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="Exemptions" Type="Self.Exemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Exemptions">
+              <PropertyRef Name="ID_Istoric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
           <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
           <End Role="Internment_Tickets" Type="Self.Internment_Tickets" Multiplicity="*" />
@@ -582,18 +584,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Scutiri_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
-          <End Role="Exemptions" Type="Self.Exemption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="History_Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Exemptions">
-              <PropertyRef Name="ID_Istoric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Appointments_Patients">
           <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
           <End Role="Appointments" Type="Self.Appointment" Multiplicity="*" />
@@ -614,11 +604,11 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <EntitySet Name="Diseases" EntityType="Self.Disease" />
           <EntitySet Name="Drugs" EntityType="Self.Drug" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Exemptions" EntityType="Self.Exemption" />
           <EntitySet Name="History_Patients" EntityType="Self.History_Patients" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Appointments" EntityType="Self.Appointment" />
-          <EntitySet Name="Exemptions" EntityType="Self.Exemption" />
           <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" />
           <EntitySet Name="Recipes" EntityType="Self.Recipe" />
           <AssociationSet Name="FK_Istoric_Pacienti_Afectiuni" Association="Self.FK_Istoric_Pacienti_Afectiuni">
@@ -637,6 +627,10 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
             <End Role="Employees" EntitySet="Employees" />
             <End Role="History_Patients" EntitySet="History_Patients" />
           </AssociationSet>
+          <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Self.FK_Scutiri_Istoric_Pacienti">
+            <End Role="History_Patients" EntitySet="History_Patients" />
+            <End Role="Exemptions" EntitySet="Exemptions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Bilete_Internare_Istoric_Pacienti" Association="Self.FK_Bilete_Internare_Istoric_Pacienti">
             <End Role="History_Patients" EntitySet="History_Patients" />
             <End Role="Internment_Tickets" EntitySet="Internment_Tickets" />
@@ -648,10 +642,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <AssociationSet Name="FK_Retete_Istoric_Pacienti" Association="Self.FK_Retete_Istoric_Pacienti">
             <End Role="History_Patients" EntitySet="History_Patients" />
             <End Role="Recipes" EntitySet="Recipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Self.FK_Scutiri_Istoric_Pacienti">
-            <End Role="History_Patients" EntitySet="History_Patients" />
-            <End Role="Exemptions" EntitySet="Exemptions" />
           </AssociationSet>
           <AssociationSet Name="FK_Appointments_Patients" Association="Self.FK_Appointments_Patients">
             <End Role="Patients" EntitySet="Patients" />
@@ -727,6 +717,16 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Exemptions">
+            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
+              <MappingFragment StoreEntitySet="Exemptions">
+                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
+                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="History_Patients">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.History_Patients">
               <MappingFragment StoreEntitySet="History_Patients">
@@ -770,15 +770,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
                 <ScalarProperty Name="ID_Pacient" ColumnName="ID_Pacient" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Accepted" ColumnName="Accepted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Exemptions">
-            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
-              <MappingFragment StoreEntitySet="Exemptions">
-                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
-                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
-                <ScalarProperty Name="Tip" ColumnName="Tip" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

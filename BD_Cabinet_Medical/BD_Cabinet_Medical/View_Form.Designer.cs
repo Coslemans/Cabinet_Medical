@@ -63,6 +63,7 @@
             this.CAfectiune3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descriere = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CNrB3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonBAck = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ViewData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RetetaData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BiletData)).BeginInit();
@@ -70,7 +71,7 @@
             // 
             // buttonScutire
             // 
-            this.buttonScutire.Location = new System.Drawing.Point(12, 189);
+            this.buttonScutire.Location = new System.Drawing.Point(12, 168);
             this.buttonScutire.Name = "buttonScutire";
             this.buttonScutire.Size = new System.Drawing.Size(85, 25);
             this.buttonScutire.TabIndex = 1;
@@ -80,7 +81,7 @@
             // 
             // buttonReteta
             // 
-            this.buttonReteta.Location = new System.Drawing.Point(12, 238);
+            this.buttonReteta.Location = new System.Drawing.Point(12, 211);
             this.buttonReteta.Name = "buttonReteta";
             this.buttonReteta.Size = new System.Drawing.Size(85, 25);
             this.buttonReteta.TabIndex = 2;
@@ -90,7 +91,7 @@
             // 
             // buttonBilet
             // 
-            this.buttonBilet.Location = new System.Drawing.Point(12, 285);
+            this.buttonBilet.Location = new System.Drawing.Point(12, 258);
             this.buttonBilet.Name = "buttonBilet";
             this.buttonBilet.Size = new System.Drawing.Size(85, 25);
             this.buttonBilet.TabIndex = 3;
@@ -101,7 +102,7 @@
             // 
             this.labelNume.AutoSize = true;
             this.labelNume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNume.Location = new System.Drawing.Point(12, 39);
+            this.labelNume.Location = new System.Drawing.Point(13, 39);
             this.labelNume.Name = "labelNume";
             this.labelNume.Size = new System.Drawing.Size(41, 15);
             this.labelNume.TabIndex = 5;
@@ -140,7 +141,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ViewData.DefaultCellStyle = dataGridViewCellStyle2;
             this.ViewData.GridColor = System.Drawing.SystemColors.WindowFrame;
-            this.ViewData.Location = new System.Drawing.Point(184, 90);
+            this.ViewData.Location = new System.Drawing.Point(168, 63);
             this.ViewData.Name = "ViewData";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -150,7 +151,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.ViewData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.ViewData.Size = new System.Drawing.Size(544, 239);
+            this.ViewData.Size = new System.Drawing.Size(544, 266);
             this.ViewData.TabIndex = 0;
             this.ViewData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ViewData_CellContentClick_1);
             this.ViewData.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ViewData_CellContentClick);
@@ -188,7 +189,7 @@
             "Reteta",
             "Scutire",
             "Bilet internare"});
-            this.comboBoxTipC.Location = new System.Drawing.Point(12, 115);
+            this.comboBoxTipC.Location = new System.Drawing.Point(12, 99);
             this.comboBoxTipC.Name = "comboBoxTipC";
             this.comboBoxTipC.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTipC.TabIndex = 6;
@@ -197,7 +198,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 90);
+            this.label1.Location = new System.Drawing.Point(13, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 7;
@@ -205,9 +206,9 @@
             // 
             // buttonAfisare
             // 
-            this.buttonAfisare.Location = new System.Drawing.Point(12, 142);
+            this.buttonAfisare.Location = new System.Drawing.Point(12, 126);
             this.buttonAfisare.Name = "buttonAfisare";
-            this.buttonAfisare.Size = new System.Drawing.Size(75, 23);
+            this.buttonAfisare.Size = new System.Drawing.Size(85, 25);
             this.buttonAfisare.TabIndex = 8;
             this.buttonAfisare.Text = "Ok";
             this.buttonAfisare.UseVisualStyleBackColor = true;
@@ -238,7 +239,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.RetetaData.DefaultCellStyle = dataGridViewCellStyle5;
-            this.RetetaData.Location = new System.Drawing.Point(184, 90);
+            this.RetetaData.Location = new System.Drawing.Point(168, 63);
             this.RetetaData.Name = "RetetaData";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -248,7 +249,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.RetetaData.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.RetetaData.Size = new System.Drawing.Size(544, 239);
+            this.RetetaData.Size = new System.Drawing.Size(544, 266);
             this.RetetaData.TabIndex = 9;
             this.RetetaData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.RetetaData_CellContentClick);
             // 
@@ -302,7 +303,7 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.BiletData.DefaultCellStyle = dataGridViewCellStyle8;
-            this.BiletData.Location = new System.Drawing.Point(184, 90);
+            this.BiletData.Location = new System.Drawing.Point(168, 63);
             this.BiletData.Name = "BiletData";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
@@ -312,7 +313,7 @@
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.BiletData.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.BiletData.Size = new System.Drawing.Size(544, 239);
+            this.BiletData.Size = new System.Drawing.Size(544, 266);
             this.BiletData.TabIndex = 10;
             this.BiletData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BiletData_CellContentClick);
             // 
@@ -341,12 +342,22 @@
             this.CNrB3.HeaderText = "Numar bilet";
             this.CNrB3.Name = "CNrB3";
             // 
+            // buttonBAck
+            // 
+            this.buttonBAck.Location = new System.Drawing.Point(12, 295);
+            this.buttonBAck.Name = "buttonBAck";
+            this.buttonBAck.Size = new System.Drawing.Size(85, 25);
+            this.buttonBAck.TabIndex = 12;
+            this.buttonBAck.Text = "Back";
+            this.buttonBAck.UseVisualStyleBackColor = true;
+            // 
             // View_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(724, 330);
+            this.ClientSize = new System.Drawing.Size(713, 330);
+            this.Controls.Add(this.buttonBAck);
             this.Controls.Add(this.BiletData);
             this.Controls.Add(this.RetetaData);
             this.Controls.Add(this.buttonAfisare);
@@ -398,5 +409,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CAfectiune3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descriere;
         private System.Windows.Forms.DataGridViewTextBoxColumn CNrB3;
+        private System.Windows.Forms.Button buttonBAck;
     }
 }

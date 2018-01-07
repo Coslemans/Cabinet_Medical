@@ -32,6 +32,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelData = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxData = new System.Windows.Forms.TextBox();
             this.textBoxMedic = new System.Windows.Forms.TextBox();
             this.labelMedic = new System.Windows.Forms.Label();
             this.textBoxZile = new System.Windows.Forms.TextBox();
@@ -39,7 +40,8 @@
             this.textBoxAfectiune = new System.Windows.Forms.TextBox();
             this.labelAfectiune = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxData = new System.Windows.Forms.TextBox();
+            this.labelTipScutire = new System.Windows.Forms.Label();
+            this.textBoxTipScutire = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +51,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(85, 25);
             this.buttonSave.TabIndex = 0;
-            this.buttonSave.Text = "Salvare";
+            this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
@@ -59,7 +61,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(85, 25);
             this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Renunta";
+            this.buttonCancel.Text = "Back";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
@@ -76,6 +78,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.Controls.Add(this.textBoxTipScutire);
+            this.panel1.Controls.Add(this.labelTipScutire);
             this.panel1.Controls.Add(this.textBoxData);
             this.panel1.Controls.Add(this.textBoxMedic);
             this.panel1.Controls.Add(this.labelMedic);
@@ -91,6 +95,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(527, 355);
             this.panel1.TabIndex = 3;
+            // 
+            // textBoxData
+            // 
+            this.textBoxData.Location = new System.Drawing.Point(147, 29);
+            this.textBoxData.Name = "textBoxData";
+            this.textBoxData.Size = new System.Drawing.Size(254, 20);
+            this.textBoxData.TabIndex = 11;
             // 
             // textBoxMedic
             // 
@@ -151,12 +162,22 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 4;
             // 
-            // textBoxData
+            // labelTipScutire
             // 
-            this.textBoxData.Location = new System.Drawing.Point(147, 29);
-            this.textBoxData.Name = "textBoxData";
-            this.textBoxData.Size = new System.Drawing.Size(254, 20);
-            this.textBoxData.TabIndex = 11;
+            this.labelTipScutire.AutoSize = true;
+            this.labelTipScutire.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTipScutire.Location = new System.Drawing.Point(18, 186);
+            this.labelTipScutire.Name = "labelTipScutire";
+            this.labelTipScutire.Size = new System.Drawing.Size(74, 17);
+            this.labelTipScutire.TabIndex = 12;
+            this.labelTipScutire.Text = "Tip scutire";
+            // 
+            // textBoxTipScutire
+            // 
+            this.textBoxTipScutire.Location = new System.Drawing.Point(147, 185);
+            this.textBoxTipScutire.Name = "textBoxTipScutire";
+            this.textBoxTipScutire.Size = new System.Drawing.Size(254, 20);
+            this.textBoxTipScutire.TabIndex = 13;
             // 
             // ScutiriForm
             // 
@@ -188,5 +209,7 @@
         private System.Windows.Forms.TextBox textBoxZile;
         private System.Windows.Forms.Label labelZile;
         private System.Windows.Forms.TextBox textBoxData;
+        private System.Windows.Forms.TextBox textBoxTipScutire;
+        private System.Windows.Forms.Label labelTipScutire;
     }
 }

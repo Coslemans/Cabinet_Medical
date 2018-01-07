@@ -193,10 +193,6 @@
     <EmbeddedResource Include="View_Form.resx">
       <DependentUpon>View_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="EntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Cabinet_MedicalDataSet.xsc">
       <DependentUpon>Cabinet_MedicalDataSet.xsd</DependentUpon>
     </None>
@@ -208,6 +204,10 @@
     <None Include="Cabinet_MedicalDataSet.xss">
       <DependentUpon>Cabinet_MedicalDataSet.xsd</DependentUpon>
     </None>
+    <EntityDeploy Include="EntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="EntityModel.edmx.diagram">
       <DependentUpon>EntityModel.edmx</DependentUpon>
     </None>
