@@ -15,11 +15,13 @@ namespace BD_Cabinet_Medical
     public partial class ScutiriForm : Form
     {
         Patient Pacient;
-        public ScutiriForm(Patient P)
+        Form formParent;
+        public ScutiriForm(Patient P, Form formparent)
         {
             InitializeComponent();
             Pacient = P;
             textBoxData.Text = DateTime.Now.ToString();
+            formParent = formparent;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -34,57 +36,65 @@ namespace BD_Cabinet_Medical
                     var query = (from m in context.Employees
                                  where m.Nume.Equals(medic)
                                  select m).First();
+
                     var query2 = (from a in context.Diseases
 
                                   where a.Denumire.Equals(afectiune)
                                   select a).First();
-
-                    var addnew = new History_Patients
-                    {
-
-                        ID_Medic = query.ID,
-
-                        Data = DateTime.Now,
-                        ID_Pacient = Pacient.ID,
-                        ID_Afectiune = query2.ID
-
-                    };
-                    context.History_Patients.Add(addnew);
-                    context.SaveChanges();
-
-                    var addsc = new Exemption
-                    {
-                        ID_Istoric = addnew.ID,
-                        Zile_Repaus = zile,
-                        Tip = textBoxTipScutire.Text
-               
-                    };
-                    if (textBoxMedic.Text.Length == 0)
-                    {
-                        throw new Exception("Nu ati introdus numele medicului/asistentului!");
-
-                    }
-                   
-
-                    else if (textBoxAfectiune.Text.Length == 0)
-                        throw new Exception("Nu ati introdus denumirea afectiunii!");
-                    else if (textBoxZile.Text.Length == 0)
-                        throw new Exception("Nu ati introdus numarul de zile!");
-                    else if (textBoxTipScutire.Text.Length == 0)
-                        throw new Exception("Nu ati introdus tipul scutirii!");
+                    if (query == null)
+                        throw new Exception("Numele medicului introdus esti incorect!");
+                    else if (query2 == null)
+                        throw new Exception("Denumirea afectiunii este incorecta!");
                     else
                     {
-                         
-                        context.Exemptions.Add(addsc);
+
+                        var addnew = new History_Patients
+                        {
+
+                            ID_Medic = query.ID,
+
+                            Data = DateTime.Now,
+                            ID_Pacient = Pacient.ID,
+                            ID_Afectiune = query2.ID
+
+                        };
+                        context.History_Patients.Add(addnew);
                         context.SaveChanges();
 
-                        MessageBox.Show("Scutirea a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var addsc = new Exemption
+                        {
+                            ID_Istoric = addnew.ID,
+                            Zile_Repaus = zile,
+                            Tip = textBoxTipScutire.Text
 
-                        ScutiriForm scu = new ScutiriForm(Pacient);
-                        scu.Show();
+                        };
+                        if (textBoxMedic.Text.Length == 0)
+                        {
+                            throw new Exception("Nu ati introdus numele medicului/asistentului!");
+
+                        }
+
+                        else if (textBoxAfectiune.Text.Length == 0)
+                            throw new Exception("Nu ati introdus denumirea afectiunii!");
+                        else if (textBoxZile.Text.Length == 0)
+                            throw new Exception("Nu ati introdus numarul de zile!");
+                        else if (textBoxTipScutire.Text.Length == 0)
+                            throw new Exception("Nu ati introdus tipul scutirii!");
+                        else
+                        {
+
+                            context.Exemptions.Add(addsc);
+                            context.SaveChanges();
+
+                            MessageBox.Show("Scutirea a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                            textBoxAfectiune.Text = "";
+                            textBoxMedic.Text = "";
+                            textBoxTipScutire.Text = "";
+
+                        }
+
                     }
-                 
-
                 }
             }
 
@@ -98,14 +108,20 @@ namespace BD_Cabinet_Medical
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+
+            formParent.Show();
             this.Close();
-            View_Form view = new View_Form(Pacient);
-            view.Show();
+            
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = false;
         }
     }
 }

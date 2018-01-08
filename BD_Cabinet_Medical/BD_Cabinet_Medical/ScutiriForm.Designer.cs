@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScutiriForm));
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.labelData = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxTipScutire = new System.Windows.Forms.TextBox();
+            this.labelTipScutire = new System.Windows.Forms.Label();
             this.textBoxData = new System.Windows.Forms.TextBox();
             this.textBoxMedic = new System.Windows.Forms.TextBox();
             this.labelMedic = new System.Windows.Forms.Label();
@@ -40,8 +43,7 @@
             this.textBoxAfectiune = new System.Windows.Forms.TextBox();
             this.labelAfectiune = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelTipScutire = new System.Windows.Forms.Label();
-            this.textBoxTipScutire = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,6 +80,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.textBoxTipScutire);
             this.panel1.Controls.Add(this.labelTipScutire);
             this.panel1.Controls.Add(this.textBoxData);
@@ -95,6 +98,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(527, 355);
             this.panel1.TabIndex = 3;
+            // 
+            // textBoxTipScutire
+            // 
+            this.textBoxTipScutire.Location = new System.Drawing.Point(147, 185);
+            this.textBoxTipScutire.Name = "textBoxTipScutire";
+            this.textBoxTipScutire.Size = new System.Drawing.Size(254, 20);
+            this.textBoxTipScutire.TabIndex = 13;
+            // 
+            // labelTipScutire
+            // 
+            this.labelTipScutire.AutoSize = true;
+            this.labelTipScutire.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTipScutire.Location = new System.Drawing.Point(18, 186);
+            this.labelTipScutire.Name = "labelTipScutire";
+            this.labelTipScutire.Size = new System.Drawing.Size(74, 17);
+            this.labelTipScutire.TabIndex = 12;
+            this.labelTipScutire.Text = "Tip scutire";
             // 
             // textBoxData
             // 
@@ -162,22 +182,15 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 4;
             // 
-            // labelTipScutire
+            // button1
             // 
-            this.labelTipScutire.AutoSize = true;
-            this.labelTipScutire.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTipScutire.Location = new System.Drawing.Point(18, 186);
-            this.labelTipScutire.Name = "labelTipScutire";
-            this.labelTipScutire.Size = new System.Drawing.Size(74, 17);
-            this.labelTipScutire.TabIndex = 12;
-            this.labelTipScutire.Text = "Tip scutire";
-            // 
-            // textBoxTipScutire
-            // 
-            this.textBoxTipScutire.Location = new System.Drawing.Point(147, 185);
-            this.textBoxTipScutire.Name = "textBoxTipScutire";
-            this.textBoxTipScutire.Size = new System.Drawing.Size(254, 20);
-            this.textBoxTipScutire.TabIndex = 13;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(3, 206);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(138, 146);
+            this.button1.TabIndex = 14;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ScutiriForm
             // 
@@ -211,5 +224,6 @@
         private System.Windows.Forms.TextBox textBoxData;
         private System.Windows.Forms.TextBox textBoxTipScutire;
         private System.Windows.Forms.Label labelTipScutire;
+        private System.Windows.Forms.Button button1;
     }
 }

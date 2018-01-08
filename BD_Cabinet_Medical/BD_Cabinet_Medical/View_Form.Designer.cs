@@ -64,6 +64,7 @@
             this.Descriere = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CNrB3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonBAck = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ViewData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RetetaData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BiletData)).BeginInit();
@@ -350,6 +351,17 @@
             this.buttonBAck.TabIndex = 12;
             this.buttonBAck.Text = "Back";
             this.buttonBAck.UseVisualStyleBackColor = true;
+            this.buttonBAck.Click += new System.EventHandler(this.buttonBAck_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(168, 39);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(544, 290);
+            this.button1.TabIndex = 13;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // View_Form
             // 
@@ -357,6 +369,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(713, 330);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonBAck);
             this.Controls.Add(this.BiletData);
             this.Controls.Add(this.RetetaData);
@@ -410,5 +423,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Descriere;
         private System.Windows.Forms.DataGridViewTextBoxColumn CNrB3;
         private System.Windows.Forms.Button buttonBAck;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -108,7 +108,8 @@ namespace BD_Cabinet_Medical
                 {
                     int idMed = 0;
                     SqlConnection con = new SqlConnection();
-                    con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
+                   
+                    con.ConnectionString = @"Data Source=DESKTOP-KADSSA5\VERA;Initial Catalog=Cabinet_Medical;Integrated Security=True";
 
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
@@ -235,6 +236,11 @@ namespace BD_Cabinet_Medical
         }
 
         private void Doctors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void historyGroup_Enter(object sender, EventArgs e)
         {
 
         }

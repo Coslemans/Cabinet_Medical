@@ -202,7 +202,6 @@
             this.showHistory.Size = new System.Drawing.Size(52, 17);
             this.showHistory.TabIndex = 13;
             this.showHistory.Text = "Istoric";
-           
             // 
             // historyGroup
             // 
@@ -216,6 +215,7 @@
             this.historyGroup.TabIndex = 14;
             this.historyGroup.TabStop = false;
             this.historyGroup.Text = "Istoric";
+            this.historyGroup.Enter += new System.EventHandler(this.historyGroup_Enter);
             // 
             // Patient_Form
             // 
