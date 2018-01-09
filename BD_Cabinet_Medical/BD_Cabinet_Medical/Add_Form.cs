@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BD_Cabinet_Medical
 {
@@ -146,7 +147,8 @@ namespace BD_Cabinet_Medical
                         {
                             //var context = new Cabinet_MedicalEntities();
                             var con = new SqlConnection();
-                            con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
+                            con.ConnectionString = ConfigurationManager.ConnectionStrings["BD_Cabinet_Medical.Properties.Settings.Cabinet_MedicalConnectionString"].ConnectionString;
+                            //con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
                             SqlCommand cmd = con.CreateCommand();
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = "INSERT INTO Patients (ID,Nume,CNP,Serie_buletin,Numar_buletin,Data_nasterii,Username,Parola) VALUES (@ID,@Nume,@CNP,@Serie,@Numar,@Data,@User,@Pass)";
