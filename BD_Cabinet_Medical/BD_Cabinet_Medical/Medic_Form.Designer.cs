@@ -85,13 +85,11 @@
             this.PacientsData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.PacientsData.Size = new System.Drawing.Size(590, 352);
             this.PacientsData.TabIndex = 2;
-            this.PacientsData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.PacientsData_CellContentClick);
             // 
             // Nume
             // 
             this.Nume.HeaderText = "Nume Pacient";
             this.Nume.Name = "Nume";
-            this.Nume.ReadOnly = true;
             this.Nume.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Nume.Width = 120;
             // 
@@ -99,7 +97,6 @@
             // 
             this.CNP.HeaderText = "CNP";
             this.CNP.Name = "CNP";
-            this.CNP.ReadOnly = true;
             this.CNP.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.CNP.Width = 130;
             // 
@@ -107,7 +104,6 @@
             // 
             this.Serie_Buletin.HeaderText = "Serie Buletin";
             this.Serie_Buletin.Name = "Serie_Buletin";
-            this.Serie_Buletin.ReadOnly = true;
             this.Serie_Buletin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Serie_Buletin.Width = 50;
             // 
@@ -115,14 +111,12 @@
             // 
             this.Numar_Buletin.HeaderText = "Numar Buletin";
             this.Numar_Buletin.Name = "Numar_Buletin";
-            this.Numar_Buletin.ReadOnly = true;
             this.Numar_Buletin.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Data_Nasterii
             // 
             this.Data_Nasterii.HeaderText = "Data Nasterii";
             this.Data_Nasterii.Name = "Data_Nasterii";
-            this.Data_Nasterii.ReadOnly = true;
             this.Data_Nasterii.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Data_Nasterii.Width = 147;
             // 

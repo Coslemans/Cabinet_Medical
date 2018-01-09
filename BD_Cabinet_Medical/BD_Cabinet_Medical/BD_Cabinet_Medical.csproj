@@ -88,6 +88,12 @@
     <Compile Include="Appointment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Appointments_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Appointments_Form.Designer.cs">
+      <DependentUpon>Appointments_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cabinet_MedicalDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,6 +175,9 @@
     </Compile>
     <EmbeddedResource Include="Add_Form.resx">
       <DependentUpon>Add_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Appointments_Form.resx">
+      <DependentUpon>Appointments_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

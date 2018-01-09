@@ -17,8 +17,8 @@ namespace BD_Cabinet_Medical
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.History_Patients = new HashSet<History_Patients>();
             this.Appointments = new HashSet<Appointment>();
+            this.History_Patients = new HashSet<History_Patients>();
         }
     
         public int ID { get; set; }
@@ -31,8 +31,8 @@ namespace BD_Cabinet_Medical
         public string Parola { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<History_Patients> History_Patients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<History_Patients> History_Patients { get; set; }
     }
 }
