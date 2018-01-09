@@ -17,7 +17,7 @@ namespace BD_Cabinet_Medical
     {
         private Patient Abouts;
         Form Login;
-        public Patient_Form(Patient P,Form f)
+        public Patient_Form(Patient P, Form f)
         {
             InitializeComponent();
             Abouts = P;
@@ -30,20 +30,20 @@ namespace BD_Cabinet_Medical
             {
                 var query = from emp in context.Employees
                             where emp.Specializare != "Asistent"
-                            select                         
+                            select
                                 emp.Nume;
-                if(query.Count()!=0)
+                if (query.Count() != 0)
                 {
-                    foreach(var doc in query)
+                    foreach (var doc in query)
                     {
                         Doctors.Items.Add(doc.ToString());
                     }
-                }           
-            
+                }
+
             }
         }
-        
-        bool checkAppointment(int medic,int pacient,DateTime date)
+
+        bool checkAppointment(int medic, int pacient, DateTime date)
         {
             var context = new Cabinet_MedicalEntities();
             var app = from cab in context.Appointments
@@ -69,7 +69,7 @@ namespace BD_Cabinet_Medical
                 this.Text = Abouts.Nume.ToString().Trim() + " Window";
                 nameLabel.Text = Abouts.Nume.ToString().Trim();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -97,7 +97,7 @@ namespace BD_Cabinet_Medical
                 FillCombo();
                 History.Enabled = false;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -105,17 +105,17 @@ namespace BD_Cabinet_Medical
 
         private void saveAppointment_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
 
 
-                if(Doctors.SelectedItem==null)
+                if (Doctors.SelectedItem == null)
                 {
                     throw new Exception("Selectati un medic!");
 
                 }
-                else if(dateTime.Checked==false)
+                else if (dateTime.Checked == false)
                 {
                     throw new Exception("Selectati o data!");
                 }
@@ -124,7 +124,7 @@ namespace BD_Cabinet_Medical
                     int idMed = 0;
                     SqlConnection con = new SqlConnection();
                     con.ConnectionString = ConfigurationManager.ConnectionStrings["BD_Cabinet_Medical.Properties.Settings.Cabinet_MedicalConnectionString"].ConnectionString;
-                   
+
                     //con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
 
                     SqlCommand cmd = con.CreateCommand();
@@ -146,7 +146,7 @@ namespace BD_Cabinet_Medical
                             if (me.Nume.Equals(Doctors.SelectedItem.ToString()))
                             {
                                 cmd.Parameters.Add("@ID_Medic", SqlDbType.Int).Value = me.ID;
-                                
+
                                 idMed = me.ID;
                             }
                         }
@@ -160,17 +160,17 @@ namespace BD_Cabinet_Medical
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show(String.Format("Ati solicitat o programare pe data:{0}.\nAsteptati confirmarea medicului!", dateTime.Value.ToString()), "Succes!", MessageBoxButtons.OK ,MessageBoxIcon.Asterisk);
+                        MessageBox.Show(String.Format("Ati solicitat o programare pe data:{0}.\nAsteptati confirmarea medicului!", dateTime.Value.ToString()), "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         con.Close();
                     }
 
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Doctors.Text="" ;
+            Doctors.Text = "";
             Doctors.Enabled = false;
             dateTime.Enabled = false;
             saveAppointment.Enabled = false;
@@ -255,7 +255,7 @@ namespace BD_Cabinet_Medical
 
                 History.DataSource = data;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -270,38 +270,6 @@ namespace BD_Cabinet_Medical
         {
 
         }
-        private void btnRezerva_Click(object sender, EventArgs e)
-        {
-            IFormatProvider culture = new System.Globalization.CultureInfo("fr-FR", true);
-            date = DateTime.Parse(data, culture, System.Globalization.DateTimeStyles.AssumeLocal);
-            DateTime data_plecare = date.Date;
-            using (var context = new HREntities1())
-            {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        //context.Database.ExecuteSqlCommand(
-                            //@"UPDATE Angajati SET Observatii = REz" +
-                              //  " WHERE Nume_Angajat='%@nume%'"
 
-                            //);
-                            string conex= "UPDATE Angajati SET Observatii = REz" +" WHERE Nume_Angajat='%@nume%'";
-                        var cmd = new SqlCommand(conex, context.Database, transaction) { CommandType = CommandType.Text };
-
-
-
-
-
-                        context.SaveChanges();
-
-                        dbContextTransaction.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        dbContextTransaction.Rollback();
-                    }
-                }
-            }
-        }
+    }
 }
