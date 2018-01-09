@@ -121,49 +121,29 @@ namespace BD_Cabinet_Medical
                 }
                 else
                 {
-                    int idMed = 0;
-                    SqlConnection con = new SqlConnection();
-                    con.ConnectionString = ConfigurationManager.ConnectionStrings["BD_Cabinet_Medical.Properties.Settings.Cabinet_MedicalConnectionString"].ConnectionString;
-
-                    //con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
-
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "INSERT INTO Appointments (ID_Medic,ID_Pacient,Date,Accepted) Values (@ID_Medic,@ID_Pacient,@Date,null)";
-
+                    
 
                     using (var context = new Cabinet_MedicalEntities())
                     {
-                        var medic = from med in context.Employees
-                                    where med.Nume.Equals(Doctors.SelectedItem.ToString())
-                                    select new
-                                    {
-                                        med.Nume,
-                                        med.ID
-                                    };
-                        foreach (var me in medic)
+                        var medic = (from med in context.Employees
+                                     where med.Nume.Equals(Doctors.SelectedItem.ToString())
+                                     select med).First();
+                        
+                        var newapp = new Appointment()
                         {
-                            if (me.Nume.Equals(Doctors.SelectedItem.ToString()))
-                            {
-                                cmd.Parameters.Add("@ID_Medic", SqlDbType.Int).Value = me.ID;
-
-                                idMed = me.ID;
-                            }
+                            ID_Medic = medic.ID,
+                            ID_Pacient = Abouts.ID,
+                            Date = dateTime.Value
+                        };
+                        if (checkAppointment(newapp.ID_Medic, newapp.ID_Pacient, newapp.Date) == true)
+                            throw new Exception("Ati mai facut o programare identica!\n");
+                        else
+                        {
+                            context.Appointments.Add(newapp);
+                            context.SaveChanges();
                         }
                     }
-                    cmd.Parameters.Add("@ID_Pacient", SqlDbType.Int).Value = Abouts.ID;
-                    cmd.Parameters.Add("@Date", SqlDbType.DateTime).Value = dateTime.Value;
-
-                    if (checkAppointment(idMed, Abouts.ID, dateTime.Value) == true)
-                        throw new Exception("Programarea este deja inregistrata!");
-                    else
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show(String.Format("Ati solicitat o programare pe data:{0}.\nAsteptati confirmarea medicului!", dateTime.Value.ToString()), "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        con.Close();
-                    }
-
+                    
                 }
             }
             catch (Exception exc)

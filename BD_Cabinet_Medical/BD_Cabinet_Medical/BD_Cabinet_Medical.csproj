@@ -164,9 +164,6 @@
     <Compile Include="ScutiriForm.Designer.cs">
       <DependentUpon>ScutiriForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="View_Form.cs">
       <SubType>Form</SubType>
     </Compile>

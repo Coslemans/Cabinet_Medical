@@ -14,11 +14,11 @@ namespace BD_Cabinet_Medical
     
     public partial class Appointment
     {
-        public int ID { get; set; }
         public int ID_Medic { get; set; }
         public int ID_Pacient { get; set; }
         public System.DateTime Date { get; set; }
-        public int Accepted { get; set; }
+        public Nullable<int> Accepted { get; set; }
+        public int ID { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Patient Patient { get; set; }
