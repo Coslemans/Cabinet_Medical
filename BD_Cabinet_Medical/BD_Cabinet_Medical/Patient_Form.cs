@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.Common;
+using System.Configuration;
 
 namespace BD_Cabinet_Medical
 {
@@ -16,7 +17,7 @@ namespace BD_Cabinet_Medical
     {
         private Patient Abouts;
         Form Login;
-        public Patient_Form(Patient P,Form f)
+        public Patient_Form(Patient P, Form f)
         {
             InitializeComponent();
             Abouts = P;
@@ -29,20 +30,20 @@ namespace BD_Cabinet_Medical
             {
                 var query = from emp in context.Employees
                             where emp.Specializare != "Asistent"
-                            select                         
+                            select
                                 emp.Nume;
-                if(query.Count()!=0)
+                if (query.Count() != 0)
                 {
-                    foreach(var doc in query)
+                    foreach (var doc in query)
                     {
                         Doctors.Items.Add(doc.ToString());
                     }
-                }           
-            
+                }
+
             }
         }
-        
-        bool checkAppointment(int medic,int pacient,DateTime date)
+
+        bool checkAppointment(int medic, int pacient, DateTime date)
         {
             var context = new Cabinet_MedicalEntities();
             var app = from cab in context.Appointments
@@ -61,10 +62,17 @@ namespace BD_Cabinet_Medical
 
         private void Patient_Form_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'cabinet_MedicalDataSet.Appointments' table. You can move, or remove it, as needed.
-            this.appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
-            this.Text = Abouts.Nume.ToString().Trim() + " Window";
-            nameLabel.Text = Abouts.Nume.ToString().Trim();
+            try
+            {
+                // TODO: This line of code loads data into the 'cabinet_MedicalDataSet.Appointments' table. You can move, or remove it, as needed.
+                this.appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
+                this.Text = Abouts.Nume.ToString().Trim() + " Window";
+                nameLabel.Text = Abouts.Nume.ToString().Trim();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Logout_Button_Click(object sender, EventArgs e)
@@ -81,26 +89,33 @@ namespace BD_Cabinet_Medical
 
         private void newAppointment_Click(object sender, EventArgs e)
         {
-            Doctors.Enabled = true;
-            dateTime.Enabled = true;
-            saveAppointment.Enabled = true;
-            FillCombo();
-            History.Enabled = false;
+            try
+            {
+                Doctors.Enabled = true;
+                dateTime.Enabled = true;
+                saveAppointment.Enabled = true;
+                FillCombo();
+                History.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void saveAppointment_Click(object sender, EventArgs e)
         {
-           
+
             try
             {
 
 
-                if(Doctors.SelectedItem==null)
+                if (Doctors.SelectedItem == null)
                 {
                     throw new Exception("Selectati un medic!");
 
                 }
-                else if(dateTime.Checked==false)
+                else if (dateTime.Checked == false)
                 {
                     throw new Exception("Selectati o data!");
                 }
@@ -108,8 +123,9 @@ namespace BD_Cabinet_Medical
                 {
                     int idMed = 0;
                     SqlConnection con = new SqlConnection();
-                   
-                    con.ConnectionString = @"Data Source=DESKTOP-KADSSA5\VERA;Initial Catalog=Cabinet_Medical;Integrated Security=True";
+                    con.ConnectionString = ConfigurationManager.ConnectionStrings["BD_Cabinet_Medical.Properties.Settings.Cabinet_MedicalConnectionString"].ConnectionString;
+
+                    //con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
 
                     SqlCommand cmd = con.CreateCommand();
                     cmd.CommandType = CommandType.Text;
@@ -130,6 +146,7 @@ namespace BD_Cabinet_Medical
                             if (me.Nume.Equals(Doctors.SelectedItem.ToString()))
                             {
                                 cmd.Parameters.Add("@ID_Medic", SqlDbType.Int).Value = me.ID;
+
                                 idMed = me.ID;
                             }
                         }
@@ -143,16 +160,17 @@ namespace BD_Cabinet_Medical
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
+                        MessageBox.Show(String.Format("Ati solicitat o programare pe data:{0}.\nAsteptati confirmarea medicului!", dateTime.Value.ToString()), "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         con.Close();
                     }
 
                 }
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Doctors.Text="" ;
+            Doctors.Text = "";
             Doctors.Enabled = false;
             dateTime.Enabled = false;
             saveAppointment.Enabled = false;
@@ -162,77 +180,85 @@ namespace BD_Cabinet_Medical
 
         private void historyButton_Click(object sender, EventArgs e)
         {
-            History.Enabled = true;
-            Doctors.Enabled = false;
-            saveAppointment.Enabled = false;
-            dateTime.Enabled = false;
-            DataTable data = new DataTable();
-            data.Columns.Add("Afectiune", typeof(string));
-            data.Columns.Add("Medic", typeof(string));
-            data.Columns.Add("Specializare", typeof(string));
-            data.Columns.Add("Data_examinare", typeof(DateTime));
-            var context = new Cabinet_MedicalEntities();
-            var query = from hist in context.History_Patients
-                        where hist.ID_Pacient.Equals(Abouts.ID)
-                        select new
-                        {
-                            hist.ID,
-                            hist.ID_Afectiune,
-                            hist.ID_Medic,
-                            hist.Data
-                        };
-            foreach(var ist in query)
+            try
             {
-                DataRow row = null;
-                row = data.NewRow();
-                var disease = from dis in context.Diseases
-                              where dis.ID == ist.ID_Afectiune
-                              select new
-                              {
-                                  dis.Denumire,dis.ID
-                              };
-
-                var medic = from doc in context.Employees
-                            where doc.ID.Equals(ist.ID)
+                History.Enabled = true;
+                Doctors.Enabled = false;
+                saveAppointment.Enabled = false;
+                dateTime.Enabled = false;
+                DataTable data = new DataTable();
+                data.Columns.Add("Afectiune", typeof(string));
+                data.Columns.Add("Medic", typeof(string));
+                data.Columns.Add("Specializare", typeof(string));
+                data.Columns.Add("Data_examinare", typeof(DateTime));
+                var context = new Cabinet_MedicalEntities();
+                var query = from hist in context.History_Patients
+                            where hist.ID_Pacient.Equals(Abouts.ID)
                             select new
                             {
-                                doc.Nume,
-                                doc.Specializare,
-                                doc.ID
+                                hist.ID,
+                                hist.ID_Afectiune,
+                                hist.ID_Medic,
+                                hist.Data
                             };
-                var dat = from da in context.History_Patients
-                          where da.ID.Equals(ist.ID)
-                          select new
-                          {
-                              da.Data,
-                              da.ID
-                          };
-                foreach(var nou in dat)
+                foreach (var ist in query)
                 {
-                    if (nou.ID == ist.ID)
-                        row["Data_examinare"] = nou.Data.ToString().Trim();
-                }
-                foreach(var doc in medic)
-                {
-                    if (doc.ID == ist.ID_Medic)
+                    DataRow row = null;
+                    row = data.NewRow();
+                    var disease = from dis in context.Diseases
+                                  where dis.ID == ist.ID_Afectiune
+                                  select new
+                                  {
+                                      dis.Denumire,
+                                      dis.ID
+                                  };
+
+                    var medic = from doc in context.Employees
+                                where doc.ID.Equals(ist.ID)
+                                select new
+                                {
+                                    doc.Nume,
+                                    doc.Specializare,
+                                    doc.ID
+                                };
+                    var dat = from da in context.History_Patients
+                              where da.ID.Equals(ist.ID)
+                              select new
+                              {
+                                  da.Data,
+                                  da.ID
+                              };
+                    foreach (var nou in dat)
                     {
-                        row["Medic"] = doc.Nume.ToString().Trim();
-                        row["Specializare"] = doc.Specializare.ToString().Trim();
+                        if (nou.ID == ist.ID)
+                            row["Data_examinare"] = nou.Data.ToString().Trim();
                     }
-                }
-                foreach (var dis in disease)
-                {
-                    if (dis.ID == ist.ID_Afectiune)
-                        row["Afectiune"] = dis.Denumire.ToString().Trim();
+                    foreach (var doc in medic)
+                    {
+                        if (doc.ID == ist.ID_Medic)
+                        {
+                            row["Medic"] = doc.Nume.ToString().Trim();
+                            row["Specializare"] = doc.Specializare.ToString().Trim();
+                        }
+                    }
+                    foreach (var dis in disease)
+                    {
+                        if (dis.ID == ist.ID_Afectiune)
+                            row["Afectiune"] = dis.Denumire.ToString().Trim();
+
+                    }
+                    data.Rows.Add(row);
+
 
                 }
-                data.Rows.Add(row);
-                
 
+
+                History.DataSource = data;
             }
-           
-            
-            History.DataSource = data;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Eroare!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Doctors_SelectedIndexChanged(object sender, EventArgs e)
@@ -244,5 +270,6 @@ namespace BD_Cabinet_Medical
         {
 
         }
+
     }
 }
