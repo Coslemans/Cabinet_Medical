@@ -52,7 +52,7 @@ namespace BD_Cabinet_Medical
             using (var context = new Cabinet_MedicalEntities())
             {
                 var query = from app in context.Appointments
-                            where app.ID_Medic.Equals(Abouts.ID)
+                            where app.ID_Medic.Equals(Abouts.ID) && app.Accepted==1
                             select app;
                 Request_Label.Text = query.Count().ToString().Trim() + " Appointments";
                 if(query.Count()!=0)
@@ -78,7 +78,8 @@ namespace BD_Cabinet_Medical
 
         private void Request_Label_Click(object sender, EventArgs e)
         {
-
+            new Appointments_Form(Abouts,Login);
+            Close();
         }
 
         private void Logout_Button_Click(object sender, EventArgs e)
@@ -174,5 +175,8 @@ namespace BD_Cabinet_Medical
             Add_Form add = new Add_Form(Abouts);
             add.Show();
         }
+
+
+     
     }
 }

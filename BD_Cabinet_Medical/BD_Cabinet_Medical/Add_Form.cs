@@ -185,5 +185,10 @@ namespace BD_Cabinet_Medical
             confirmBox.Text = "";
             nameBox.Focus();
         }
+
+        private void nameBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -17,25 +17,25 @@ namespace BD_Cabinet_Medical
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public History_Patients()
         {
-            this.Exemptions = new HashSet<Exemption>();
             this.Internment_Tickets = new HashSet<Internment_Tickets>();
             this.Recipes = new HashSet<Recipe>();
+            this.Exemptions = new HashSet<Exemption>();
         }
     
         public int ID_Pacient { get; set; }
         public int ID_Medic { get; set; }
         public int ID_Afectiune { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public System.DateTime Data { get; set; }
         public int ID { get; set; }
     
         public virtual Disease Disease { get; set; }
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exemption> Exemptions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Internment_Tickets> Internment_Tickets { get; set; }
         public virtual Patient Patient { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Recipe> Recipes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Exemption> Exemptions { get; set; }
     }
 }
