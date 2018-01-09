@@ -131,41 +131,28 @@ namespace BD_Cabinet_Medical
 
                     else
                     {
-                        Patient p = new Patient();
-                        p.Nume = nameBox.Text.ToString();
-                        p.CNP = cnpBox.Text.ToString();
-                        p.Serie_Buletin = serieBox.Text.ToString();
-                        p.Numar_Buletin = numberBox.Text.ToString();
-                        p.Data_Nasterii = data_nasterePick.Value;
-                        p.Username = userBox.Text.ToString();
-                        p.Parola = passwordBox.Text.ToString();
+                        var p = new Patient {
+                            Nume = nameBox.Text.ToString(),
+                            CNP = cnpBox.Text.ToString(),
+                           Serie_Buletin = serieBox.Text.ToString(),
+                        Numar_Buletin = numberBox.Text.ToString(),
+                        Data_Nasterii = data_nasterePick.Value,
+                        Username = userBox.Text.ToString(),
+                        Parola = passwordBox.Text.ToString()
+                    };
                         if (checkExists(nameBox.Text,cnpBox.Text,serieBox.Text,numberBox.Text) == true)
                             throw new Exception("Pacientul este deja inregistrat!");
                         else if (userExists(userBox.Text) == true)
                             throw new Exception("Username-ul este deja inregistrat!\nIncercati alt username!");
                         else
                         {
-                            //var context = new Cabinet_MedicalEntities();
-                            var con = new SqlConnection();
-                            con.ConnectionString = ConfigurationManager.ConnectionStrings["BD_Cabinet_Medical.Properties.Settings.Cabinet_MedicalConnectionString"].ConnectionString;
-                            //con.ConnectionString = @"Data Source=DESKTOP-3R1BJRO;Initial Catalog=Cabinet_Medical;Integrated Security=True";
-                            SqlCommand cmd = con.CreateCommand();
-                            cmd.CommandType = CommandType.Text;
-                            cmd.CommandText = "INSERT INTO Patients (ID,Nume,CNP,Serie_buletin,Numar_buletin,Data_nasterii,Username,Parola) VALUES (@ID,@Nume,@CNP,@Serie,@Numar,@Data,@User,@Pass)";
-                            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = 4;
-                            cmd.Parameters.Add("@Nume", SqlDbType.NChar, 25).Value = nameBox.Text.ToString();
-                            cmd.Parameters.Add("@CNP", SqlDbType.Char, 13).Value = cnpBox.Text.ToString();
-                            cmd.Parameters.Add("@Serie", SqlDbType.NChar, 2).Value = serieBox.Text.ToString();
-                            cmd.Parameters.Add("@Numar", SqlDbType.NChar, 6).Value = numberBox.Text.ToString();
-                            cmd.Parameters.Add("@Data", SqlDbType.Date).Value = data_nasterePick.Value;
-                            cmd.Parameters.Add("@User", SqlDbType.NChar, 25).Value = userBox.Text.ToString();
-                            cmd.Parameters.Add("@Pass", SqlDbType.NChar, 25).Value = passwordBox.Text.ToString();
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            con.Close();
-                            MessageBox.Show("Pacientul a fost inregistrat cu succes!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            //context.Patients.Add(p);
-                            //context.SaveChanges();
+                            using (var context = new Cabinet_MedicalEntities())
+                            {
+                                
+                                MessageBox.Show("Pacientul a fost inregistrat cu succes!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                context.Patients.Add(p);
+                                context.SaveChanges();
+                            }
                         }
                     }
                 }

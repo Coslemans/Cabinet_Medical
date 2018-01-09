@@ -128,12 +128,13 @@ namespace BD_Cabinet_Medical
                         var medic = (from med in context.Employees
                                      where med.Nume.Equals(Doctors.SelectedItem.ToString())
                                      select med).First();
-                        
+
                         var newapp = new Appointment()
                         {
                             ID_Medic = medic.ID,
                             ID_Pacient = Abouts.ID,
-                            Date = dateTime.Value
+                            Date = dateTime.Value, Accepted = 1
+                            
                         };
                         if (checkAppointment(newapp.ID_Medic, newapp.ID_Pacient, newapp.Date) == true)
                             throw new Exception("Ati mai facut o programare identica!\n");
