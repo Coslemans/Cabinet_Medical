@@ -149,9 +149,10 @@ namespace BD_Cabinet_Medical
                             using (var context = new Cabinet_MedicalEntities())
                             {
                                 
-                                MessageBox.Show("Pacientul a fost inregistrat cu succes!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                context.Patients.Add(p);
+                                 context.Patients.Add(p);
                                 context.SaveChanges();
+                                MessageBox.Show("Pacientul a fost inregistrat cu succes!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                             }
                         }
                     }
