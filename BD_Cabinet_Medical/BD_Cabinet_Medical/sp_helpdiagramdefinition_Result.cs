@@ -10,17 +10,10 @@
 namespace BD_Cabinet_Medical
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Appointment
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int ID { get; set; }
-        public int ID_Medic { get; set; }
-        public int ID_Pacient { get; set; }
-        public System.DateTime Date { get; set; }
-        public int Accepted { get; set; }
-    
-        public virtual Employee Employee { get; set; }
-        public virtual Patient Patient { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

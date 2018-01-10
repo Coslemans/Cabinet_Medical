@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using System.Security.Cryptography;
+using System.Runtime.InteropServices;
+using Excel = Microsoft.Office.Interop.Excel;
 namespace BD_Cabinet_Medical
 {
     public partial class Medic_Form : Form
     {
         Employee Abouts;
         Form Login;
-      
+
         public Medic_Form(Employee E, Form F)
         {
             InitializeComponent();
@@ -39,11 +42,11 @@ namespace BD_Cabinet_Medical
                                 emp.Numar_Buletin,
                                 emp.Data_Nasterii
                             };
-                            
 
-                foreach(var row in query)
+
+                foreach (var row in query)
                 {
-                    
+
                     PacientsData.Rows.Add(row.Nume.ToString().Trim(), row.CNP.ToString().Trim(),
                         row.Serie_Buletin.ToString().Trim(), row.Numar_Buletin.ToString().Trim(),
                         row.Data_Nasterii.ToString().Trim());
@@ -52,21 +55,21 @@ namespace BD_Cabinet_Medical
             using (var context = new Cabinet_MedicalEntities())
             {
                 var query = from app in context.Appointments
-                            where app.ID_Medic.Equals(Abouts.ID) && app.Accepted==1
+                            where app.ID_Medic.Equals(Abouts.ID) && app.Accepted == 1
                             select app;
                 Request_Label.Text = query.Count().ToString().Trim() + " Appointments";
-                if(query.Count()!=0)
+                if (query.Count() != 0)
                 {
                     Request_Label.BackColor = Color.Red;
                 }
             }
 
-            if(Equals(Abouts.Specializare.ToString().Trim(),"Asistent")==true)
+            if (Equals(Abouts.Specializare.ToString().Trim(), "Asistent") == true)
             {
 
                 Add_Button.Enabled = false;
                 Delete_Button.Enabled = false;
-                
+
             }
         }
 
@@ -78,7 +81,7 @@ namespace BD_Cabinet_Medical
 
         private void Request_Label_Click(object sender, EventArgs e)
         {
-            new Appointments_Form(Abouts,Login);
+            new Appointments_Form(Abouts, Login);
             Close();
         }
 
@@ -103,8 +106,8 @@ namespace BD_Cabinet_Medical
                 {
                     string cell = PacientsData.SelectedRows[0].Cells[0].Value.ToString();
                     var query2 = (from pat in context.Patients
-                                 where pat.Nume.Equals(cell)
-                                 select pat).First();
+                                  where pat.Nume.Equals(cell)
+                                  select pat).First();
 
 
 
@@ -113,12 +116,12 @@ namespace BD_Cabinet_Medical
                         throw new Exception("Selectati un pacient!");
                     }
 
-              
+
                     else
                     {
                         this.Hide();
 
-                        View_Form view = new View_Form(query2,this);
+                        View_Form view = new View_Form(query2, this);
                         view.Show();
                     }
                 }
@@ -132,7 +135,7 @@ namespace BD_Cabinet_Medical
 
         private void Delete_Button_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 if (PacientsData.SelectedRows.Count == 0)
@@ -151,7 +154,7 @@ namespace BD_Cabinet_Medical
                     //context.SaveChanges();
                     //PacientsData.Rows.Remove(PacientsData.SelectedRows[0]);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -160,15 +163,7 @@ namespace BD_Cabinet_Medical
             }
         }
 
-        private void Name_Label_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void PacientsData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void Add_Button_Click(object sender, EventArgs e)
         {
@@ -176,7 +171,132 @@ namespace BD_Cabinet_Medical
             add.Show();
         }
 
+        private void CSVExport(string filename)
+        {
+            var csv = new StringBuilder();
+            using (var context = new Cabinet_MedicalEntities())
+            {
+                var query = from emp in context.Patients
+                            select new
+                            {
+                                emp.Nume,
+                                emp.CNP,
+                                emp.Serie_Buletin,
+                                emp.Numar_Buletin,
+                                emp.Data_Nasterii
+                            };
 
-     
+
+                foreach (var row in query)
+                {
+                    var newline = string.Format("{0},{1},{2},{3},{4}", row.Nume.ToString().Trim(),
+                        row.CNP.ToString().Trim(), row.Serie_Buletin.ToString().Trim(), row.Numar_Buletin.ToString().Trim(),
+                        row.Data_Nasterii.ToString().Trim());
+                    csv.AppendLine(newline);
+                }
+                File.WriteAllText(filename, csv.ToString());
+            }
+
+        }
+
+        private void ExcelExport(string filename)
+        {
+            try
+            {
+                Excel.Application xlApp;
+                Excel.Workbook xlWorkBook;
+                Excel.Worksheet xlWorkSheet;
+                object misValue = System.Reflection.Missing.Value;
+
+                xlApp = new Microsoft.Office.Interop.Excel.Application();
+
+                if (xlApp == null)
+                    throw new Exception("Eroare exportare foaie de calcul!");
+
+                xlWorkBook = xlApp.Workbooks.Add(misValue);
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+                using (var context = new Cabinet_MedicalEntities())
+                {
+                    var query = from emp in context.Patients
+                                select new
+                                {
+                                    emp.Nume,
+                                    emp.CNP,
+                                    emp.Serie_Buletin,
+                                    emp.Numar_Buletin,
+                                    emp.Data_Nasterii
+                                };
+
+                    int i = 1;
+                    foreach (var row in query)
+                    {
+                        xlWorkSheet.Cells[i, 1] = row.Nume.ToString().Trim();
+                        xlWorkSheet.Cells[i, 2] = row.CNP.ToString().Trim();
+                        xlWorkSheet.Cells[i, 3] = row.Serie_Buletin.ToString().Trim();
+                        xlWorkSheet.Cells[i, 4] = row.Numar_Buletin.ToString().Trim();
+                        xlWorkSheet.Cells[i, 5] = row.Data_Nasterii.ToString().Trim();
+                        i++;
+                    }
+                }
+                xlWorkBook.SaveAs(filename);
+             }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void Export_Button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ExportType.SelectedItem.ToString().Length == 0)
+                    throw new Exception("Selectati tipul fisierului!");
+                string Type = ExportType.SelectedItem.ToString();
+               
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Title = "Save Report";
+
+                if(Equals(Type,"Excel"))
+                {
+                    saveFile.Filter = "Excel 2007 |*.xlsx| Excel 2003 |*.xls";
+                    saveFile.ShowDialog();
+                    
+                        if (saveFile.FileName == "")
+                        {
+                            throw new Exception("Alegeti un nume pentru fisier!");
+                        }
+
+                        ExcelExport(saveFile.FileName);
+                        return;
+                    
+                }
+                else if(Equals(Type,"CSV"))
+                {
+                    saveFile.Filter = "CSV |*.csv";
+                    saveFile.ShowDialog();
+                   
+                    if (saveFile.FileName == "")
+                    {
+                         throw new Exception("Alegeti un nume pentru fisier!");
+                    }
+
+                    CSVExport(saveFile.FileName);
+                    return;
+                }
+                else if(Equals(Type,"PDF"))
+                {
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

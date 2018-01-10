@@ -65,7 +65,7 @@ namespace BD_Cabinet_Medical
             try
             {
                 // TODO: This line of code loads data into the 'cabinet_MedicalDataSet.Appointments' table. You can move, or remove it, as needed.
-                this.appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
+               // appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
                 this.Text = Abouts.Nume.ToString().Trim() + " Window";
                 nameLabel.Text = Abouts.Nume.ToString().Trim();
             }
