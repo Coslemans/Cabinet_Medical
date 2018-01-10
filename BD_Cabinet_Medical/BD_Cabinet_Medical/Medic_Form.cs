@@ -121,7 +121,7 @@ namespace BD_Cabinet_Medical
                     {
                         this.Hide();
 
-                        View_Form view = new View_Form(query2, this);
+                        View_Form view = new View_Form(query2, this,Abouts);
                         view.Show();
                     }
                 }

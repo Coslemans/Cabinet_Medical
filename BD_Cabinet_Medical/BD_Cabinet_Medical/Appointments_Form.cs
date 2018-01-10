@@ -103,7 +103,7 @@ namespace BD_Cabinet_Medical
                                  select pat).First();
                     query2.Accepted = 2;
                     context.SaveChanges();
-                    Form p = new View_Form(query3, this);
+                    Form p = new View_Form(query3, this,Abouts);
                     p.Show();
                 }
             }

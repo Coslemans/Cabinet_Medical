@@ -15,11 +15,13 @@ namespace BD_Cabinet_Medical
     {
         Patient Pacient;
         Form med;
-        public View_Form(Patient P, Form ParentForm)
+        Employee Medic;
+        public View_Form(Patient P, Form ParentForm,Employee E)
         {
             InitializeComponent();
             Pacient = P;
             med = ParentForm;
+            Medic = E;
         }
 
         private void labelAdaugare_Click(object sender, EventArgs e)
@@ -217,6 +219,12 @@ namespace BD_Cabinet_Medical
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;
+        }
+
+        private void buttonBilet_Click(object sender, EventArgs e)
+        {
+            Bilet_internareForm bilet = new Bilet_internareForm(Medic);
+            bilet.Show();
         }
     }
     

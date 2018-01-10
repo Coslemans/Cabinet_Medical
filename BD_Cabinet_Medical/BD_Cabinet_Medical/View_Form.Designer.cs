@@ -98,6 +98,7 @@
             this.buttonBilet.TabIndex = 3;
             this.buttonBilet.Text = "Bilet internare";
             this.buttonBilet.UseVisualStyleBackColor = true;
+            this.buttonBilet.Click += new System.EventHandler(this.buttonBilet_Click);
             // 
             // labelNume
             // 

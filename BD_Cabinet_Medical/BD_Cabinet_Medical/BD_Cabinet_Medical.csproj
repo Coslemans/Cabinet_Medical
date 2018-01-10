@@ -107,6 +107,12 @@
     <Compile Include="Appointments_Form.Designer.cs">
       <DependentUpon>Appointments_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bilet_internareForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bilet_internareForm.Designer.cs">
+      <DependentUpon>Bilet_internareForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cabinet_MedicalDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Appointments_Form.resx">
       <DependentUpon>Appointments_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bilet_internareForm.resx">
+      <DependentUpon>Bilet_internareForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
