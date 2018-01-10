@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Security.Cryptography;
 namespace BD_Cabinet_Medical
 {
     public partial class Add_Form : Form
     {
         Employee Abouts;
+       
         public Add_Form(Employee E)
         {
-            InitializeComponent();
-            Abouts = E;
-            //Show();
+          
         }
 
         
@@ -35,6 +34,18 @@ namespace BD_Cabinet_Medical
                 return false;
             else
                 return true;
+        }
+        public string getMD5(string text)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+            byte[] result = md5.Hash;
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                str.Append(result[i].ToString("x2"));
+            }
+            return str.ToString();
         }
         bool numberOnly(string element)
         {
@@ -134,11 +145,11 @@ namespace BD_Cabinet_Medical
                         var p = new Patient {
                             Nume = nameBox.Text.ToString(),
                             CNP = cnpBox.Text.ToString(),
-                           Serie_Buletin = serieBox.Text.ToString(),
-                        Numar_Buletin = numberBox.Text.ToString(),
-                        Data_Nasterii = data_nasterePick.Value,
-                        Username = userBox.Text.ToString(),
-                        Parola = passwordBox.Text.ToString()
+                            Serie_Buletin = serieBox.Text.ToString(),
+                            Numar_Buletin = numberBox.Text.ToString(),
+                            Data_Nasterii = data_nasterePick.Value,
+                            Username = userBox.Text.ToString(),
+                            Parola = getMD5(passwordBox.Text.ToString())
                     };
                         if (checkExists(nameBox.Text,cnpBox.Text,serieBox.Text,numberBox.Text) == true)
                             throw new Exception("Pacientul este deja inregistrat!");
@@ -152,7 +163,7 @@ namespace BD_Cabinet_Medical
                                  context.Patients.Add(p);
                                 context.SaveChanges();
                                 MessageBox.Show("Pacientul a fost inregistrat cu succes!", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                                
                             }
                         }
                     }

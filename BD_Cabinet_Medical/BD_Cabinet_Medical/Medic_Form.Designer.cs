@@ -41,6 +41,9 @@
             this.Delete_Button = new System.Windows.Forms.Button();
             this.Request_Label = new System.Windows.Forms.Label();
             this.Logout_Button = new System.Windows.Forms.Button();
+            this.Export_Button = new System.Windows.Forms.Button();
+            this.ExportType = new System.Windows.Forms.ComboBox();
+            this.tableAdapterManager1 = new BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.PacientsData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +56,6 @@
             this.Name_Label.Size = new System.Drawing.Size(49, 16);
             this.Name_Label.TabIndex = 0;
             this.Name_Label.Text = "Name";
-            this.Name_Label.Click += new System.EventHandler(this.Name_Label_Click);
             // 
             // Specs_Label
             // 
@@ -172,12 +174,43 @@
             this.Logout_Button.UseVisualStyleBackColor = true;
             this.Logout_Button.Click += new System.EventHandler(this.Logout_Button_Click);
             // 
+            // Export_Button
+            // 
+            this.Export_Button.Location = new System.Drawing.Point(763, 97);
+            this.Export_Button.Name = "Export_Button";
+            this.Export_Button.Size = new System.Drawing.Size(75, 23);
+            this.Export_Button.TabIndex = 8;
+            this.Export_Button.Text = "Export";
+            this.Export_Button.UseVisualStyleBackColor = true;
+            this.Export_Button.Click += new System.EventHandler(this.Export_Button_Click);
+            // 
+            // ExportType
+            // 
+            this.ExportType.FormattingEnabled = true;
+            this.ExportType.Items.AddRange(new object[] {
+            "Excel",
+            "CSV",
+            "PDF"});
+            this.ExportType.Location = new System.Drawing.Point(717, 143);
+            this.ExportType.Name = "ExportType";
+            this.ExportType.Size = new System.Drawing.Size(121, 21);
+            this.ExportType.TabIndex = 9;
+            // 
+            // tableAdapterManager1
+            // 
+            this.tableAdapterManager1.AppointmentsTableAdapter = null;
+            this.tableAdapterManager1.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager1.Connection = null;
+            this.tableAdapterManager1.UpdateOrder = BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            // 
             // Medic_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 377);
+            this.ClientSize = new System.Drawing.Size(842, 377);
             this.ControlBox = false;
+            this.Controls.Add(this.ExportType);
+            this.Controls.Add(this.Export_Button);
             this.Controls.Add(this.Logout_Button);
             this.Controls.Add(this.Request_Label);
             this.Controls.Add(this.Delete_Button);
@@ -209,5 +242,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Serie_Buletin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numar_Buletin;
         private System.Windows.Forms.DataGridViewTextBoxColumn Data_Nasterii;
+        private System.Windows.Forms.Button Export_Button;
+        private System.Windows.Forms.ComboBox ExportType;
+        private Cabinet_MedicalDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
     }
 }

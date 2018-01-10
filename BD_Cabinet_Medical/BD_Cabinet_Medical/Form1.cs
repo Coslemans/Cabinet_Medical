@@ -49,15 +49,15 @@ namespace BD_Cabinet_Medical
                 {
                     throw new Exception("Nu ati introdus parola utilizatorului!");
                 }
-                else if (Login_Type.SelectedItem.ToString().Length == 0)
+                else if (Login_Type.SelectedItem == null)
                 {
                     throw new Exception("Nu ati selectat tipul de utilizator!");
                 }
                 else
                 {
                     string Username = Username_Box.Text.ToString();
-                   // string Password = getMD5(Password_Box.Text.ToString());
-                    string Password = Password_Box.Text.ToString();
+                    string Password = getMD5(Password_Box.Text.ToString());
+                    //string Password = Password_Box.Text.ToString();
                     string Type = Login_Type.SelectedItem.ToString();
                     using (var context = new Cabinet_MedicalEntities())
                     {
@@ -129,6 +129,12 @@ namespace BD_Cabinet_Medical
         private void Login_Type_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Admin_Button_Click(object sender, EventArgs e)
+        {
+            new Admin_Form(this);
+            Hide();
         }
     }
 }

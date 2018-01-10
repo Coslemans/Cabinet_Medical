@@ -33,16 +33,17 @@
             this.Password_Box = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Login_Button = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.Exit_Button = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.Login_Type = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Login_Button)).BeginInit();
+            this.Admin_Button = new System.Windows.Forms.Button();
+            this.Exit_Button = new System.Windows.Forms.PictureBox();
+            this.Login_Button = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Exit_Button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Login_Button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Username_Box
@@ -82,31 +83,6 @@
             this.label2.Text = "Parola";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox1.Location = new System.Drawing.Point(-7, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(652, 142);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // Login_Button
-            // 
-            this.Login_Button.BackColor = System.Drawing.Color.Transparent;
-            this.Login_Button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Login_Button.BackgroundImage")));
-            this.Login_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Login_Button.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Login_Button.Location = new System.Drawing.Point(508, 149);
-            this.Login_Button.Name = "Login_Button";
-            this.Login_Button.Size = new System.Drawing.Size(127, 87);
-            this.Login_Button.TabIndex = 5;
-            this.Login_Button.TabStop = false;
-            this.Login_Button.Click += new System.EventHandler(this.Login_Button_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -118,19 +94,6 @@
             this.label3.Text = "Login";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.label3.UseMnemonic = false;
-            // 
-            // Exit_Button
-            // 
-            this.Exit_Button.BackColor = System.Drawing.Color.Transparent;
-            this.Exit_Button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Exit_Button.BackgroundImage")));
-            this.Exit_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Exit_Button.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Exit_Button.Location = new System.Drawing.Point(508, 255);
-            this.Exit_Button.Name = "Exit_Button";
-            this.Exit_Button.Size = new System.Drawing.Size(127, 87);
-            this.Exit_Button.TabIndex = 7;
-            this.Exit_Button.TabStop = false;
-            this.Exit_Button.Click += new System.EventHandler(this.Exit_Button_Click);
             // 
             // label4
             // 
@@ -166,6 +129,55 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Tip Utilizator";
             // 
+            // Admin_Button
+            // 
+            this.Admin_Button.BackgroundImage = global::BD_Cabinet_Medical.Properties.Resources.admin;
+            this.Admin_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Admin_Button.Location = new System.Drawing.Point(13, 298);
+            this.Admin_Button.Name = "Admin_Button";
+            this.Admin_Button.Size = new System.Drawing.Size(75, 53);
+            this.Admin_Button.TabIndex = 12;
+            this.Admin_Button.UseVisualStyleBackColor = true;
+            this.Admin_Button.Click += new System.EventHandler(this.Admin_Button_Click);
+            // 
+            // Exit_Button
+            // 
+            this.Exit_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Exit_Button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Exit_Button.BackgroundImage")));
+            this.Exit_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Exit_Button.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Exit_Button.Location = new System.Drawing.Point(508, 255);
+            this.Exit_Button.Name = "Exit_Button";
+            this.Exit_Button.Size = new System.Drawing.Size(127, 87);
+            this.Exit_Button.TabIndex = 7;
+            this.Exit_Button.TabStop = false;
+            this.Exit_Button.Click += new System.EventHandler(this.Exit_Button_Click);
+            // 
+            // Login_Button
+            // 
+            this.Login_Button.BackColor = System.Drawing.Color.Transparent;
+            this.Login_Button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Login_Button.BackgroundImage")));
+            this.Login_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Login_Button.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Login_Button.Location = new System.Drawing.Point(508, 149);
+            this.Login_Button.Name = "Login_Button";
+            this.Login_Button.Size = new System.Drawing.Size(127, 87);
+            this.Login_Button.TabIndex = 5;
+            this.Login_Button.TabStop = false;
+            this.Login_Button.Click += new System.EventHandler(this.Login_Button_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox1.Location = new System.Drawing.Point(-7, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(652, 142);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // Start_Form
             // 
             this.AllowDrop = true;
@@ -175,6 +187,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(647, 362);
             this.ControlBox = false;
+            this.Controls.Add(this.Admin_Button);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Login_Type);
             this.Controls.Add(this.label4);
@@ -191,9 +204,9 @@
             this.Name = "Start_Form";
             this.Text = "Cabinet Medical";
             this.Load += new System.EventHandler(this.Start_Form_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Login_Button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Exit_Button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Login_Button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,6 +225,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox Login_Type;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button Admin_Button;
     }
 }
 
