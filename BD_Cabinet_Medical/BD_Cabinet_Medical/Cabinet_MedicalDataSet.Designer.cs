@@ -828,8 +828,8 @@ namespace BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters {
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Appointments] ([ID_Medic], [ID_Pacient], [Date], [Accepted]) V" +
-                "ALUES (@ID_Medic, @ID_Pacient, @Date, @Accepted);\r\nSELECT ID_Medic, ID_Pacient, " +
-                "Date, Accepted FROM Appointments WHERE (Date = @Date)";
+                "ALUES (@ID_Medic, @ID_Pacient, @Date, @Accepted);\nSELECT ID_Medic, ID_Pacient, D" +
+                "ate, Accepted FROM Appointments WHERE (Date = @Date)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_Medic", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Medic", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID_Pacient", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ID_Pacient", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));

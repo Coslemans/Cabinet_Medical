@@ -108,5 +108,10 @@ namespace BD_Cabinet_Medical
             Date_Label.Visible = true;
             Stoc_Label.Visible = true;
         }
+
+        private void admin_label_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

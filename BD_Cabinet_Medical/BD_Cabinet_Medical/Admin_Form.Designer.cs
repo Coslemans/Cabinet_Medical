@@ -66,6 +66,7 @@
             this.admin_label.Size = new System.Drawing.Size(53, 18);
             this.admin_label.TabIndex = 1;
             this.admin_label.Text = "admin";
+            this.admin_label.Click += new System.EventHandler(this.admin_label_Click);
             // 
             // User_Label
             // 

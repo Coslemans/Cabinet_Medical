@@ -34,7 +34,7 @@ namespace BD_Cabinet_Medical
         public virtual DbSet<Exemption> Exemptions { get; set; }
         public virtual DbSet<History_Patients> History_Patients { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
-        public virtual DbSet<Exemption> Exemptions { get; set; }
+     //   public virtual DbSet<Exemption> Exemptions { get; set; }
         public virtual DbSet<Internment_Tickets> Internment_Tickets { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
     }
