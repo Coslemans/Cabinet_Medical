@@ -43,6 +43,7 @@
             this.Logout_Button = new System.Windows.Forms.Button();
             this.Export_Button = new System.Windows.Forms.Button();
             this.ExportType = new System.Windows.Forms.ComboBox();
+            this.tableAdapterManager1 = new BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.PacientsData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,7 +176,7 @@
             // 
             // Export_Button
             // 
-            this.Export_Button.Location = new System.Drawing.Point(755, 97);
+            this.Export_Button.Location = new System.Drawing.Point(763, 97);
             this.Export_Button.Name = "Export_Button";
             this.Export_Button.Size = new System.Drawing.Size(75, 23);
             this.Export_Button.TabIndex = 8;
@@ -194,6 +195,13 @@
             this.ExportType.Name = "ExportType";
             this.ExportType.Size = new System.Drawing.Size(121, 21);
             this.ExportType.TabIndex = 9;
+            // 
+            // tableAdapterManager1
+            // 
+            this.tableAdapterManager1.AppointmentsTableAdapter = null;
+            this.tableAdapterManager1.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager1.Connection = null;
+            this.tableAdapterManager1.UpdateOrder = BD_Cabinet_Medical.Cabinet_MedicalDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // Medic_Form
             // 
@@ -236,5 +244,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Data_Nasterii;
         private System.Windows.Forms.Button Export_Button;
         private System.Windows.Forms.ComboBox ExportType;
+        private Cabinet_MedicalDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
     }
 }

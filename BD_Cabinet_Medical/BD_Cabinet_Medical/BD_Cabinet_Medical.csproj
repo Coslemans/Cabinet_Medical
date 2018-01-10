@@ -86,6 +86,12 @@
     <Compile Include="Add_Form.Designer.cs">
       <DependentUpon>Add_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Admin_Form.Designer.cs">
+      <DependentUpon>Admin_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Appointment.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
@@ -183,6 +189,9 @@
     <EmbeddedResource Include="Add_Form.resx">
       <DependentUpon>Add_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Admin_Form.resx">
+      <DependentUpon>Admin_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Appointments_Form.resx">
       <DependentUpon>Appointments_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +212,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ScutiriForm.resx">
       <DependentUpon>ScutiriForm.cs</DependentUpon>
@@ -258,6 +268,7 @@
       <DependentUpon>EntityModel.edmx</DependentUpon>
       <LastGenOutput>EntityModel.cs</LastGenOutput>
     </Content>
+    <None Include="Images\admin.png" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

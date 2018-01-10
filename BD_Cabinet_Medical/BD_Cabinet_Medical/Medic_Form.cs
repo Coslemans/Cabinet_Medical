@@ -253,7 +253,7 @@ namespace BD_Cabinet_Medical
         {
             try
             {
-                if (ExportType.SelectedItem.ToString().Length == 0)
+                if (ExportType.SelectedItem == null)
                     throw new Exception("Selectati tipul fisierului!");
                 string Type = ExportType.SelectedItem.ToString();
                
