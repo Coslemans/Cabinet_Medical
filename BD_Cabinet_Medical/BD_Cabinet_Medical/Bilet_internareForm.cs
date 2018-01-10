@@ -30,6 +30,7 @@ namespace BD_Cabinet_Medical
         {
             this.Text = "Bilet internare";
             regLabel.Text= "Registered as " + medic.Nume.ToString().Trim();
+            //
         }
     }
 }
