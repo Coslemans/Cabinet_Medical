@@ -87,10 +87,10 @@ namespace BD_Cabinet_Medical
                             context.SaveChanges();
 
                             MessageBox.Show("Scutirea a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
                             textBoxAfectiune.Text = "";
                             textBoxMedic.Text = "";
                             textBoxTipScutire.Text = "";
+                            textBoxZile.Text = "";
 
                         }
 

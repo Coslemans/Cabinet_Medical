@@ -12,13 +12,12 @@ namespace BD_Cabinet_Medical
     using System;
     using System.Collections.Generic;
     
-    public partial class Exemption
+    public partial class sysdiagram
     {
-        public int ID_Istoric { get; set; }
-        public int Zile_Repaus { get; set; }
-        public string Tip { get; set; }
-        public int ID { get; set; }
-    
-        public virtual History_Patients History_Patients { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
