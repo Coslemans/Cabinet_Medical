@@ -32,5 +32,15 @@ namespace BD_Cabinet_Medical
             regLabel.Text= "Registered as " + medic.Nume.ToString().Trim();
             //
         }
+
+        private void genderLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void regLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
