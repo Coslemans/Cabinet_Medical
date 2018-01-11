@@ -136,5 +136,10 @@ namespace BD_Cabinet_Medical
             new Admin_Form(this);
             Hide();
         }
+
+        private void Username_Box_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
