@@ -161,6 +161,7 @@ namespace BD_Cabinet_Medical
                 E.Specializare = Spec_Box.Text.Trim();
                 E.Username = Username_Box.Text.Trim();
                 E.Parola = getMD5(Parola_Box.Text.Trim());
+             //  E.Parola = Parola_Box.Text.Trim();
                 using (var context = new Cabinet_MedicalEntities())
                 {
                     var query = from emp in context.Employees

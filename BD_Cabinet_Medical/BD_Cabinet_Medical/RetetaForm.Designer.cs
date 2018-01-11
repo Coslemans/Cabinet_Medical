@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RetetaForm));
             this.labelData = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelMed = new System.Windows.Forms.Label();
@@ -41,6 +42,8 @@
             this.labelCNP = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonBack = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBoxMedic = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +93,7 @@
             // 
             this.labelMedic.AutoSize = true;
             this.labelMedic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMedic.Location = new System.Drawing.Point(22, 41);
+            this.labelMedic.Location = new System.Drawing.Point(12, 118);
             this.labelMedic.Name = "labelMedic";
             this.labelMedic.Size = new System.Drawing.Size(45, 17);
             this.labelMedic.TabIndex = 4;
@@ -110,6 +113,7 @@
             this.textBoxAf.Name = "textBoxAf";
             this.textBoxAf.Size = new System.Drawing.Size(224, 20);
             this.textBoxAf.TabIndex = 7;
+            this.textBoxAf.TextChanged += new System.EventHandler(this.textBoxAf_TextChanged);
             // 
             // textBoxMed
             // 
@@ -126,6 +130,7 @@
             this.buttonSave.TabIndex = 11;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // labelNume
             // 
@@ -152,7 +157,6 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.panel1.Controls.Add(this.labelCNP);
             this.panel1.Controls.Add(this.labelData);
-            this.panel1.Controls.Add(this.labelMedic);
             this.panel1.Controls.Add(this.labelNume);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
@@ -167,13 +171,33 @@
             this.buttonBack.TabIndex = 15;
             this.buttonBack.Text = "Back";
             this.buttonBack.UseVisualStyleBackColor = true;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(392, 106);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(273, 228);
+            this.button1.TabIndex = 16;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBoxMedic
+            // 
+            this.textBoxMedic.Location = new System.Drawing.Point(126, 115);
+            this.textBoxMedic.Name = "textBoxMedic";
+            this.textBoxMedic.Size = new System.Drawing.Size(224, 20);
+            this.textBoxMedic.TabIndex = 17;
             // 
             // RetetaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 346);
+            this.Controls.Add(this.textBoxMedic);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonBack);
+            this.Controls.Add(this.labelMedic);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonSave);
@@ -182,7 +206,7 @@
             this.Controls.Add(this.textBoxMed);
             this.Controls.Add(this.textBoxAf);
             this.Controls.Add(this.textBoxNrF);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RetetaForm";
             this.Text = "RetetaForm";
             this.Load += new System.EventHandler(this.RetetaForm_Load);
@@ -208,5 +232,7 @@
         private System.Windows.Forms.Label labelCNP;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxMedic;
     }
 }

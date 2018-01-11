@@ -132,6 +132,7 @@
             this.textBoxData.Name = "textBoxData";
             this.textBoxData.Size = new System.Drawing.Size(254, 20);
             this.textBoxData.TabIndex = 11;
+            this.textBoxData.TextChanged += new System.EventHandler(this.textBoxData_TextChanged);
             // 
             // textBoxMedic
             // 

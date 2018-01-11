@@ -31,7 +31,10 @@ namespace BD_Cabinet_Medical
 
         private void buttonReteta_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            RetetaForm r = new RetetaForm(Pacient, this);
+        
+            r.Show();
         }
 
         private void View_Form_Load(object sender, EventArgs e)
@@ -108,7 +111,7 @@ namespace BD_Cabinet_Medical
                                 var medicament = (from d in context.Drugs
                                                   where d.ID.Equals(query.ID_Medicament)
                                                   select d).FirstOrDefault();
-                                RetetaData.Rows.Add(reteta.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), query.Numar_Flacoane.ToString().Trim(), medicament.Denumire.ToString().Trim());
+                                RetetaData.Rows.Add(reteta.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), medicament.Denumire.ToString().Trim(), query.Numar_Flacoane.ToString().Trim());
 
                             }
 
@@ -140,7 +143,7 @@ namespace BD_Cabinet_Medical
                                 var med = (from mm in context.Employees
                                            where mm.ID.Equals(bilet.ID_Medic)
                                            select mm).FirstOrDefault();
-                                BiletData.Rows.Add(bilet.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), query.Numar_Bilet.ToString().Trim(), query.Descriere.ToString().Trim());
+                                BiletData.Rows.Add(bilet.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(),  query.Descriere.ToString().Trim(), query.Numar_Bilet.ToString().Trim());
 
                             }
 
@@ -173,7 +176,7 @@ namespace BD_Cabinet_Medical
                                            where n.ID.Equals(scutire.ID_Medic)
                                            select n).FirstOrDefault();
                              
-                                ViewData.Rows.Add(scutire.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), query.Zile_Repaus.ToString().Trim(),query.Tip.ToString().Trim());
+                                ViewData.Rows.Add(scutire.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(),query.Tip.ToString().Trim(), query.Zile_Repaus.ToString().Trim());
 
                             }
 

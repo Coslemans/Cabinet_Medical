@@ -123,5 +123,10 @@ namespace BD_Cabinet_Medical
         {
             button1.Enabled = false;
         }
+
+        private void textBoxData_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
