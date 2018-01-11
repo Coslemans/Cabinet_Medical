@@ -185,6 +185,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "RetetaForm";
             this.Text = "RetetaForm";
+            this.Load += new System.EventHandler(this.RetetaForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

@@ -47,6 +47,9 @@
             this.Exit = new System.Windows.Forms.Button();
             this.Stoc_Label = new System.Windows.Forms.Label();
             this.Date_Label = new System.Windows.Forms.Label();
+            this.DatePick = new System.Windows.Forms.DateTimePicker();
+            this.Add_Pill = new System.Windows.Forms.Button();
+            this.Add_Med = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Password_Box
@@ -240,11 +243,46 @@
             this.Date_Label.Text = "Data Expirarii";
             this.Date_Label.Visible = false;
             // 
+            // DatePick
+            // 
+            this.DatePick.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DatePick.Location = new System.Drawing.Point(348, 123);
+            this.DatePick.Name = "DatePick";
+            this.DatePick.Size = new System.Drawing.Size(128, 20);
+            this.DatePick.TabIndex = 19;
+            this.DatePick.Visible = false;
+            // 
+            // Add_Pill
+            // 
+            this.Add_Pill.Location = new System.Drawing.Point(401, 280);
+            this.Add_Pill.Name = "Add_Pill";
+            this.Add_Pill.Size = new System.Drawing.Size(75, 23);
+            this.Add_Pill.TabIndex = 20;
+            this.Add_Pill.Text = "Adauga";
+            this.Add_Pill.UseVisualStyleBackColor = true;
+            this.Add_Pill.Visible = false;
+            this.Add_Pill.Click += new System.EventHandler(this.Add_Pill_Click);
+            // 
+            // Add_Med
+            // 
+            this.Add_Med.Location = new System.Drawing.Point(401, 280);
+            this.Add_Med.Name = "Add_Med";
+            this.Add_Med.Size = new System.Drawing.Size(75, 23);
+            this.Add_Med.TabIndex = 21;
+            this.Add_Med.Text = "Adauga";
+            this.Add_Med.UseVisualStyleBackColor = true;
+            this.Add_Med.Visible = false;
+            this.Add_Med.Click += new System.EventHandler(this.Add_Med_Click);
+            // 
             // Admin_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 388);
+            this.ControlBox = false;
+            this.Controls.Add(this.Add_Med);
+            this.Controls.Add(this.Add_Pill);
+            this.Controls.Add(this.DatePick);
             this.Controls.Add(this.Date_Label);
             this.Controls.Add(this.Stoc_Label);
             this.Controls.Add(this.Exit);
@@ -293,5 +331,8 @@
         private System.Windows.Forms.Button Exit;
         private System.Windows.Forms.Label Stoc_Label;
         private System.Windows.Forms.Label Date_Label;
+        private System.Windows.Forms.DateTimePicker DatePick;
+        private System.Windows.Forms.Button Add_Pill;
+        private System.Windows.Forms.Button Add_Med;
     }
 }

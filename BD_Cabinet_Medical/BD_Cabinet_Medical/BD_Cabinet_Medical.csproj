@@ -177,20 +177,17 @@
     <Compile Include="Recipe.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="RetetaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RetetaForm.Designer.cs">
+      <DependentUpon>RetetaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScutiriForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ScutiriForm.Designer.cs">
       <DependentUpon>ScutiriForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="View_Form.cs">
       <SubType>Form</SubType>
@@ -229,6 +226,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RetetaForm.resx">
+      <DependentUpon>RetetaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ScutiriForm.resx">
       <DependentUpon>ScutiriForm.cs</DependentUpon>
     </EmbeddedResource>

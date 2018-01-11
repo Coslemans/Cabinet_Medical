@@ -31,5 +31,10 @@ namespace BD_Cabinet_Medical
         {
 
         }
+
+        private void RetetaForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

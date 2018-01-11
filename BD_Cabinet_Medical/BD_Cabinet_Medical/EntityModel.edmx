@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Denumire" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Data_Expirarii" Type="date" Nullable="false" />
           <Property Name="Stoc" Type="int" Nullable="false" />
@@ -45,20 +45,23 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Drugs_Diseases' does not have 
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nume" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Specializare" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Username" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Parola" Type="nchar" MaxLength="130" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cabinet_Medical.dbo.Exemptions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Exemptions">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_Istoric" />
+            <PropertyRef Name="Zile_Repaus" />
+            <PropertyRef Name="Tip" />
           </Key>
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="Zile_Repaus" Type="int" Nullable="false" />
           <Property Name="Tip" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -67,8 +70,8 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Drugs_Diseases' does not have 
           <Property Name="ID_Pacient" Type="int" Nullable="false" />
           <Property Name="ID_Medic" Type="int" Nullable="false" />
           <Property Name="ID_Afectiune" Type="int" Nullable="false" />
-          <Property Name="Data" Type="date" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -285,7 +288,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <EntitySet Name="Diseases" EntityType="Self.Diseases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Exemptions" EntityType="Self.Exemptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History_Patients" EntityType="Self.History_Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -294,6 +296,13 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
     [Drugs_Diseases].[ID_Afectiune] AS [ID_Afectiune], 
     [Drugs_Diseases].[ID_Medicament] AS [ID_Medicament]
     FROM [dbo].[Drugs_Diseases] AS [Drugs_Diseases]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Exemptions" EntityType="Self.Exemptions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Exemptions].[ID_Istoric] AS [ID_Istoric], 
+    [Exemptions].[Zile_Repaus] AS [Zile_Repaus], 
+    [Exemptions].[Tip] AS [Tip]
+    FROM [dbo].[Exemptions] AS [Exemptions]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -359,13 +368,35 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
     <edmx:ConceptualModels>
       <Schema Namespace="Cabinet_MedicalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Cabinet_MedicalEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="Appointments" EntityType="Cabinet_MedicalModel.Appointment" />
           <EntitySet Name="Diseases" EntityType="Cabinet_MedicalModel.Disease" />
           <EntitySet Name="Drugs" EntityType="Cabinet_MedicalModel.Drug" />
           <EntitySet Name="Employees" EntityType="Cabinet_MedicalModel.Employee" />
           <EntitySet Name="History_Patients" EntityType="Cabinet_MedicalModel.History_Patients" />
           <EntitySet Name="Patients" EntityType="Cabinet_MedicalModel.Patient" />
-         
           <EntitySet Name="Exemptions" EntityType="Cabinet_MedicalModel.Exemption" />
           <EntitySet Name="Internment_Tickets" EntityType="Cabinet_MedicalModel.Internment_Tickets" />
           <EntitySet Name="Recipes" EntityType="Cabinet_MedicalModel.Recipe" />
@@ -403,35 +434,12 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           </AssociationSet>
           <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti">
             <End Role="History_Patients" EntitySet="History_Patients" />
-           
+            <End Role="Exemption" EntitySet="Exemptions" />
           </AssociationSet>
           <AssociationSet Name="Drugs_Diseases" Association="Cabinet_MedicalModel.Drugs_Diseases">
             <End Role="Disease" EntitySet="Diseases" />
             <End Role="Drug" EntitySet="Drugs" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="Appointment">
           <Key>
@@ -458,7 +466,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Name="Data_Expirarii" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Stoc" Type="Int32" Nullable="false" />
@@ -469,23 +477,13 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nume" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Specializare" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Name="Parola" Type="String" MaxLength="130" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Appointments" Relationship="Cabinet_MedicalModel.FK_Appointments_Employees" FromRole="Employee" ToRole="Appointment" />
           <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati" FromRole="Employee" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="Exemption">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
-          <Property Name="Tip" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="Exemptions" ToRole="History_Patients" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -496,8 +494,12 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ID" Type="Int32" Nullable="false" />
-      
-          <NavigationProperty Name="Exemptions" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemptions" />
+          <NavigationProperty Name="Disease" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Afectiuni" FromRole="History_Patients" ToRole="Disease" />
+          <NavigationProperty Name="Employee" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati" FromRole="History_Patients" ToRole="Employee" />
+          <NavigationProperty Name="Internment_Tickets" Relationship="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti" FromRole="History_Patients" ToRole="Internment_Tickets" />
+          <NavigationProperty Name="Patient" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti" FromRole="History_Patients" ToRole="Patient" />
+          <NavigationProperty Name="Recipes" Relationship="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti" FromRole="History_Patients" ToRole="Recipe" />
+          <NavigationProperty Name="Exemptions" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemption" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -514,7 +516,17 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
           <NavigationProperty Name="Appointments" Relationship="Cabinet_MedicalModel.FK_Appointments_Patients" FromRole="Patient" ToRole="Appointment" />
           <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti" FromRole="Patient" ToRole="History_Patients" />
         </EntityType>
-
+        <EntityType Name="Exemption">
+          <Key>
+            <PropertyRef Name="ID_Istoric" />
+            <PropertyRef Name="Zile_Repaus" />
+            <PropertyRef Name="Tip" />
+          </Key>
+          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
+          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
+          <Property Name="Tip" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="Exemption" ToRole="History_Patients" />
+        </EntityType>
         <EntityType Name="Internment_Tickets">
           <Key>
             <PropertyRef Name="ID_Istoric" />
@@ -598,18 +610,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Scutiri_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
-          <End Role="Exemptions" Type="Self.Exemption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="History_Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Exemptions">
-              <PropertyRef Name="ID_Istoric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
           <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1" />
           <End Type="Cabinet_MedicalModel.Internment_Tickets" Role="Internment_Tickets" Multiplicity="*" />
@@ -646,13 +646,23 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-
+        <Association Name="FK_Scutiri_Istoric_Pacienti">
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Exemption" Role="Exemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Exemption">
+              <PropertyRef Name="ID_Istoric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Drugs_Diseases">
           <End Type="Cabinet_MedicalModel.Disease" Role="Disease" Multiplicity="*" />
           <End Type="Cabinet_MedicalModel.Drug" Role="Drug" Multiplicity="*" />
         </Association>
-        
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -698,16 +708,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Exemptions">
-            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
-              <MappingFragment StoreEntitySet="Exemptions">
-                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
-                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
-                <ScalarProperty Name="Tip" ColumnName="Tip" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="History_Patients">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.History_Patients">
               <MappingFragment StoreEntitySet="History_Patients">
@@ -733,10 +733,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-
           <EntitySetMapping Name="Exemptions">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
-        </EntityTypeMapping>
+              <MappingFragment StoreEntitySet="Exemptions">
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
+                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
+              </MappingFragment>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Internment_Tickets">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Internment_Tickets">
