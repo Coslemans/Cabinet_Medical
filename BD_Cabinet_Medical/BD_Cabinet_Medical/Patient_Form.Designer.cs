@@ -46,11 +46,13 @@
             this.Programare = new System.Windows.Forms.GroupBox();
             this.showHistory = new System.Windows.Forms.Label();
             this.historyGroup = new System.Windows.Forms.GroupBox();
+            this.hView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.History)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cabinet_MedicalDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).BeginInit();
             this.Programare.SuspendLayout();
             this.historyGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hView)).BeginInit();
             this.SuspendLayout();
             // 
             // Logout_Button
@@ -58,6 +60,8 @@
             this.Logout_Button.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Logout_Button.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("Logout_Button.BackgroundImage")));
             this.Logout_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Logout_Button.FlatAppearance.BorderSize = 0;
+            this.Logout_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Logout_Button.Location = new System.Drawing.Point(2, 221);
             this.Logout_Button.Name = "Logout_Button";
             this.Logout_Button.Size = new System.Drawing.Size(100, 96);
@@ -81,6 +85,8 @@
             this.newAppointment.AllowDrop = true;
             this.newAppointment.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("newAppointment.BackgroundImage")));
             this.newAppointment.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.newAppointment.FlatAppearance.BorderSize = 0;
+            this.newAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newAppointment.Location = new System.Drawing.Point(35, 23);
             this.newAppointment.Name = "newAppointment";
             this.newAppointment.Size = new System.Drawing.Size(121, 109);
@@ -156,6 +162,8 @@
             // 
             this.historyButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("historyButton.BackgroundImage")));
             this.historyButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.historyButton.FlatAppearance.BorderSize = 0;
+            this.historyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.historyButton.Location = new System.Drawing.Point(45, 40);
             this.historyButton.Name = "historyButton";
             this.historyButton.Size = new System.Drawing.Size(74, 96);
@@ -217,13 +225,23 @@
             this.historyGroup.Text = "Istoric";
             this.historyGroup.Enter += new System.EventHandler(this.historyGroup_Enter);
             // 
+            // hView
+            // 
+            this.hView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.hView.Location = new System.Drawing.Point(243, 413);
+            this.hView.Name = "hView";
+            this.hView.Size = new System.Drawing.Size(532, 150);
+            this.hView.TabIndex = 15;
+            this.hView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
             // Patient_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.ClientSize = new System.Drawing.Size(803, 373);
+            this.ClientSize = new System.Drawing.Size(810, 587);
             this.ControlBox = false;
+            this.Controls.Add(this.hView);
             this.Controls.Add(this.historyGroup);
             this.Controls.Add(this.Programare);
             this.Controls.Add(this.nameLabel);
@@ -239,6 +257,7 @@
             this.Programare.PerformLayout();
             this.historyGroup.ResumeLayout(false);
             this.historyGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +281,6 @@
         private System.Windows.Forms.GroupBox Programare;
         private System.Windows.Forms.Label showHistory;
         private System.Windows.Forms.GroupBox historyGroup;
+        private System.Windows.Forms.DataGridView hView;
     }
 }

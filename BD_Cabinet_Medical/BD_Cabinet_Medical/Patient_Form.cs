@@ -96,6 +96,7 @@ namespace BD_Cabinet_Medical
                 saveAppointment.Enabled = true;
                 FillCombo();
                 History.Enabled = false;
+                hView.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -163,78 +164,108 @@ namespace BD_Cabinet_Medical
         {
             try
             {
+                hView.Enabled = true;
                 History.Enabled = true;
                 Doctors.Enabled = false;
                 saveAppointment.Enabled = false;
                 dateTime.Enabled = false;
-                DataTable data = new DataTable();
-                data.Columns.Add("Afectiune", typeof(string));
-                data.Columns.Add("Medic", typeof(string));
-                data.Columns.Add("Specializare", typeof(string));
-                data.Columns.Add("Data_examinare", typeof(DateTime));
-                var context = new Cabinet_MedicalEntities();
-                var query = from hist in context.History_Patients
-                            where hist.ID_Pacient.Equals(Abouts.ID)
-                            select new
-                            {
-                                hist.ID,
-                                hist.ID_Afectiune,
-                                hist.ID_Medic,
-                                hist.Data
-                            };
-                foreach (var ist in query)
+                using (var cont = new Cabinet_MedicalEntities())
                 {
-                    DataRow row = null;
-                    row = data.NewRow();
-                    var disease = from dis in context.Diseases
-                                  where dis.ID == ist.ID_Afectiune
-                                  select new
-                                  {
-                                      dis.Denumire,
-                                      dis.ID
-                                  };
-
-                    var medic = from doc in context.Employees
-                                where doc.ID.Equals(ist.ID)
-                                select new
-                                {
-                                    doc.Nume,
-                                    doc.Specializare,
-                                    doc.ID
-                                };
-                    var dat = from da in context.History_Patients
-                              where da.ID.Equals(ist.ID)
-                              select new
-                              {
-                                  da.Data,
-                                  da.ID
-                              };
-                    foreach (var nou in dat)
+                    var quer = from hist in cont.historyViews
+                               where hist.ID.Equals(Abouts.ID)
+                               select new
+                               {
+                                   hist.Denumire,
+                                   hist.Nume,
+                                   hist.Specializare,
+                                   hist.Data
+                               };
+                    DataTable tabel = new DataTable();
+                    tabel.Columns.Add("Afectiune", typeof(string));
+                    tabel.Columns.Add("Medic",typeof(string));
+                    tabel.Columns.Add("Specializare", typeof(string));
+                    tabel.Columns.Add("Data examinare", typeof(DateTime));
+                    foreach(var item in quer)
                     {
-                        if (nou.ID == ist.ID)
-                            row["Data_examinare"] = nou.Data.ToString().Trim();
+                        DataRow Row = null;
+                        Row = tabel.NewRow();
+                        Row["Afectiune"] = item.Denumire.ToString().Trim();
+                        Row["Medic"] = item.Nume.ToString().Trim();
+                        Row["Specializare"] = item.Specializare.ToString().Trim();
+                        Row["Data examinare"] = item.Data;
+                        tabel.Rows.Add(Row);
                     }
-                    foreach (var doc in medic)
-                    {
-                        if (doc.ID == ist.ID_Medic)
-                        {
-                            row["Medic"] = doc.Nume.ToString().Trim();
-                            row["Specializare"] = doc.Specializare.ToString().Trim();
-                        }
-                    }
-                    foreach (var dis in disease)
-                    {
-                        if (dis.ID == ist.ID_Afectiune)
-                            row["Afectiune"] = dis.Denumire.ToString().Trim();
-
-                    }
-                    data.Rows.Add(row);
-
+                    hView.DataSource = tabel;
 
                 }
+                //DataTable data = new DataTable();
+                //data.Columns.Add("Afectiune", typeof(string));
+                //data.Columns.Add("Medic", typeof(string));
+                //data.Columns.Add("Specializare", typeof(string));
+                //data.Columns.Add("Data_examinare", typeof(DateTime));
+                //var context = new Cabinet_MedicalEntities();
+                //var query = from hist in context.History_Patients
+                //            where hist.ID_Pacient.Equals(Abouts.ID)
+                //            select new
+                //            {
+                //                hist.ID,
+                //                hist.ID_Afectiune,
+                //                hist.ID_Medic,
+                //                hist.Data
+                //            };
+                //foreach (var ist in query)
+                //{
+                //    DataRow row = null;
+                //    row = data.NewRow();
+                //    var disease = from dis in context.Diseases
+                //                  where dis.ID == ist.ID_Afectiune
+                //                  select new
+                //                  {
+                //                      dis.Denumire,
+                //                      dis.ID
+                //                  };
+
+                //    var medic = from doc in context.Employees
+                //                where doc.ID.Equals(ist.ID_Medic)
+                //                select new
+                //                {
+                //                    doc.Nume,
+                //                    doc.Specializare,
+                //                    doc.ID
+                //                };
+                //    var dat = from da in context.History_Patients
+                //              where da.ID.Equals(ist.ID)
+                //              select new
+                //              {
+                //                  da.Data,
+                //                  da.ID
+                //              };
+                //    foreach (var nou in dat)
+                //    {
+                //        if (nou.ID == ist.ID)
+                //            row["Data_examinare"] = nou.Data.ToString().Trim();
+                //    }
+                //    foreach (var doc in medic)
+                //    {
+                //        if (doc.ID == ist.ID_Medic)
+                //        {
+                //            row["Medic"] = doc.Nume.ToString().Trim();
+                //            row["Specializare"] = doc.Specializare.ToString().Trim();
+                //        }
+                //    }
+                //    foreach (var dis in disease)
+                //    {
+                //        if (dis.ID == ist.ID_Afectiune)
+                //            row["Afectiune"] = dis.Denumire.ToString().Trim();
+
+                //    }
+                //    data.Rows.Add(row);
 
 
-                History.DataSource = data;
+                //}
+
+
+                //History.DataSource = data;
             }
             catch (Exception ex)
             {
@@ -252,5 +283,9 @@ namespace BD_Cabinet_Medical
 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

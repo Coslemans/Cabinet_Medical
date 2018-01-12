@@ -18,7 +18,8 @@ namespace BD_Cabinet_Medical
        
         public Add_Form(Employee E)
         {
-          
+            InitializeComponent();
+            Abouts = E;
         }
 
         

@@ -52,26 +52,33 @@
             this.city2Label = new System.Windows.Forms.Label();
             this.city2TextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.diagTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dataPicker = new System.Windows.Forms.DateTimePicker();
             this.saveTicket = new System.Windows.Forms.Button();
+            this.diseaseBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(12, 467);
+            this.backButton.BackColor = System.Drawing.Color.Transparent;
+            this.backButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("backButton.BackgroundImage")));
+            this.backButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.backButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.backButton.FlatAppearance.BorderSize = 0;
+            this.backButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.backButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.ForeColor = System.Drawing.Color.Transparent;
+            this.backButton.Location = new System.Drawing.Point(15, 417);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(75, 23);
+            this.backButton.Size = new System.Drawing.Size(81, 68);
             this.backButton.TabIndex = 0;
-            this.backButton.Text = "Back";
-            this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.UseVisualStyleBackColor = false;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
             // regLabel
             // 
             this.regLabel.AutoSize = true;
-            this.regLabel.Location = new System.Drawing.Point(444, 480);
+            this.regLabel.BackColor = System.Drawing.Color.Transparent;
+            this.regLabel.Location = new System.Drawing.Point(241, 506);
             this.regLabel.Name = "regLabel";
             this.regLabel.Size = new System.Drawing.Size(36, 13);
             this.regLabel.TabIndex = 1;
@@ -81,6 +88,7 @@
             // countyLabel
             // 
             this.countyLabel.AutoSize = true;
+            this.countyLabel.BackColor = System.Drawing.Color.Transparent;
             this.countyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countyLabel.Location = new System.Drawing.Point(12, 34);
             this.countyLabel.Name = "countyLabel";
@@ -91,6 +99,7 @@
             // cityLabel
             // 
             this.cityLabel.AutoSize = true;
+            this.cityLabel.BackColor = System.Drawing.Color.Transparent;
             this.cityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cityLabel.Location = new System.Drawing.Point(12, 67);
             this.cityLabel.Name = "cityLabel";
@@ -101,6 +110,7 @@
             // unitLabel
             // 
             this.unitLabel.AutoSize = true;
+            this.unitLabel.BackColor = System.Drawing.Color.Transparent;
             this.unitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.unitLabel.Location = new System.Drawing.Point(12, 101);
             this.unitLabel.Name = "unitLabel";
@@ -132,6 +142,7 @@
             // internmentTicket
             // 
             this.internmentTicket.AutoSize = true;
+            this.internmentTicket.BackColor = System.Drawing.Color.Transparent;
             this.internmentTicket.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.internmentTicket.Location = new System.Drawing.Point(207, 163);
             this.internmentTicket.Name = "internmentTicket";
@@ -142,6 +153,7 @@
             // hospitalLabel
             // 
             this.hospitalLabel.AutoSize = true;
+            this.hospitalLabel.BackColor = System.Drawing.Color.Transparent;
             this.hospitalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hospitalLabel.Location = new System.Drawing.Point(12, 227);
             this.hospitalLabel.Name = "hospitalLabel";
@@ -159,6 +171,7 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
+            this.nameLabel.BackColor = System.Drawing.Color.Transparent;
             this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameLabel.Location = new System.Drawing.Point(12, 263);
             this.nameLabel.Name = "nameLabel";
@@ -176,6 +189,7 @@
             // genderLabel
             // 
             this.genderLabel.AutoSize = true;
+            this.genderLabel.BackColor = System.Drawing.Color.Transparent;
             this.genderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.genderLabel.Location = new System.Drawing.Point(416, 263);
             this.genderLabel.Name = "genderLabel";
@@ -190,6 +204,9 @@
             "Feminin",
             "Masculin"});
             this.gender_comboBox.FormattingEnabled = true;
+            this.gender_comboBox.Items.AddRange(new object[] {
+            "Feminin",
+            "Masculin"});
             this.gender_comboBox.Location = new System.Drawing.Point(461, 259);
             this.gender_comboBox.Name = "gender_comboBox";
             this.gender_comboBox.Size = new System.Drawing.Size(122, 21);
@@ -198,6 +215,7 @@
             // ageLabel
             // 
             this.ageLabel.AutoSize = true;
+            this.ageLabel.BackColor = System.Drawing.Color.Transparent;
             this.ageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ageLabel.Location = new System.Drawing.Point(12, 302);
             this.ageLabel.Name = "ageLabel";
@@ -215,6 +233,9 @@
             // years_monthsCBOX
             // 
             this.years_monthsCBOX.FormattingEnabled = true;
+            this.years_monthsCBOX.Items.AddRange(new object[] {
+            "ani",
+            "luni"});
             this.years_monthsCBOX.Location = new System.Drawing.Point(223, 298);
             this.years_monthsCBOX.Name = "years_monthsCBOX";
             this.years_monthsCBOX.Size = new System.Drawing.Size(54, 21);
@@ -223,6 +244,7 @@
             // domiciliuLabel
             // 
             this.domiciliuLabel.AutoSize = true;
+            this.domiciliuLabel.BackColor = System.Drawing.Color.Transparent;
             this.domiciliuLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.domiciliuLabel.Location = new System.Drawing.Point(281, 302);
             this.domiciliuLabel.Name = "domiciliuLabel";
@@ -240,6 +262,7 @@
             // city2Label
             // 
             this.city2Label.AutoSize = true;
+            this.city2Label.BackColor = System.Drawing.Color.Transparent;
             this.city2Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.city2Label.Location = new System.Drawing.Point(12, 338);
             this.city2Label.Name = "city2Label";
@@ -257,6 +280,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(12, 369);
             this.label4.Name = "label4";
@@ -264,52 +288,40 @@
             this.label4.TabIndex = 22;
             this.label4.Text = "Diagnosticul:";
             // 
-            // diagTextBox
-            // 
-            this.diagTextBox.Location = new System.Drawing.Point(111, 366);
-            this.diagTextBox.Name = "diagTextBox";
-            this.diagTextBox.Size = new System.Drawing.Size(472, 20);
-            this.diagTextBox.TabIndex = 23;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(108, 416);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 17);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Data:";
-            // 
-            // dataPicker
-            // 
-            this.dataPicker.CustomFormat = "dd/MM/yyyy";
-            this.dataPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dataPicker.Location = new System.Drawing.Point(161, 413);
-            this.dataPicker.Name = "dataPicker";
-            this.dataPicker.Size = new System.Drawing.Size(155, 20);
-            this.dataPicker.TabIndex = 25;
-            // 
             // saveTicket
             // 
-            this.saveTicket.Location = new System.Drawing.Point(461, 425);
+            this.saveTicket.BackColor = System.Drawing.Color.Transparent;
+            this.saveTicket.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("saveTicket.BackgroundImage")));
+            this.saveTicket.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.saveTicket.FlatAppearance.BorderSize = 0;
+            this.saveTicket.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.saveTicket.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.saveTicket.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveTicket.Location = new System.Drawing.Point(484, 436);
             this.saveTicket.Name = "saveTicket";
-            this.saveTicket.Size = new System.Drawing.Size(75, 23);
+            this.saveTicket.Size = new System.Drawing.Size(99, 49);
             this.saveTicket.TabIndex = 26;
-            this.saveTicket.Text = "Save";
-            this.saveTicket.UseVisualStyleBackColor = true;
+            this.saveTicket.UseVisualStyleBackColor = false;
+            this.saveTicket.Click += new System.EventHandler(this.saveTicket_Click);
+            // 
+            // diseaseBox
+            // 
+            this.diseaseBox.FormattingEnabled = true;
+            this.diseaseBox.Location = new System.Drawing.Point(111, 365);
+            this.diseaseBox.Name = "diseaseBox";
+            this.diseaseBox.Size = new System.Drawing.Size(472, 21);
+            this.diseaseBox.TabIndex = 27;
             // 
             // Bilet_internareForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(624, 502);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(624, 528);
             this.ControlBox = false;
+            this.Controls.Add(this.diseaseBox);
             this.Controls.Add(this.saveTicket);
-            this.Controls.Add(this.dataPicker);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.diagTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.city2TextBox);
             this.Controls.Add(this.city2Label);
@@ -333,6 +345,7 @@
             this.Controls.Add(this.countyLabel);
             this.Controls.Add(this.regLabel);
             this.Controls.Add(this.backButton);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -346,7 +359,15 @@
 
         #endregion
 
+        private System.Windows.Forms.TextBox hostpitalTextBox;
+        private System.Windows.Forms.ComboBox gender_comboBox;
+        private System.Windows.Forms.TextBox ageTextBox;
+        private System.Windows.Forms.ComboBox years_monthsCBOX;
+        private System.Windows.Forms.TextBox county2TextBox;
+        private System.Windows.Forms.TextBox city2TextBox;
+        private System.Windows.Forms.ComboBox diseaseBox;
         private System.Windows.Forms.Button backButton;
+        private System.Windows.Forms.Button saveTicket;
         private System.Windows.Forms.Label regLabel;
         private System.Windows.Forms.Label countyLabel;
         private System.Windows.Forms.Label cityLabel;
@@ -355,23 +376,14 @@
         private System.Windows.Forms.TextBox cityTextBox;
         private System.Windows.Forms.TextBox unitTextBox;
         private System.Windows.Forms.Label internmentTicket;
-        private System.Windows.Forms.Label hospitalLabel;
-        private System.Windows.Forms.TextBox hostpitalTextBox;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Label genderLabel;
-        private System.Windows.Forms.ComboBox gender_comboBox;
         private System.Windows.Forms.Label ageLabel;
-        private System.Windows.Forms.TextBox ageTextBox;
-        private System.Windows.Forms.ComboBox years_monthsCBOX;
         private System.Windows.Forms.Label domiciliuLabel;
-        private System.Windows.Forms.TextBox county2TextBox;
         private System.Windows.Forms.Label city2Label;
-        private System.Windows.Forms.TextBox city2TextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox diagTextBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dataPicker;
-        private System.Windows.Forms.Button saveTicket;
+
+        private System.Windows.Forms.Label hospitalLabel;
     }
 }

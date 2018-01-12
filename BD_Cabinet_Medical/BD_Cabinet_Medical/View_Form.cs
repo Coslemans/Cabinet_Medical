@@ -78,112 +78,117 @@ namespace BD_Cabinet_Medical
             {
                 button1.Hide();
                 string tipConsutatie = comboBoxTipC.SelectedItem.ToString();
-                using (var context = new Cabinet_MedicalEntities())
+                if (comboBoxTipC.SelectedItem != null)
                 {
-                    RetetaData.Show();
-                    ViewData.Hide();
-                    BiletData.Hide();
-                    var q = from i in context.History_Patients
-                            where i.ID_Pacient.Equals(Pacient.ID)
-                            select i;
-
-
-                    if (Equals(tipConsutatie, "Reteta"))
+                    using (var context = new Cabinet_MedicalEntities())
                     {
-                        foreach (var reteta in q)
-                        {
-                            var query = (from r in context.Recipes
-                                         where r.ID_Istoric.Equals(reteta.ID)
-                                         select new
-                                         {
-                                             r.ID_Medicament,
-                                             r.Numar_Flacoane
-                                         }).FirstOrDefault();
-                            if (query != null)
-                            {
-
-                                var afect = (from a in context.Diseases
-                                             where a.ID.Equals(reteta.ID_Afectiune)
-                                             select a).FirstOrDefault();
-                                var med = (from m in context.Employees
-                                           where m.ID.Equals(reteta.ID_Medic)
-                                           select m).FirstOrDefault();
-                                var medicament = (from d in context.Drugs
-                                                  where d.ID.Equals(query.ID_Medicament)
-                                                  select d).FirstOrDefault();
-                                RetetaData.Rows.Add(reteta.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), medicament.Denumire.ToString().Trim(), query.Numar_Flacoane.ToString().Trim());
-
-                            }
-
-                        }
-
-
-                    }
-                    else if (Equals(tipConsutatie, "Bilet internare"))
-                    {
-                        RetetaData.Hide();
+                        RetetaData.Show();
                         ViewData.Hide();
-                        BiletData.Show();
-                        foreach (var bilet in q)
-                        {
-                            var query = (from b in context.Internment_Tickets
-                                         where b.ID_Istoric.Equals(bilet.ID)
-                                         select new
-                                         {
-                                             b.Descriere,
-                                             b.Numar_Bilet,
-
-                                         }).FirstOrDefault();
-                            if (query != null)
-                            {
-
-                                var afect = (from af in context.Diseases
-                                             where af.ID.Equals(bilet.ID_Afectiune)
-                                             select af).FirstOrDefault();
-                                var med = (from mm in context.Employees
-                                           where mm.ID.Equals(bilet.ID_Medic)
-                                           select mm).FirstOrDefault();
-                                BiletData.Rows.Add(bilet.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(),  query.Descriere.ToString().Trim(), query.Numar_Bilet.ToString().Trim());
-
-                            }
-
-                        }
-                       
-
-                    }
-                    else if (Equals(tipConsutatie, "Scutire"))
-                    {
-                        ViewData.Show();
-                        RetetaData.Hide();
                         BiletData.Hide();
-                        foreach (var scutire in q)
-                        {
-                            var query = (from s in context.Exemptions
-                                         where s.ID_Istoric.Equals(scutire.ID)
-                                         select new
-                                         {
-                                             s.Zile_Repaus,
-                                             s.Tip
-                                             
-                                         }).FirstOrDefault();
-                            if (query != null)
-                            {
+                        var q = from i in context.History_Patients
+                                where i.ID_Pacient.Equals(Pacient.ID)
+                                select i;
 
-                                var afect = (from aa in context.Diseases
-                                             where aa.ID.Equals(scutire.ID_Afectiune)
-                                             select aa).FirstOrDefault();
-                                var med = (from n in context.Employees
-                                           where n.ID.Equals(scutire.ID_Medic)
-                                           select n).FirstOrDefault();
-                             
-                                ViewData.Rows.Add(scutire.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(),query.Tip.ToString().Trim(), query.Zile_Repaus.ToString().Trim());
+
+                        if (Equals(tipConsutatie, "Reteta"))
+                        {
+                            foreach (var reteta in q)
+                            {
+                                var query = (from r in context.Recipes
+                                             where r.ID_Istoric.Equals(reteta.ID)
+                                             select new
+                                             {
+                                                 r.ID_Medicament,
+                                                 r.Numar_Flacoane
+                                             }).FirstOrDefault();
+                                if (query != null)
+                                {
+
+                                    var afect = (from a in context.Diseases
+                                                 where a.ID.Equals(reteta.ID_Afectiune)
+                                                 select a).FirstOrDefault();
+                                    var med = (from m in context.Employees
+                                               where m.ID.Equals(reteta.ID_Medic)
+                                               select m).FirstOrDefault();
+                                    var medicament = (from d in context.Drugs
+                                                      where d.ID.Equals(query.ID_Medicament)
+                                                      select d).FirstOrDefault();
+                                    RetetaData.Rows.Add(reteta.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), medicament.Denumire.ToString().Trim(), query.Numar_Flacoane.ToString().Trim());
+
+                                }
+
+                            }
+
+
+                        }
+                        else if (Equals(tipConsutatie, "Bilet internare"))
+                        {
+                            RetetaData.Hide();
+                            ViewData.Hide();
+                            BiletData.Show();
+                            foreach (var bilet in q)
+                            {
+                                var query = (from b in context.Internment_Tickets
+                                             where b.ID_Istoric.Equals(bilet.ID)
+                                             select new
+                                             {
+                                                 b.Descriere,
+                                                 b.Numar_Bilet,
+
+                                             }).FirstOrDefault();
+                                if (query != null)
+                                {
+
+                                    var afect = (from af in context.Diseases
+                                                 where af.ID.Equals(bilet.ID_Afectiune)
+                                                 select af).FirstOrDefault();
+                                    var med = (from mm in context.Employees
+                                               where mm.ID.Equals(bilet.ID_Medic)
+                                               select mm).FirstOrDefault();
+                                    BiletData.Rows.Add(bilet.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), query.Descriere.ToString().Trim(), query.Numar_Bilet.ToString().Trim());
+
+                                }
+
+                            }
+
+
+                        }
+                        else if (Equals(tipConsutatie, "Scutire"))
+                        {
+                            ViewData.Show();
+                            RetetaData.Hide();
+                            BiletData.Hide();
+                            foreach (var scutire in q)
+                            {
+                                var query = (from s in context.Exemptions
+                                             where s.ID_Istoric.Equals(scutire.ID)
+                                             select new
+                                             {
+                                                 s.Zile_Repaus,
+                                                 s.Tip
+
+                                             }).FirstOrDefault();
+                                if (query != null)
+                                {
+
+                                    var afect = (from aa in context.Diseases
+                                                 where aa.ID.Equals(scutire.ID_Afectiune)
+                                                 select aa).FirstOrDefault();
+                                    var med = (from n in context.Employees
+                                               where n.ID.Equals(scutire.ID_Medic)
+                                               select n).FirstOrDefault();
+
+                                    ViewData.Rows.Add(scutire.Data.ToString().Trim(), med.Nume.ToString().Trim(), afect.Denumire.ToString().Trim(), query.Tip.ToString().Trim(), query.Zile_Repaus.ToString().Trim());
+
+                                }
 
                             }
 
                         }
-                      
                     }
                 }
+                else
+                    throw new Exception("Selectati un camp!");
                 
             }
 
@@ -226,7 +231,7 @@ namespace BD_Cabinet_Medical
 
         private void buttonBilet_Click(object sender, EventArgs e)
         {
-            Bilet_internareForm bilet = new Bilet_internareForm(Medic);
+            Bilet_internareForm bilet = new Bilet_internareForm(Medic,Pacient);
             bilet.Show();
         }
     }

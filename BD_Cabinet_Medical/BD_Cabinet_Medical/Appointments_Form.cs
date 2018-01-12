@@ -54,6 +54,8 @@ namespace BD_Cabinet_Medical
                                 PatientsData.Rows.Add(line.Nume.ToString().Trim(), line.Date.ToString().Trim(), "Refuzat");
                         }
                     }
+                    else
+                        throw new Exception("Nu sunt programari in asteptare!");
                 }
             }
             catch(Exception ex)
