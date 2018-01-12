@@ -14,13 +14,13 @@ namespace BD_Cabinet_Medical
     {
         Patient Pacient;
         Form formParent;
-       
-        public RetetaForm(Patient P,Form formparent)
+
+        public RetetaForm(Patient P, Form formparent)
         {
             InitializeComponent();
             Pacient = P;
             formParent = formparent;
-            labelData.Text = labelData.Text +": "+ DateTime.Now.ToString();
+            labelData.Text = labelData.Text + ": " + DateTime.Now.ToString();
             labelNume.Text = labelNume.Text + ": " + Pacient.Nume.ToString();
             labelCNP.Text = labelCNP.Text + ": " + Pacient.CNP.ToString();
             button1.Enabled = false;
@@ -55,47 +55,51 @@ namespace BD_Cabinet_Medical
         {
             formParent.Show();
             this.Close();
-           
+
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+
             using (var context = new Cabinet_MedicalEntities())
             {
-                if (textBoxMedic.Text.Length == 0)
+                try
                 {
-                    throw new Exception("Nu ati introdus numele medicului/asistentului!");
+                    if (textBoxMedic.Text.Length == 0)
+                    {
+                        throw new Exception("Nu ati introdus numele medicului/asistentului!");
 
-                }
+                    }
 
-                else if (textBoxAf.Text.Length == 0)
-                    throw new Exception("Nu ati introdus denumirea afectiunii!");
-                else if (textBoxMed.Text.Length == 0)
-                    throw new Exception("Nu ati introdus numele medicamentului!");
-                else if (textBoxNrF.Text.Length == 0)
-                    throw new Exception("Nu ati introdus numarul de flacoane");
-                else { 
-                var res = (from p in context.Drugs
-                           where p.Denumire.Equals(textBoxMed.Text)
-                           select p).First();
-                int numar = Int32.Parse(textBoxNrF.Text);
-                
-                   
-                    var query = (from m in context.Employees
-                                 where m.Nume.Equals(textBoxMedic.Text)
-                                 select m).First();
+                    else if (textBoxAf.Text.Length == 0)
+                        throw new Exception("Nu ati introdus denumirea afectiunii!");
+                    else if (textBoxMed.Text.Length == 0)
+                        throw new Exception("Nu ati introdus numele medicamentului!");
+                    else if (textBoxNrF.Text.Length == 0)
+                        throw new Exception("Nu ati introdus numarul de flacoane");
+                    else
+                    {
+                        var res = (from p in context.Drugs
+                                   where p.Denumire.Equals(textBoxMed.Text)
+                                   select p).First();
+                        int numar = Int32.Parse(textBoxNrF.Text);
 
-                    var query2 = (from a in context.Diseases
 
-                                  where a.Denumire.Equals(textBoxAf.Text)
-                                  select a).First();
-                    
-                    if (query == null)
-                        throw new Exception("Numele medicului introdus esti incorect!");
-                    else if (query2 == null)
-                        throw new Exception("Denumirea afectiunii este incorecta!");
-                  
-              
+                        var query = (from m in context.Employees
+                                     where m.Nume.Equals(textBoxMedic.Text)
+                                     select m).First();
+
+                        var query2 = (from a in context.Diseases
+
+                                      where a.Denumire.Equals(textBoxAf.Text)
+                                      select a).First();
+
+                        if (query == null)
+                            throw new Exception("Numele medicului introdus esti incorect!");
+                        else if (query2 == null)
+                            throw new Exception("Denumirea afectiunii este incorecta!");
+                             string den = res.Denumire;
+
                         if (res.Stoc > numar)
                         {
                             var addnew = new History_Patients
@@ -118,23 +122,54 @@ namespace BD_Cabinet_Medical
                                 Numar_Flacoane = numar
 
                             };
-                         
 
-                                context.Recipes.Add(addret);
-                                context.SaveChanges();
 
-                                MessageBox.Show("Reteta a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                textBoxAf.Text = "";
-                                textBoxMedic.Text = "";
-                                textBoxMed.Text = "";
-                                textBoxNrF.Text = "";
+                            context.Recipes.Add(addret);
+                            context.SaveChanges();
 
+                            using (var dbContextTransaction = context.Database.BeginTransaction())
+                            {
+                                try
+                                {
+                                   
+
+                                    var pp = from dr in context.Drugs
+                                            where dr.Denumire.Equals(den)
+                                            select dr;
+                                    foreach(var pastile in pp)
+                                    {
+                                        pastile.Stoc = pastile.Stoc - numar;
+                                    }
+                                    context.SaveChanges();
+                                    dbContextTransaction.Commit();
+
+                                }
+                                catch(Exception)
+                                {
+                                    dbContextTransaction.Rollback();
+                                }
                             }
+                            MessageBox.Show("Reteta a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            textBoxAf.Text = "";
+                            textBoxMedic.Text = "";
+                            textBoxMed.Text = "";
+                            textBoxNrF.Text = "";
+
                         }
 
                     }
+
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message",
+                  MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
+
             }
+
+        }
+    }
         
 }
