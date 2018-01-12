@@ -151,12 +151,11 @@ namespace BD_Cabinet_Medical
 
                 using (var context = new Cabinet_MedicalEntities())
                 {
-                    var PacientDel = (from c in context.Patients
-                                      where c.Nume.Equals(name)
-                                      select c).First();
-                    //context.Patients.Remove(PacientDel);
-                    //context.SaveChanges();
-                    //PacientsData.Rows.Remove(PacientsData.SelectedRows[0]);
+
+                    context.DeletePatient(name);
+                    context.SaveChanges();
+                    PacientsData.Rows.Remove(PacientsData.SelectedRows[0]);
+
                 }
 
             }

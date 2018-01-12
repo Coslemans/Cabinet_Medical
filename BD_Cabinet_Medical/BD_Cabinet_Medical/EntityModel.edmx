@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ID_Medic" Type="int" Nullable="false" />
           <Property Name="ID_Pacient" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Accepted" Type="int" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Accepted" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Diseases">
           <Key>
@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Denumire" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Data_Expirarii" Type="date" Nullable="false" />
           <Property Name="Stoc" Type="int" Nullable="false" />
@@ -49,16 +49,19 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Drugs_Diseases' does not have 
           <Property Name="Nume" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Specializare" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Username" Type="nchar" MaxLength="25" Nullable="false" />
-          <Property Name="Parola" Type="nchar" MaxLength="130" Nullable="false" />
+          <Property Name="Parola" Type="nchar" MaxLength="130" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cabinet_Medical.dbo.Exemptions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Exemptions">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_Istoric" />
+            <PropertyRef Name="Zile_Repaus" />
+            <PropertyRef Name="Tip" />
           </Key>
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="Zile_Repaus" Type="int" Nullable="false" />
           <Property Name="Tip" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -67,8 +70,8 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Drugs_Diseases' does not have 
           <Property Name="ID_Pacient" Type="int" Nullable="false" />
           <Property Name="ID_Medic" Type="int" Nullable="false" />
           <Property Name="ID_Afectiune" Type="int" Nullable="false" />
-          <Property Name="Data" Type="date" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -93,16 +96,19 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Property Name="Numar_Buletin" Type="nchar" MaxLength="6" Nullable="false" />
           <Property Name="Data_Nasterii" Type="date" Nullable="false" />
           <Property Name="Username" Type="nchar" MaxLength="25" />
-          <Property Name="Parola" Type="nchar" MaxLength="25" />
+          <Property Name="Parola" Type="nchar" MaxLength="130" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cabinet_Medical.dbo.Recipes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Recipes">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_Istoric" />
+            <PropertyRef Name="ID_Medicament" />
+            <PropertyRef Name="Numar_Flacoane" />
           </Key>
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="ID_Medicament" Type="int" Nullable="false" />
           <Property Name="Numar_Flacoane" Type="int" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -151,7 +157,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appointments_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
@@ -163,7 +171,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Internment_Tickets" Type="Self.Internment_Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -199,7 +209,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Istoric_Pacienti_Pacienti">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
@@ -211,7 +223,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Retete_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Recipes" Type="Self.Recipes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -235,7 +249,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Scutiri_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Exemptions" Type="Self.Exemptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -246,6 +262,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DeletePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -282,10 +301,8 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <EntitySet Name="Diseases" EntityType="Self.Diseases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drugs" EntityType="Self.Drugs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Exemptions" EntityType="Self.Exemptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History_Patients" EntityType="Self.History_Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drugs_Diseases" EntityType="Self.Drugs_Diseases" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -293,12 +310,26 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
     [Drugs_Diseases].[ID_Medicament] AS [ID_Medicament]
     FROM [dbo].[Drugs_Diseases] AS [Drugs_Diseases]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Exemptions" EntityType="Self.Exemptions" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Exemptions].[ID_Istoric] AS [ID_Istoric], 
+    [Exemptions].[Zile_Repaus] AS [Zile_Repaus], 
+    [Exemptions].[Tip] AS [Tip]
+    FROM [dbo].[Exemptions] AS [Exemptions]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Internment_Tickets].[ID_Istoric] AS [ID_Istoric], 
     [Internment_Tickets].[Numar_Bilet] AS [Numar_Bilet], 
     [Internment_Tickets].[Descriere] AS [Descriere]
     FROM [dbo].[Internment_Tickets] AS [Internment_Tickets]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Recipes" EntityType="Self.Recipes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Recipes].[ID_Istoric] AS [ID_Istoric], 
+    [Recipes].[ID_Medicament] AS [ID_Medicament], 
+    [Recipes].[Numar_Flacoane] AS [Numar_Flacoane]
+    FROM [dbo].[Recipes] AS [Recipes]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Afectiune_Medicament_Afectiuni" Association="Self.FK_Afectiune_Medicament_Afectiuni">
             <End Role="Diseases" EntitySet="Diseases" />
@@ -377,11 +408,11 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <EntitySet Name="Diseases" EntityType="Cabinet_MedicalModel.Disease" />
           <EntitySet Name="Drugs" EntityType="Cabinet_MedicalModel.Drug" />
           <EntitySet Name="Employees" EntityType="Cabinet_MedicalModel.Employee" />
-          <EntitySet Name="Exemptions" EntityType="Cabinet_MedicalModel.Exemption" />
           <EntitySet Name="History_Patients" EntityType="Cabinet_MedicalModel.History_Patients" />
           <EntitySet Name="Patients" EntityType="Cabinet_MedicalModel.Patient" />
-          <EntitySet Name="Recipes" EntityType="Cabinet_MedicalModel.Recipe" />
+          <EntitySet Name="Exemptions" EntityType="Cabinet_MedicalModel.Exemption" />
           <EntitySet Name="Internment_Tickets" EntityType="Cabinet_MedicalModel.Internment_Tickets" />
+          <EntitySet Name="Recipes" EntityType="Cabinet_MedicalModel.Recipe" />
           <AssociationSet Name="FK_Appointments_Employees" Association="Cabinet_MedicalModel.FK_Appointments_Employees">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="Appointment" EntitySet="Appointments" />
@@ -402,10 +433,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
             <End Role="Employee" EntitySet="Employees" />
             <End Role="History_Patients" EntitySet="History_Patients" />
           </AssociationSet>
-          <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti">
-            <End Role="History_Patients" EntitySet="History_Patients" />
-            <End Role="Exemption" EntitySet="Exemptions" />
-          </AssociationSet>
           <AssociationSet Name="FK_Bilete_Internare_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti">
             <End Role="History_Patients" EntitySet="History_Patients" />
             <End Role="Internment_Tickets" EntitySet="Internment_Tickets" />
@@ -418,20 +445,27 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
             <End Role="History_Patients" EntitySet="History_Patients" />
             <End Role="Recipe" EntitySet="Recipes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti">
+            <End Role="History_Patients" EntitySet="History_Patients" />
+            <End Role="Exemption" EntitySet="Exemptions" />
+          </AssociationSet>
           <AssociationSet Name="Drugs_Diseases" Association="Cabinet_MedicalModel.Drugs_Diseases">
             <End Role="Disease" EntitySet="Diseases" />
             <End Role="Drug" EntitySet="Drugs" />
           </AssociationSet>
+          <FunctionImport Name="DeletePatient">
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Appointment">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="ID_Medic" Type="Int32" Nullable="false" />
           <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Accepted" Type="Int32" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Accepted" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Cabinet_MedicalModel.FK_Appointments_Employees" FromRole="Appointment" ToRole="Employee" />
           <NavigationProperty Name="Patient" Relationship="Cabinet_MedicalModel.FK_Appointments_Patients" FromRole="Appointment" ToRole="Patient" />
         </EntityType>
@@ -448,7 +482,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denumire" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Name="Data_Expirarii" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Stoc" Type="Int32" Nullable="false" />
@@ -463,19 +497,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Property Name="Nume" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Specializare" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="Parola" Type="String" Nullable="false" MaxLength="130" FixedLength="true" Unicode="true" />
+          <Property Name="Parola" Type="String" MaxLength="130" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Appointments" Relationship="Cabinet_MedicalModel.FK_Appointments_Employees" FromRole="Employee" ToRole="Appointment" />
           <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati" FromRole="Employee" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="Exemption">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
-          <Property Name="Tip" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="Exemption" ToRole="History_Patients" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -484,14 +508,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
           <Property Name="ID_Medic" Type="Int32" Nullable="false" />
           <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="DateTime" Precision="0" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Disease" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Afectiuni" FromRole="History_Patients" ToRole="Disease" />
           <NavigationProperty Name="Employee" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati" FromRole="History_Patients" ToRole="Employee" />
-          <NavigationProperty Name="Exemptions" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemption" />
           <NavigationProperty Name="Internment_Tickets" Relationship="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti" FromRole="History_Patients" ToRole="Internment_Tickets" />
           <NavigationProperty Name="Patient" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti" FromRole="History_Patients" ToRole="Patient" />
           <NavigationProperty Name="Recipes" Relationship="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti" FromRole="History_Patients" ToRole="Recipe" />
+          <NavigationProperty Name="Exemptions" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemption" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -504,20 +528,20 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Property Name="Numar_Buletin" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
           <Property Name="Data_Nasterii" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Username" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="Parola" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="Parola" Type="String" MaxLength="130" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Appointments" Relationship="Cabinet_MedicalModel.FK_Appointments_Patients" FromRole="Patient" ToRole="Appointment" />
           <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti" FromRole="Patient" ToRole="History_Patients" />
         </EntityType>
-        <EntityType Name="Recipe">
+        <EntityType Name="Exemption">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_Istoric" />
+            <PropertyRef Name="Zile_Repaus" />
+            <PropertyRef Name="Tip" />
           </Key>
           <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="ID_Medicament" Type="Int32" Nullable="false" />
-          <Property Name="Numar_Flacoane" Type="Int32" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Drug" Relationship="Cabinet_MedicalModel.FK_Retete_Medicamente" FromRole="Recipe" ToRole="Drug" />
-          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti" FromRole="Recipe" ToRole="History_Patients" />
+          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
+          <Property Name="Tip" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="Exemption" ToRole="History_Patients" />
         </EntityType>
         <EntityType Name="Internment_Tickets">
           <Key>
@@ -529,6 +553,18 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Property Name="Numar_Bilet" Type="Int32" Nullable="false" />
           <Property Name="Descriere" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti" FromRole="Internment_Tickets" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="ID_Istoric" />
+            <PropertyRef Name="ID_Medicament" />
+            <PropertyRef Name="Numar_Flacoane" />
+          </Key>
+          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
+          <Property Name="ID_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="Numar_Flacoane" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drug" Relationship="Cabinet_MedicalModel.FK_Retete_Medicamente" FromRole="Recipe" ToRole="Drug" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti" FromRole="Recipe" ToRole="History_Patients" />
         </EntityType>
         <Association Name="FK_Appointments_Employees">
           <End Type="Cabinet_MedicalModel.Employee" Role="Employee" Multiplicity="1" />
@@ -543,7 +579,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appointments_Patients">
-          <End Type="Cabinet_MedicalModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Patient" Role="Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Cabinet_MedicalModel.Appointment" Role="Appointment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
@@ -590,20 +628,10 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Scutiri_Istoric_Pacienti">
-          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1" />
-          <End Type="Cabinet_MedicalModel.Exemption" Role="Exemption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="History_Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Exemption">
-              <PropertyRef Name="ID_Istoric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
-          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Cabinet_MedicalModel.Internment_Tickets" Role="Internment_Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -615,7 +643,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Istoric_Pacienti_Pacienti">
-          <End Type="Cabinet_MedicalModel.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Patient" Role="Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
@@ -627,13 +657,29 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Retete_Istoric_Pacienti">
-          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Cabinet_MedicalModel.Recipe" Role="Recipe" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Recipe">
+              <PropertyRef Name="ID_Istoric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scutiri_Istoric_Pacienti">
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Cabinet_MedicalModel.Exemption" Role="Exemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Exemption">
               <PropertyRef Name="ID_Istoric" />
             </Dependent>
           </ReferentialConstraint>
@@ -651,11 +697,11 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Appointment">
               <MappingFragment StoreEntitySet="Appointments">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Accepted" ColumnName="Accepted" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ID_Pacient" ColumnName="ID_Pacient" />
                 <ScalarProperty Name="ID_Medic" ColumnName="ID_Medic" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -688,16 +734,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Exemptions">
-            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
-              <MappingFragment StoreEntitySet="Exemptions">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Tip" ColumnName="Tip" />
-                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
-                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="History_Patients">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.History_Patients">
               <MappingFragment StoreEntitySet="History_Patients">
@@ -723,12 +759,11 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Recipes">
-            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Recipe">
-              <MappingFragment StoreEntitySet="Recipes">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Numar_Flacoane" ColumnName="Numar_Flacoane" />
-                <ScalarProperty Name="ID_Medicament" ColumnName="ID_Medicament" />
+          <EntitySetMapping Name="Exemptions">
+            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
+              <MappingFragment StoreEntitySet="Exemptions">
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
                 <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -742,6 +777,15 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Recipes">
+            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipes">
+                <ScalarProperty Name="Numar_Flacoane" ColumnName="Numar_Flacoane" />
+                <ScalarProperty Name="ID_Medicament" ColumnName="ID_Medicament" />
+                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="Drugs_Diseases" TypeName="Cabinet_MedicalModel.Drugs_Diseases" StoreEntitySet="Drugs_Diseases">
             <EndProperty Name="Drug">
               <ScalarProperty Name="ID" ColumnName="ID_Medicament" />
@@ -750,6 +794,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
               <ScalarProperty Name="ID" ColumnName="ID_Afectiune" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="DeletePatient" FunctionName="Cabinet_MedicalModel.Store.DeletePatient" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

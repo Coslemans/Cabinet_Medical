@@ -31,11 +31,11 @@ namespace BD_Cabinet_Medical
         public virtual DbSet<Disease> Diseases { get; set; }
         public virtual DbSet<Drug> Drugs { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Exemption> Exemptions { get; set; }
         public virtual DbSet<History_Patients> History_Patients { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
-        public virtual DbSet<Recipe> Recipes { get; set; }
+        public virtual DbSet<Exemption> Exemptions { get; set; }
         public virtual DbSet<Internment_Tickets> Internment_Tickets { get; set; }
+        public virtual DbSet<Recipe> Recipes { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -112,6 +112,15 @@ namespace BD_Cabinet_Medical
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int DeletePatient(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePatient", nameParameter);
         }
     }
 }
