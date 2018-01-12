@@ -11,6 +11,10 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html;
+using iTextSharp.text.html.simpleparser;
 namespace BD_Cabinet_Medical
 {
     public partial class Medic_Form : Form
@@ -249,6 +253,48 @@ namespace BD_Cabinet_Medical
 
         }
 
+        private void PdfExport(string filename)
+        {
+            var Text = new StringBuilder();
+            var pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            var htmlparser = new HTMLWorker(pdfDoc);
+            using (var context = new Cabinet_MedicalEntities())
+            {
+                var query = from emp in context.Patients
+                            select new
+                            {
+                                emp.Nume,
+                                emp.CNP,
+                                emp.Serie_Buletin,
+                                emp.Numar_Buletin,
+                                emp.Data_Nasterii
+                            };
+
+
+                foreach (var row in query)
+                {
+                    var newline = string.Format("{0},{1},{2},{3},{4},\r\n", row.Nume.ToString().Trim(),
+                        row.CNP.ToString().Trim(), row.Serie_Buletin.ToString().Trim(), row.Numar_Buletin.ToString().Trim(),
+                        row.Data_Nasterii.ToString().Trim());
+                    Text.AppendLine(newline);
+                }
+
+            }
+            using (var memory = new MemoryStream())
+            {
+                var writer = PdfWriter.GetInstance(pdfDoc, memory);
+                pdfDoc.Open();
+
+                htmlparser.Parse(new StringReader(Text.ToString()));
+                pdfDoc.Close();
+
+                byte[] bytes = memory.ToArray();
+                File.WriteAllBytes(filename, bytes);
+
+                memory.Close();
+            }
+        }
+
         private void Export_Button_Click(object sender, EventArgs e)
         {
             try
@@ -289,6 +335,13 @@ namespace BD_Cabinet_Medical
                 }
                 else if(Equals(Type,"PDF"))
                 {
+                    saveFile.Filter = "PDF |*.pdf";
+                    saveFile.ShowDialog();
+                    if(saveFile.FileName=="")
+                    {
+                        throw new Exception("Alegeti un nume pentru fisier!");
+                    }
+                    PdfExport(saveFile.FileName);
                     return;
                 }
             }
