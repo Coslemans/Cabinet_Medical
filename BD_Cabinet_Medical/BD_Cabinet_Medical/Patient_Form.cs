@@ -65,7 +65,7 @@ namespace BD_Cabinet_Medical
             try
             {
                 // TODO: This line of code loads data into the 'cabinet_MedicalDataSet.Appointments' table. You can move, or remove it, as needed.
-               // appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
+                // appointmentsTableAdapter.Fill(this.cabinet_MedicalDataSet.Appointments);
                 this.Text = Abouts.Nume.ToString().Trim() + " Window";
                 nameLabel.Text = Abouts.Nume.ToString().Trim();
             }
@@ -121,7 +121,7 @@ namespace BD_Cabinet_Medical
                 }
                 else
                 {
-                    
+
 
                     using (var context = new Cabinet_MedicalEntities())
                     {
@@ -133,8 +133,9 @@ namespace BD_Cabinet_Medical
                         {
                             ID_Medic = medic.ID,
                             ID_Pacient = Abouts.ID,
-                            Date = dateTime.Value, Accepted = 1
-                            
+                            Date = dateTime.Value,
+                            Accepted = 1
+
                         };
                         if (checkAppointment(newapp.ID_Medic, newapp.ID_Pacient, newapp.Date) == true)
                             throw new Exception("Ati mai facut o programare identica!\n");
@@ -144,7 +145,7 @@ namespace BD_Cabinet_Medical
                             context.SaveChanges();
                         }
                     }
-                    
+
                 }
             }
             catch (Exception exc)
@@ -163,7 +164,7 @@ namespace BD_Cabinet_Medical
         {
             try
             {
-                
+
 
                 History.Enabled = true;
                 Doctors.Enabled = false;
@@ -182,10 +183,10 @@ namespace BD_Cabinet_Medical
                                };
                     DataTable tabel = new DataTable();
                     tabel.Columns.Add("Afectiune", typeof(string));
-                    tabel.Columns.Add("Medic",typeof(string));
+                    tabel.Columns.Add("Medic", typeof(string));
                     tabel.Columns.Add("Specializare", typeof(string));
                     tabel.Columns.Add("Data examinare", typeof(DateTime));
-                    foreach(var item in quer)
+                    foreach (var item in quer)
                     {
                         DataRow Row = null;
                         Row = tabel.NewRow();
@@ -198,7 +199,7 @@ namespace BD_Cabinet_Medical
                     History.DataSource = tabel;
 
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -215,6 +216,6 @@ namespace BD_Cabinet_Medical
         {
 
         }
-
+    }
         
 }
