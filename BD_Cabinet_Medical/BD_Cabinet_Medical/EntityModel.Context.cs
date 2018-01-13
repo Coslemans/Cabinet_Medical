@@ -34,6 +34,6 @@ namespace BD_Cabinet_Medical
         public virtual DbSet<Internment_Tickets> Internment_Tickets { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<Recipe> Recipes { get; set; }
-        public virtual DbSet<historyView> historyViews { get; set; }
+        public virtual DbSet<HistView> HistViews { get; set; }
     }
 }

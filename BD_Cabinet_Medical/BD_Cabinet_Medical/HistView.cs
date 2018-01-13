@@ -12,7 +12,7 @@ namespace BD_Cabinet_Medical
     using System;
     using System.Collections.Generic;
     
-    public partial class historyView
+    public partial class HistView
     {
         public string Nume { get; set; }
         public string Specializare { get; set; }

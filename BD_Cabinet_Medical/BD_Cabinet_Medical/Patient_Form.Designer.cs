@@ -46,13 +46,11 @@
             this.Programare = new System.Windows.Forms.GroupBox();
             this.showHistory = new System.Windows.Forms.Label();
             this.historyGroup = new System.Windows.Forms.GroupBox();
-            this.hView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.History)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cabinet_MedicalDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.appointmentsBindingSource)).BeginInit();
             this.Programare.SuspendLayout();
             this.historyGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hView)).BeginInit();
             this.SuspendLayout();
             // 
             // Logout_Button
@@ -150,12 +148,14 @@
             // 
             // History
             // 
+            this.History.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.History.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.History.Enabled = false;
-            this.History.Location = new System.Drawing.Point(135, 23);
+            this.History.Location = new System.Drawing.Point(246, 40);
             this.History.Name = "History";
-            this.History.RowHeadersWidth = 130;
-            this.History.Size = new System.Drawing.Size(532, 150);
+            this.History.RowHeadersVisible = false;
+            this.History.RowHeadersWidth = 150;
+            this.History.Size = new System.Drawing.Size(389, 100);
             this.History.TabIndex = 9;
             // 
             // historyButton
@@ -225,23 +225,13 @@
             this.historyGroup.Text = "Istoric";
             this.historyGroup.Enter += new System.EventHandler(this.historyGroup_Enter);
             // 
-            // hView
-            // 
-            this.hView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.hView.Location = new System.Drawing.Point(243, 413);
-            this.hView.Name = "hView";
-            this.hView.Size = new System.Drawing.Size(532, 150);
-            this.hView.TabIndex = 15;
-            this.hView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
             // Patient_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.ClientSize = new System.Drawing.Size(810, 587);
+            this.ClientSize = new System.Drawing.Size(801, 386);
             this.ControlBox = false;
-            this.Controls.Add(this.hView);
             this.Controls.Add(this.historyGroup);
             this.Controls.Add(this.Programare);
             this.Controls.Add(this.nameLabel);
@@ -257,7 +247,6 @@
             this.Programare.PerformLayout();
             this.historyGroup.ResumeLayout(false);
             this.historyGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,6 +270,5 @@
         private System.Windows.Forms.GroupBox Programare;
         private System.Windows.Forms.Label showHistory;
         private System.Windows.Forms.GroupBox historyGroup;
-        private System.Windows.Forms.DataGridView hView;
     }
 }

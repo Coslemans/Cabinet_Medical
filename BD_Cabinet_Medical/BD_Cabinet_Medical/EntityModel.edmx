@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Cabinet_MedicalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Cabinet_MedicalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Appointments">
           <Key>
             <PropertyRef Name="ID" />
@@ -101,8 +101,8 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Drugs_Diseases' does not have 
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="historyView">
+warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HistView">
           <Key>
             <PropertyRef Name="Nume" />
             <PropertyRef Name="Specializare" />
@@ -264,14 +264,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
     [Drugs_Diseases].[ID_Medicament] AS [ID_Medicament]
     FROM [dbo].[Drugs_Diseases] AS [Drugs_Diseases]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="historyView" EntityType="Self.historyView" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="HistView" EntityType="Self.HistView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [historyView].[Nume] AS [Nume], 
-    [historyView].[Specializare] AS [Specializare], 
-    [historyView].[Denumire] AS [Denumire], 
-    [historyView].[Data] AS [Data], 
-    [historyView].[ID] AS [ID]
-    FROM [dbo].[historyView] AS [historyView]</DefiningQuery>
+    [HistView].[Nume] AS [Nume], 
+    [HistView].[Specializare] AS [Specializare], 
+    [HistView].[Denumire] AS [Denumire], 
+    [HistView].[Data] AS [Data], 
+    [HistView].[ID] AS [ID]
+    FROM [dbo].[HistView] AS [HistView]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Afectiune_Medicament_Afectiuni" Association="Self.FK_Afectiune_Medicament_Afectiuni">
             <End Role="Diseases" EntitySet="Diseases" />
@@ -318,7 +318,8 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
             <End Role="Exemptions" EntitySet="Exemptions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Cabinet_MedicalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -426,6 +427,20 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Drug" Relationship="Self.FK_Retete_Medicamente" FromRole="Recipes" ToRole="Drugs" />
           <NavigationProperty Name="History_Patients" Relationship="Self.FK_Retete_Istoric_Pacienti" FromRole="Recipes" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="HistView">
+          <Key>
+            <PropertyRef Name="Nume" />
+            <PropertyRef Name="Specializare" />
+            <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Data" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Nume" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Specializare" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Denumire" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Appointments_Employees">
           <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
@@ -549,6 +564,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
           <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="Recipes" EntityType="Self.Recipe" />
+          <EntitySet Name="HistViews" EntityType="Self.HistView" />
           <AssociationSet Name="FK_Appointments_Employees" Association="Self.FK_Appointments_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Appointments" EntitySet="Appointments" />
@@ -589,22 +605,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
             <End Role="Diseases" EntitySet="Diseases" />
             <End Role="Drugs" EntitySet="Drugs" />
           </AssociationSet>
-          <EntitySet Name="historyViews" EntityType="Cabinet_MedicalModel.historyView" />
         </EntityContainer>
-        <EntityType Name="historyView">
-          <Key>
-            <PropertyRef Name="Nume" />
-            <PropertyRef Name="Specializare" />
-            <PropertyRef Name="Denumire" />
-            <PropertyRef Name="Data" />
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="Nume" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Specializare" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Denumire" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ID" Type="Int32" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -705,6 +706,17 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="HistViews">
+            <EntityTypeMapping TypeName="Cabinet_MedicalModel.HistView">
+              <MappingFragment StoreEntitySet="HistView">
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="Specializare" ColumnName="Specializare" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="Drugs_Diseases" TypeName="Cabinet_MedicalModel.Drugs_Diseases" StoreEntitySet="Drugs_Diseases">
             <EndProperty Name="Diseases">
               <ScalarProperty Name="ID" ColumnName="ID_Afectiune" />
@@ -713,17 +725,6 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.historyView' does not have a p
               <ScalarProperty Name="ID" ColumnName="ID_Medicament" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="historyViews">
-            <EntityTypeMapping TypeName="Cabinet_MedicalModel.historyView">
-              <MappingFragment StoreEntitySet="historyView">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
-                <ScalarProperty Name="Specializare" ColumnName="Specializare" />
-                <ScalarProperty Name="Nume" ColumnName="Nume" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
