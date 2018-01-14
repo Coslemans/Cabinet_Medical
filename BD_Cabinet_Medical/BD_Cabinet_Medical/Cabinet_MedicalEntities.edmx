@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Medic" Type="int" Nullable="false" />
           <Property Name="ID_Pacient" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Accepted" Type="int" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Accepted" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Diseases">
           <Key>
@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Denumire" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="Data_Expirarii" Type="date" Nullable="false" />
           <Property Name="Stoc" Type="int" Nullable="false" />
@@ -35,9 +35,9 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Afectiune" Type="int" Nullable="false" />
           <Property Name="ID_Medicament" Type="int" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -47,16 +47,16 @@
           <Property Name="Nume" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Specializare" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Username" Type="nchar" MaxLength="25" Nullable="false" />
-          <Property Name="Parola" Type="nchar" MaxLength="130" Nullable="false" />
+          <Property Name="Parola" Type="nchar" MaxLength="130" />
         </EntityType>
         <EntityType Name="Exemptions">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="Zile_Repaus" Type="int" Nullable="false" />
           <Property Name="Tip" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="History_Patients">
           <Key>
@@ -65,17 +65,14 @@
           <Property Name="ID_Pacient" Type="int" Nullable="false" />
           <Property Name="ID_Medic" Type="int" Nullable="false" />
           <Property Name="ID_Afectiune" Type="int" Nullable="false" />
-          <Property Name="Data" Type="date" />
+          <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Internment_Tickets">
           <Key>
-            <PropertyRef Name="ID_Istoric" />
-            <PropertyRef Name="Numar_Bilet" />
-            <PropertyRef Name="Descriere" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="Numar_Bilet" Type="int" Nullable="false" />
           <Property Name="Descriere" Type="nchar" MaxLength="100" Nullable="false" />
@@ -90,17 +87,17 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.Internment_Tickets' does not h
           <Property Name="Serie_Buletin" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="Numar_Buletin" Type="nchar" MaxLength="6" Nullable="false" />
           <Property Name="Data_Nasterii" Type="date" Nullable="false" />
-          <Property Name="Username" Type="nchar" MaxLength="25" />
-          <Property Name="Parola" Type="nchar" MaxLength="25" />
+          <Property Name="Username" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Parola" Type="nchar" MaxLength="130" Nullable="false" />
         </EntityType>
         <EntityType Name="Recipes">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Istoric" Type="int" Nullable="false" />
           <Property Name="ID_Medicament" Type="int" Nullable="false" />
           <Property Name="Numar_Flacoane" Type="int" Nullable="false" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -119,12 +116,13 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
             <PropertyRef Name="Nume" />
             <PropertyRef Name="Specializare" />
             <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Data" />
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="Nume" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Specializare" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="Denumire" Type="nchar" MaxLength="100" Nullable="false" />
-          <Property Name="Data" Type="date" />
+          <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Afectiune_Medicament_Afectiuni">
@@ -164,7 +162,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Appointments_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
@@ -176,7 +176,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Internment_Tickets" Type="Self.Internment_Tickets" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -212,7 +214,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Istoric_Pacienti_Pacienti">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patients">
@@ -224,7 +228,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Retete_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Recipes" Type="Self.Recipes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -248,7 +254,9 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Scutiri_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
+          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Exemptions" Type="Self.Exemptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="History_Patients">
@@ -259,7 +267,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DeletePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="SetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="tip" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -298,16 +313,10 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exemptions" EntityType="Self.Exemptions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="History_Patients" EntityType="Self.History_Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Internment_Tickets].[ID_Istoric] AS [ID_Istoric], 
-    [Internment_Tickets].[Numar_Bilet] AS [Numar_Bilet], 
-    [Internment_Tickets].[Descriere] AS [Descriere]
-    FROM [dbo].[Internment_Tickets] AS [Internment_Tickets]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="HistView" EntityType="Self.HistView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [HistView].[Nume] AS [Nume], 
@@ -366,321 +375,10 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Cabinet_MedicalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Appointment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Medic" Type="Int32" Nullable="false" />
-          <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Accepted" Type="Int32" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Appointments_Employees" FromRole="Appointments" ToRole="Employees" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_Appointments_Patients" FromRole="Appointments" ToRole="Patients" />
-        </EntityType>
-        <EntityType Name="Disease">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Denumire" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Drugs_Diseases" Relationship="Self.FK_Afectiune_Medicament_Afectiuni" FromRole="Diseases" ToRole="Drugs_Diseases" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Istoric_Pacienti_Afectiuni" FromRole="Diseases" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="Drug">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Denumire" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Data_Expirarii" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Stoc" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Drugs_Diseases" Relationship="Self.FK_Afectiune_Medicament_Medicamente" FromRole="Drugs" ToRole="Drugs_Diseases" />
-          <NavigationProperty Name="Recipes" Relationship="Self.FK_Retete_Medicamente" FromRole="Drugs" ToRole="Recipes" />
-        </EntityType>
-        <EntityType Name="Drugs_Diseases">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
-          <Property Name="ID_Medicament" Type="Int32" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Disease" Relationship="Self.FK_Afectiune_Medicament_Afectiuni" FromRole="Drugs_Diseases" ToRole="Diseases" />
-          <NavigationProperty Name="Drug" Relationship="Self.FK_Afectiune_Medicament_Medicamente" FromRole="Drugs_Diseases" ToRole="Drugs" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nume" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Specializare" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Parola" Type="String" MaxLength="130" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Employees" FromRole="Employees" ToRole="Appointments" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Istoric_Pacienti_Angajati" FromRole="Employees" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="Exemption">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
-          <Property Name="Tip" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="Exemptions" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="History_Patients">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
-          <Property Name="ID_Medic" Type="Int32" Nullable="false" />
-          <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="DateTime" Precision="0" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Disease" Relationship="Self.FK_Istoric_Pacienti_Afectiuni" FromRole="History_Patients" ToRole="Diseases" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Istoric_Pacienti_Angajati" FromRole="History_Patients" ToRole="Employees" />
-          <NavigationProperty Name="Exemptions" Relationship="Self.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemptions" />
-          <NavigationProperty Name="Internment_Tickets" Relationship="Self.FK_Bilete_Internare_Istoric_Pacienti" FromRole="History_Patients" ToRole="Internment_Tickets" />
-          <NavigationProperty Name="Patient" Relationship="Self.FK_Istoric_Pacienti_Pacienti" FromRole="History_Patients" ToRole="Patients" />
-          <NavigationProperty Name="Recipes" Relationship="Self.FK_Retete_Istoric_Pacienti" FromRole="History_Patients" ToRole="Recipes" />
-        </EntityType>
-        <EntityType Name="Patient">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nume" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="CNP" Type="String" MaxLength="13" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Serie_Buletin" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Numar_Buletin" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Data_Nasterii" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Username" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="Parola" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Patients" FromRole="Patients" ToRole="Appointments" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Istoric_Pacienti_Pacienti" FromRole="Patients" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="Recipe">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="ID_Medicament" Type="Int32" Nullable="false" />
-          <Property Name="Numar_Flacoane" Type="Int32" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Drug" Relationship="Self.FK_Retete_Medicamente" FromRole="Recipes" ToRole="Drugs" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Retete_Istoric_Pacienti" FromRole="Recipes" ToRole="History_Patients" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="Internment_Tickets">
-          <Key>
-            <PropertyRef Name="ID_Istoric" />
-            <PropertyRef Name="Numar_Bilet" />
-            <PropertyRef Name="Descriere" />
-          </Key>
-          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
-          <Property Name="Numar_Bilet" Type="Int32" Nullable="false" />
-          <Property Name="Descriere" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="History_Patients" Relationship="Self.FK_Bilete_Internare_Istoric_Pacienti" FromRole="Internment_Tickets" ToRole="History_Patients" />
-        </EntityType>
-        <Association Name="FK_Appointments_Employees">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Appointments" Type="Self.Appointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Appointments">
-              <PropertyRef Name="ID_Medic" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Appointments_Patients">
-          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
-          <End Role="Appointments" Type="Self.Appointment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Appointments">
-              <PropertyRef Name="ID_Pacient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Afectiune_Medicament_Afectiuni">
-          <End Role="Diseases" Type="Self.Disease" Multiplicity="1" />
-          <End Role="Drugs_Diseases" Type="Self.Drugs_Diseases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Diseases">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Drugs_Diseases">
-              <PropertyRef Name="ID_Afectiune" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Istoric_Pacienti_Afectiuni">
-          <End Role="Diseases" Type="Self.Disease" Multiplicity="1" />
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Diseases">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="History_Patients">
-              <PropertyRef Name="ID_Afectiune" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Afectiune_Medicament_Medicamente">
-          <End Role="Drugs" Type="Self.Drug" Multiplicity="1" />
-          <End Role="Drugs_Diseases" Type="Self.Drugs_Diseases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drugs">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Drugs_Diseases">
-              <PropertyRef Name="ID_Medicament" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Retete_Medicamente">
-          <End Role="Drugs" Type="Self.Drug" Multiplicity="1" />
-          <End Role="Recipes" Type="Self.Recipe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drugs">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Recipes">
-              <PropertyRef Name="ID_Medicament" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Istoric_Pacienti_Angajati">
-          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="History_Patients">
-              <PropertyRef Name="ID_Medic" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Scutiri_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
-          <End Role="Exemptions" Type="Self.Exemption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="History_Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Exemptions">
-              <PropertyRef Name="ID_Istoric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
-          <End Role="Internment_Tickets" Type="Self.Internment_Tickets" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="History_Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Internment_Tickets">
-              <PropertyRef Name="ID_Istoric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Istoric_Pacienti_Pacienti">
-          <End Role="Patients" Type="Self.Patient" Multiplicity="1" />
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="History_Patients">
-              <PropertyRef Name="ID_Pacient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Retete_Istoric_Pacienti">
-          <End Role="History_Patients" Type="Self.History_Patients" Multiplicity="1" />
-          <End Role="Recipes" Type="Self.Recipe" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="History_Patients">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Recipes">
-              <PropertyRef Name="ID_Istoric" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Cabinet_MedicalEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
-          <EntitySet Name="Diseases" EntityType="Self.Disease" />
-          <EntitySet Name="Drugs" EntityType="Self.Drug" />
-          <EntitySet Name="Drugs_Diseases" EntityType="Self.Drugs_Diseases" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Exemptions" EntityType="Self.Exemption" />
-          <EntitySet Name="History_Patients" EntityType="Self.History_Patients" />
-          <EntitySet Name="Patients" EntityType="Self.Patient" />
-          <EntitySet Name="Recipes" EntityType="Self.Recipe" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Internment_Tickets" EntityType="Self.Internment_Tickets" />
-          <AssociationSet Name="FK_Appointments_Employees" Association="Self.FK_Appointments_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Appointments" EntitySet="Appointments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Appointments_Patients" Association="Self.FK_Appointments_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="Appointments" EntitySet="Appointments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Afectiune_Medicament_Afectiuni" Association="Self.FK_Afectiune_Medicament_Afectiuni">
-            <End Role="Diseases" EntitySet="Diseases" />
-            <End Role="Drugs_Diseases" EntitySet="Drugs_Diseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Istoric_Pacienti_Afectiuni" Association="Self.FK_Istoric_Pacienti_Afectiuni">
-            <End Role="Diseases" EntitySet="Diseases" />
-            <End Role="History_Patients" EntitySet="History_Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Afectiune_Medicament_Medicamente" Association="Self.FK_Afectiune_Medicament_Medicamente">
-            <End Role="Drugs" EntitySet="Drugs" />
-            <End Role="Drugs_Diseases" EntitySet="Drugs_Diseases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Retete_Medicamente" Association="Self.FK_Retete_Medicamente">
-            <End Role="Drugs" EntitySet="Drugs" />
-            <End Role="Recipes" EntitySet="Recipes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Istoric_Pacienti_Angajati" Association="Self.FK_Istoric_Pacienti_Angajati">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="History_Patients" EntitySet="History_Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Self.FK_Scutiri_Istoric_Pacienti">
-            <End Role="History_Patients" EntitySet="History_Patients" />
-            <End Role="Exemptions" EntitySet="Exemptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Bilete_Internare_Istoric_Pacienti" Association="Self.FK_Bilete_Internare_Istoric_Pacienti">
-            <End Role="History_Patients" EntitySet="History_Patients" />
-            <End Role="Internment_Tickets" EntitySet="Internment_Tickets" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Istoric_Pacienti_Pacienti" Association="Self.FK_Istoric_Pacienti_Pacienti">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="History_Patients" EntitySet="History_Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Retete_Istoric_Pacienti" Association="Self.FK_Retete_Istoric_Pacienti">
-            <End Role="History_Patients" EntitySet="History_Patients" />
-            <End Role="Recipes" EntitySet="Recipes" />
-          </AssociationSet>
+          <FunctionImport Name="DeletePatient">
+          <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -697,11 +395,11 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Cabinet_MedicalModel.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Cabinet_MedicalModel.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -711,34 +409,399 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SetData">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="tip" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Appointments" EntityType="Cabinet_MedicalModel.Appointment" />
+          <EntitySet Name="Diseases" EntityType="Cabinet_MedicalModel.Disease" />
+          <EntitySet Name="Drugs" EntityType="Cabinet_MedicalModel.Drug" />
+          <EntitySet Name="Drugs_Diseases" EntityType="Cabinet_MedicalModel.Drugs_Diseases" />
+          <EntitySet Name="Employees" EntityType="Cabinet_MedicalModel.Employee" />
+          <EntitySet Name="Exemptions" EntityType="Cabinet_MedicalModel.Exemption" />
+          <EntitySet Name="History_Patients" EntityType="Cabinet_MedicalModel.History_Patients" />
+          <EntitySet Name="Internment_Tickets" EntityType="Cabinet_MedicalModel.Internment_Tickets" />
+          <EntitySet Name="Patients" EntityType="Cabinet_MedicalModel.Patient" />
+          <EntitySet Name="Recipes" EntityType="Cabinet_MedicalModel.Recipe" />
+          <EntitySet Name="sysdiagrams" EntityType="Cabinet_MedicalModel.sysdiagram" />
           <EntitySet Name="HistViews" EntityType="Cabinet_MedicalModel.HistView" />
-        </EntityContainer>
+          <AssociationSet Name="FK_Appointments_Employees" Association="Cabinet_MedicalModel.FK_Appointments_Employees">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Patients" Association="Cabinet_MedicalModel.FK_Appointments_Patients">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Afectiune_Medicament_Afectiuni" Association="Cabinet_MedicalModel.FK_Afectiune_Medicament_Afectiuni">
+            <End Role="Disease" EntitySet="Diseases" />
+            <End Role="Drugs_Diseases" EntitySet="Drugs_Diseases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Istoric_Pacienti_Afectiuni" Association="Cabinet_MedicalModel.FK_Istoric_Pacienti_Afectiuni">
+            <End Role="Disease" EntitySet="Diseases" />
+            <End Role="History_Patients" EntitySet="History_Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Afectiune_Medicament_Medicamente" Association="Cabinet_MedicalModel.FK_Afectiune_Medicament_Medicamente">
+            <End Role="Drug" EntitySet="Drugs" />
+            <End Role="Drugs_Diseases" EntitySet="Drugs_Diseases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retete_Medicamente" Association="Cabinet_MedicalModel.FK_Retete_Medicamente">
+            <End Role="Drug" EntitySet="Drugs" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Istoric_Pacienti_Angajati" Association="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="History_Patients" EntitySet="History_Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scutiri_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti">
+            <End Role="History_Patients" EntitySet="History_Patients" />
+            <End Role="Exemption" EntitySet="Exemptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bilete_Internare_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti">
+            <End Role="History_Patients" EntitySet="History_Patients" />
+            <End Role="Internment_Tickets" EntitySet="Internment_Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Istoric_Pacienti_Pacienti" Association="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="History_Patients" EntitySet="History_Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retete_Istoric_Pacienti" Association="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti">
+            <End Role="History_Patients" EntitySet="History_Patients" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Medic" Type="Int32" Nullable="false" />
+          <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Accepted" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Cabinet_MedicalModel.FK_Appointments_Employees" FromRole="Appointment" ToRole="Employee" />
+          <NavigationProperty Name="Patient" Relationship="Cabinet_MedicalModel.FK_Appointments_Patients" FromRole="Appointment" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Disease">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Denumire" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Drugs_Diseases" Relationship="Cabinet_MedicalModel.FK_Afectiune_Medicament_Afectiuni" FromRole="Disease" ToRole="Drugs_Diseases" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Afectiuni" FromRole="Disease" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denumire" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="Data_Expirarii" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Stoc" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drugs_Diseases" Relationship="Cabinet_MedicalModel.FK_Afectiune_Medicament_Medicamente" FromRole="Drug" ToRole="Drugs_Diseases" />
+          <NavigationProperty Name="Recipes" Relationship="Cabinet_MedicalModel.FK_Retete_Medicamente" FromRole="Drug" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="Drugs_Diseases">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
+          <Property Name="ID_Medicament" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Disease" Relationship="Cabinet_MedicalModel.FK_Afectiune_Medicament_Afectiuni" FromRole="Drugs_Diseases" ToRole="Disease" />
+          <NavigationProperty Name="Drug" Relationship="Cabinet_MedicalModel.FK_Afectiune_Medicament_Medicamente" FromRole="Drugs_Diseases" ToRole="Drug" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Specializare" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="Parola" Type="String" MaxLength="130" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Appointments" Relationship="Cabinet_MedicalModel.FK_Appointments_Employees" FromRole="Employee" ToRole="Appointment" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati" FromRole="Employee" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="Exemption">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
+          <Property Name="Zile_Repaus" Type="Int32" Nullable="false" />
+          <Property Name="Tip" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="Exemption" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="History_Patients">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID_Pacient" Type="Int32" Nullable="false" />
+          <Property Name="ID_Medic" Type="Int32" Nullable="false" />
+          <Property Name="ID_Afectiune" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Disease" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Afectiuni" FromRole="History_Patients" ToRole="Disease" />
+          <NavigationProperty Name="Employee" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Angajati" FromRole="History_Patients" ToRole="Employee" />
+          <NavigationProperty Name="Exemptions" Relationship="Cabinet_MedicalModel.FK_Scutiri_Istoric_Pacienti" FromRole="History_Patients" ToRole="Exemption" />
+          <NavigationProperty Name="Internment_Tickets" Relationship="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti" FromRole="History_Patients" ToRole="Internment_Tickets" />
+          <NavigationProperty Name="Patient" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti" FromRole="History_Patients" ToRole="Patient" />
+          <NavigationProperty Name="Recipes" Relationship="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti" FromRole="History_Patients" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="Internment_Tickets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
+          <Property Name="Numar_Bilet" Type="Int32" Nullable="false" />
+          <Property Name="Descriere" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Bilete_Internare_Istoric_Pacienti" FromRole="Internment_Tickets" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nume" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="CNP" Type="String" Nullable="false" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="Serie_Buletin" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Numar_Buletin" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Data_Nasterii" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="Parola" Type="String" Nullable="false" MaxLength="130" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Appointments" Relationship="Cabinet_MedicalModel.FK_Appointments_Patients" FromRole="Patient" ToRole="Appointment" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Istoric_Pacienti_Pacienti" FromRole="Patient" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Istoric" Type="Int32" Nullable="false" />
+          <Property Name="ID_Medicament" Type="Int32" Nullable="false" />
+          <Property Name="Numar_Flacoane" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Drug" Relationship="Cabinet_MedicalModel.FK_Retete_Medicamente" FromRole="Recipe" ToRole="Drug" />
+          <NavigationProperty Name="History_Patients" Relationship="Cabinet_MedicalModel.FK_Retete_Istoric_Pacienti" FromRole="Recipe" ToRole="History_Patients" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="HistView">
           <Key>
             <PropertyRef Name="Nume" />
             <PropertyRef Name="Specializare" />
             <PropertyRef Name="Denumire" />
+            <PropertyRef Name="Data" />
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="Nume" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Specializare" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Denumire" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ID" Type="Int32" Nullable="false" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_Appointments_Employees">
+          <End Type="Cabinet_MedicalModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="ID_Medic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Patients">
+          <End Type="Cabinet_MedicalModel.Patient" Role="Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Cabinet_MedicalModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="ID_Pacient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Afectiune_Medicament_Afectiuni">
+          <End Type="Cabinet_MedicalModel.Disease" Role="Disease" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Drugs_Diseases" Role="Drugs_Diseases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disease">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Drugs_Diseases">
+              <PropertyRef Name="ID_Afectiune" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Istoric_Pacienti_Afectiuni">
+          <End Type="Cabinet_MedicalModel.Disease" Role="Disease" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disease">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Patients">
+              <PropertyRef Name="ID_Afectiune" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Afectiune_Medicament_Medicamente">
+          <End Type="Cabinet_MedicalModel.Drug" Role="Drug" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Drugs_Diseases" Role="Drugs_Diseases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drug">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Drugs_Diseases">
+              <PropertyRef Name="ID_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retete_Medicamente">
+          <End Type="Cabinet_MedicalModel.Drug" Role="Drug" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drug">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="ID_Medicament" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Istoric_Pacienti_Angajati">
+          <End Type="Cabinet_MedicalModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Patients">
+              <PropertyRef Name="ID_Medic" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scutiri_Istoric_Pacienti">
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Cabinet_MedicalModel.Exemption" Role="Exemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Exemption">
+              <PropertyRef Name="ID_Istoric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bilete_Internare_Istoric_Pacienti">
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Cabinet_MedicalModel.Internment_Tickets" Role="Internment_Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Internment_Tickets">
+              <PropertyRef Name="ID_Istoric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Istoric_Pacienti_Pacienti">
+          <End Type="Cabinet_MedicalModel.Patient" Role="Patient" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Patients">
+              <PropertyRef Name="ID_Pacient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retete_Istoric_Pacienti">
+          <End Type="Cabinet_MedicalModel.History_Patients" Role="History_Patients" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Cabinet_MedicalModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="History_Patients">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="ID_Istoric" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Cabinet_MedicalModelStoreContainer" CdmEntityContainer="Cabinet_MedicalEntities">
+          <FunctionImportMapping FunctionImportName="DeletePatient" FunctionName="Cabinet_MedicalModel.Store.DeletePatient" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Cabinet_MedicalModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Cabinet_MedicalModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Cabinet_MedicalModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Cabinet_MedicalModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Cabinet_MedicalModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Cabinet_MedicalModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Cabinet_MedicalModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Cabinet_MedicalModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Cabinet_MedicalModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SetData" FunctionName="Cabinet_MedicalModel.Store.SetData" />
           <EntitySetMapping Name="Appointments">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Appointment">
               <MappingFragment StoreEntitySet="Appointments">
-                <ScalarProperty Name="ID_Medic" ColumnName="ID_Medic" />
-                <ScalarProperty Name="ID_Pacient" ColumnName="ID_Pacient" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID_Pacient" ColumnName="ID_Pacient" />
+                <ScalarProperty Name="ID_Medic" ColumnName="ID_Medic" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -746,26 +809,26 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           <EntitySetMapping Name="Diseases">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Disease">
               <MappingFragment StoreEntitySet="Diseases">
-                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Drugs">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Drug">
               <MappingFragment StoreEntitySet="Drugs">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
-                <ScalarProperty Name="Data_Expirarii" ColumnName="Data_Expirarii" />
                 <ScalarProperty Name="Stoc" ColumnName="Stoc" />
+                <ScalarProperty Name="Data_Expirarii" ColumnName="Data_Expirarii" />
+                <ScalarProperty Name="Denumire" ColumnName="Denumire" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Drugs_Diseases">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Drugs_Diseases">
               <MappingFragment StoreEntitySet="Drugs_Diseases">
-                <ScalarProperty Name="ID_Afectiune" ColumnName="ID_Afectiune" />
                 <ScalarProperty Name="ID_Medicament" ColumnName="ID_Medicament" />
+                <ScalarProperty Name="ID_Afectiune" ColumnName="ID_Afectiune" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -773,20 +836,20 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nume" ColumnName="Nume" />
-                <ScalarProperty Name="Specializare" ColumnName="Specializare" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Specializare" ColumnName="Specializare" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Exemptions">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Exemption">
               <MappingFragment StoreEntitySet="Exemptions">
-                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
-                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
                 <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Zile_Repaus" ColumnName="Zile_Repaus" />
+                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -794,10 +857,20 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           <EntitySetMapping Name="History_Patients">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.History_Patients">
               <MappingFragment StoreEntitySet="History_Patients">
-                <ScalarProperty Name="ID_Pacient" ColumnName="ID_Pacient" />
-                <ScalarProperty Name="ID_Medic" ColumnName="ID_Medic" />
-                <ScalarProperty Name="ID_Afectiune" ColumnName="ID_Afectiune" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ID_Afectiune" ColumnName="ID_Afectiune" />
+                <ScalarProperty Name="ID_Medic" ColumnName="ID_Medic" />
+                <ScalarProperty Name="ID_Pacient" ColumnName="ID_Pacient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Internment_Tickets">
+            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Internment_Tickets">
+              <MappingFragment StoreEntitySet="Internment_Tickets">
+                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+                <ScalarProperty Name="Numar_Bilet" ColumnName="Numar_Bilet" />
+                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -805,23 +878,23 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nume" ColumnName="Nume" />
-                <ScalarProperty Name="CNP" ColumnName="CNP" />
-                <ScalarProperty Name="Serie_Buletin" ColumnName="Serie_Buletin" />
-                <ScalarProperty Name="Numar_Buletin" ColumnName="Numar_Buletin" />
-                <ScalarProperty Name="Data_Nasterii" ColumnName="Data_Nasterii" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Parola" ColumnName="Parola" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Data_Nasterii" ColumnName="Data_Nasterii" />
+                <ScalarProperty Name="Numar_Buletin" ColumnName="Numar_Buletin" />
+                <ScalarProperty Name="Serie_Buletin" ColumnName="Serie_Buletin" />
+                <ScalarProperty Name="CNP" ColumnName="CNP" />
+                <ScalarProperty Name="Nume" ColumnName="Nume" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Recipes">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.Recipe">
               <MappingFragment StoreEntitySet="Recipes">
-                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
-                <ScalarProperty Name="ID_Medicament" ColumnName="ID_Medicament" />
                 <ScalarProperty Name="Numar_Flacoane" ColumnName="Numar_Flacoane" />
+                <ScalarProperty Name="ID_Medicament" ColumnName="ID_Medicament" />
+                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -829,30 +902,14 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Internment_Tickets">
-            <EntityTypeMapping TypeName="Cabinet_MedicalModel.Internment_Tickets">
-              <MappingFragment StoreEntitySet="Internment_Tickets">
-                <ScalarProperty Name="ID_Istoric" ColumnName="ID_Istoric" />
-                <ScalarProperty Name="Numar_Bilet" ColumnName="Numar_Bilet" />
-                <ScalarProperty Name="Descriere" ColumnName="Descriere" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Cabinet_MedicalModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Cabinet_MedicalModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Cabinet_MedicalModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Cabinet_MedicalModel.Store.sp_helpdiagramdefinition" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Cabinet_MedicalModel.Store.sp_helpdiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Cabinet_MedicalModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Cabinet_MedicalModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="HistViews">
             <EntityTypeMapping TypeName="Cabinet_MedicalModel.HistView">
               <MappingFragment StoreEntitySet="HistView">
@@ -864,7 +921,7 @@ warning 6002: The table/view 'Cabinet_Medical.dbo.HistView' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

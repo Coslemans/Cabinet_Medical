@@ -14,9 +14,9 @@ namespace BD_Cabinet_Medical
     
     public partial class Drugs_Diseases
     {
+        public int ID { get; set; }
         public int ID_Afectiune { get; set; }
         public int ID_Medicament { get; set; }
-        public int ID { get; set; }
     
         public virtual Disease Disease { get; set; }
         public virtual Drug Drug { get; set; }

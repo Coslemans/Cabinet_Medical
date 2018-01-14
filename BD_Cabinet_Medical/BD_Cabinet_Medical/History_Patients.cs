@@ -25,7 +25,7 @@ namespace BD_Cabinet_Medical
         public int ID_Pacient { get; set; }
         public int ID_Medic { get; set; }
         public int ID_Afectiune { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public System.DateTime Data { get; set; }
         public int ID { get; set; }
     
         public virtual Disease Disease { get; set; }

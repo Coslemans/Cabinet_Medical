@@ -29,7 +29,7 @@ namespace BD_Cabinet_Medical
             using (var context = new Cabinet_MedicalEntities())
             {
                 var query = from emp in context.Employees
-                            where emp.Specializare != "Asistent"
+                            where emp.Specializare != "Asistent" && emp.Nume!="admin"
                             select
                                 emp.Nume;
                 if (query.Count() != 0)

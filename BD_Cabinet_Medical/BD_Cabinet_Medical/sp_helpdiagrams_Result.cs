@@ -10,15 +10,13 @@
 namespace BD_Cabinet_Medical
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Exemption
+    public partial class sp_helpdiagrams_Result
     {
+        public string Database { get; set; }
+        public string Name { get; set; }
         public int ID { get; set; }
-        public int ID_Istoric { get; set; }
-        public int Zile_Repaus { get; set; }
-        public string Tip { get; set; }
-    
-        public virtual History_Patients History_Patients { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

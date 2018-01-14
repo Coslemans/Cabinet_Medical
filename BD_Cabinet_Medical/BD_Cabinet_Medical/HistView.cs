@@ -17,7 +17,7 @@ namespace BD_Cabinet_Medical
         public string Nume { get; set; }
         public string Specializare { get; set; }
         public string Denumire { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public System.DateTime Data { get; set; }
         public int ID { get; set; }
     }
 }

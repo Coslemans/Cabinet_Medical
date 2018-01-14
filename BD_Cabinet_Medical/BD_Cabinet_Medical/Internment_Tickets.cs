@@ -14,6 +14,7 @@ namespace BD_Cabinet_Medical
     
     public partial class Internment_Tickets
     {
+        public int ID { get; set; }
         public int ID_Istoric { get; set; }
         public int Numar_Bilet { get; set; }
         public string Descriere { get; set; }

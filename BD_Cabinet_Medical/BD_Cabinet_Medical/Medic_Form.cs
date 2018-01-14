@@ -152,7 +152,7 @@ namespace BD_Cabinet_Medical
                 using (var context = new Cabinet_MedicalEntities())
                 {
 
-                    //context.DeletePatient(name);
+                    context.DeletePatient(name);
                     context.SaveChanges();
                     PacientsData.Rows.Remove(PacientsData.SelectedRows[0]);
 

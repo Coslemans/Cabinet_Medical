@@ -10,15 +10,10 @@
 namespace BD_Cabinet_Medical
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Exemption
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int ID { get; set; }
-        public int ID_Istoric { get; set; }
-        public int Zile_Repaus { get; set; }
-        public string Tip { get; set; }
-    
-        public virtual History_Patients History_Patients { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

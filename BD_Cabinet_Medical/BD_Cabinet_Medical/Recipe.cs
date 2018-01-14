@@ -14,10 +14,10 @@ namespace BD_Cabinet_Medical
     
     public partial class Recipe
     {
+        public int ID { get; set; }
         public int ID_Istoric { get; set; }
         public int ID_Medicament { get; set; }
         public int Numar_Flacoane { get; set; }
-        public int ID { get; set; }
     
         public virtual Drug Drug { get; set; }
         public virtual History_Patients History_Patients { get; set; }

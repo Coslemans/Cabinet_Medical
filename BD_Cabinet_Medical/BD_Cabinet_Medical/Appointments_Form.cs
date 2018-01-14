@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.SqlClient;
 namespace BD_Cabinet_Medical
 {
     public partial class Appointments_Form : Form
@@ -84,6 +84,7 @@ namespace BD_Cabinet_Medical
                     throw new Exception("Pacientul a fost deja consultat!");
                 if (PatientsData.SelectedCells[2].Value.ToString().Equals("Refuzat"))
                     throw new Exception("Pacientul a fost deja refuzat!");
+                Patient P;
                 using (var context = new Cabinet_MedicalEntities())
                 {
                     string name = PatientsData.SelectedCells[0].Value.ToString();
@@ -97,17 +98,18 @@ namespace BD_Cabinet_Medical
                                     pat.ID
                                 }).First();
                     PatientsData.SelectedCells[2].Value = "Consultat";
-                    var query2 = (from app in context.Appointments
-                                  where app.ID_Pacient == query.ID
-                                  select app).First();
+                   // var query2 = (from app in context.Appointments
+                    //              where app.ID_Pacient == query.ID
+                    //              select app).First();
                     var query3 = (from pat in context.Patients
                                  where pat.Nume.Equals(name)
                                  select pat).First();
-                    query2.Accepted = 2;
+                    context.SetData(name, 2);
                     context.SaveChanges();
-                    Form p = new View_Form(query3, this,Abouts);
-                    p.Show();
+                    P = query3;
                 }
+                Form p = new View_Form(P, this, Abouts);
+                p.Show();
             }
             catch(Exception ex)
             {
@@ -147,7 +149,7 @@ namespace BD_Cabinet_Medical
                     var query3 = (from pat in context.Patients
                                   where pat.Nume.Equals(name)
                                   select pat).First();
-                    query2.Accepted = 3;
+                    context.SetData(name, 3);
                     context.SaveChanges();
                 }
             }

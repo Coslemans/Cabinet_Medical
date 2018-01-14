@@ -47,7 +47,7 @@ namespace BD_Cabinet_Medical
                     throw new Exception("Introduceti parola!");
                 }
                 string username = "admin";
-                string password = Password_Box.Text.Trim();
+                string password = getMD5(Password_Box.Text.Trim());
 
                 using (var context = new Cabinet_MedicalEntities())
                 {
