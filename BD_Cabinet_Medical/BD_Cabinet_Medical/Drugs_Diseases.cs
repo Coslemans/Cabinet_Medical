@@ -12,12 +12,13 @@ namespace BD_Cabinet_Medical
     using System;
     using System.Collections.Generic;
     
-    public partial class HistView
+    public partial class Drugs_Diseases
     {
-        public string Nume { get; set; }
-        public string Specializare { get; set; }
-        public string Denumire { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public int ID_Afectiune { get; set; }
+        public int ID_Medicament { get; set; }
         public int ID { get; set; }
+    
+        public virtual Disease Disease { get; set; }
+        public virtual Drug Drug { get; set; }
     }
 }

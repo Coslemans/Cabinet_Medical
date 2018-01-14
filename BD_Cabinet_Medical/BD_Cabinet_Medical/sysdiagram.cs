@@ -12,12 +12,12 @@ namespace BD_Cabinet_Medical
     using System;
     using System.Collections.Generic;
     
-    public partial class HistView
+    public partial class sysdiagram
     {
-        public string Nume { get; set; }
-        public string Specializare { get; set; }
-        public string Denumire { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
-        public int ID { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

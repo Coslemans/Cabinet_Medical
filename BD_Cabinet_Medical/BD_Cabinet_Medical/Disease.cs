@@ -17,16 +17,16 @@ namespace BD_Cabinet_Medical
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Disease()
         {
+            this.Drugs_Diseases = new HashSet<Drugs_Diseases>();
             this.History_Patients = new HashSet<History_Patients>();
-            this.Drugs = new HashSet<Drug>();
         }
     
         public int ID { get; set; }
         public string Denumire { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<History_Patients> History_Patients { get; set; }
+        public virtual ICollection<Drugs_Diseases> Drugs_Diseases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Drug> Drugs { get; set; }
+        public virtual ICollection<History_Patients> History_Patients { get; set; }
     }
 }

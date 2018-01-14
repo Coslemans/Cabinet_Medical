@@ -32,7 +32,7 @@ namespace BD_Cabinet_Medical
         private void buttonReteta_Click(object sender, EventArgs e)
         {
             this.Hide();
-            RetetaForm r = new RetetaForm(Pacient, this);
+            RetetaForm r = new RetetaForm(Pacient, this,Medic);
         
             r.Show();
         }

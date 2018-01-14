@@ -17,8 +17,8 @@ namespace BD_Cabinet_Medical
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Drug()
         {
+            this.Drugs_Diseases = new HashSet<Drugs_Diseases>();
             this.Recipes = new HashSet<Recipe>();
-            this.Diseases = new HashSet<Disease>();
         }
     
         public int ID { get; set; }
@@ -27,8 +27,8 @@ namespace BD_Cabinet_Medical
         public int Stoc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Recipe> Recipes { get; set; }
+        public virtual ICollection<Drugs_Diseases> Drugs_Diseases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Disease> Diseases { get; set; }
+        public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }

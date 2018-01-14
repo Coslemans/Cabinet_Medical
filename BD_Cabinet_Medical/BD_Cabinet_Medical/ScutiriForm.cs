@@ -33,67 +33,68 @@ namespace BD_Cabinet_Medical
                     string medic = textBoxMedic.Text;
                     string afectiune = textBoxAfectiune.Text;
                     int zile = Int32.Parse(textBoxZile.Text);
+                    if (textBoxMedic.Text.Length == 0)
+                    {
+                        throw new Exception("Nu ati introdus numele medicului/asistentului!");
+
+                    }
+                    else if (textBoxAfectiune.Text.Length == 0)
+                        throw new Exception("Nu ati introdus denumirea afectiunii!");
+                    else if (textBoxZile.Text.Length == 0)
+                        throw new Exception("Nu ati introdus numarul de zile!");
+                    else if (textBoxTipScutire.Text.Length == 0)
+                        throw new Exception("Nu ati introdus tipul scutirii!");
+                    else
+                    { 
                     var query = (from m in context.Employees
                                  where m.Nume.Equals(medic)
-                                 select m).First();
+                                 select m).FirstOrDefault();
 
                     var query2 = (from a in context.Diseases
 
                                   where a.Denumire.Equals(afectiune)
-                                  select a).First();
-                    if (query == null)
-                        throw new Exception("Numele medicului introdus esti incorect!");
-                    else if (query2 == null)
-                        throw new Exception("Denumirea afectiunii este incorecta!");
-                    else
-                    {
-
-                        var addnew = new History_Patients
-                        {
-
-                            ID_Medic = query.ID,
-
-                            Data = DateTime.Now,
-                            ID_Pacient = Pacient.ID,
-                            ID_Afectiune = query2.ID
-
-                        };
-                        context.History_Patients.Add(addnew);
-                        context.SaveChanges();
-
-                        var addsc = new Exemption
-                        {
-                            ID_Istoric = addnew.ID,
-                            Zile_Repaus = zile,
-                            Tip = textBoxTipScutire.Text
-
-                        };
-                        if (textBoxMedic.Text.Length == 0)
-                        {
-                            throw new Exception("Nu ati introdus numele medicului/asistentului!");
-
-                        }
-
-                        else if (textBoxAfectiune.Text.Length == 0)
-                            throw new Exception("Nu ati introdus denumirea afectiunii!");
-                        else if (textBoxZile.Text.Length == 0)
-                            throw new Exception("Nu ati introdus numarul de zile!");
-                        else if (textBoxTipScutire.Text.Length == 0)
-                            throw new Exception("Nu ati introdus tipul scutirii!");
+                                  select a).FirstOrDefault();
+                        if (query2 == null)
+                            throw new Exception("Denumirea afectiunii este incorecta!");
+                        else   if (query == null)
+                            throw new Exception("Numele medicului introdus esti incorect!");
+                     
                         else
                         {
 
-                            context.Exemptions.Add(addsc);
+                            var addnew = new History_Patients
+                            {
+
+                                ID_Medic = query.ID,
+
+                                Data = DateTime.Now,
+                                ID_Pacient = Pacient.ID,
+                                ID_Afectiune = query2.ID
+
+                            };
+                            context.History_Patients.Add(addnew);
                             context.SaveChanges();
 
-                            MessageBox.Show("Scutirea a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            textBoxAfectiune.Text = "";
-                            textBoxMedic.Text = "";
-                            textBoxTipScutire.Text = "";
-                            textBoxZile.Text = "";
+                            var addsc = new Exemption
+                            {
+                                ID_Istoric = addnew.ID,
+                                Zile_Repaus = zile,
+                                Tip = textBoxTipScutire.Text
 
+                            };
+                      
+
+                       
+                       
+                                context.Exemptions.Add(addsc);
+                                context.SaveChanges();
+
+                                MessageBox.Show("Scutirea a fost inregistrata cu succes!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                textBoxAfectiune.Text = "";
+                                textBoxMedic.Text = "";
+                                textBoxTipScutire.Text = "";
+                                textBoxZile.Text = "";
                         }
-
                     }
                 }
             }
